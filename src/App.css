@@ -1,0 +1,1156 @@
+.page {
+  max-width: 1480px;
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 4vw, 3.5rem);
+  color: #f2f6ff;
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  flex-wrap: nowrap; 
+  padding: 0.5rem 1.5rem; 
+  background: rgba(18, 20, 58, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+}
+
+.site-nav__brand {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.05rem;
+}
+
+.nav-logo {
+  width: 48px;
+  height: auto;
+  border-radius: 0;
+  object-fit: contain;
+  box-shadow: none;
+}
+
+.site-nav__links {
+  display: flex;
+  align-items: center;
+  
+  /* REDUCED GAP: Changed from 1.25rem to 0.5rem to fit everything */
+  gap: 0.5rem; 
+  
+  /* REDUCED FONT: Slightly smaller text to prevent crowding */
+  font-size: 0.85rem; 
+  
+  flex-wrap: nowrap; /* Forces links to stay in one line */
+}
+
+.site-nav__links a {
+  position: relative;
+  
+  /* REDUCED PADDING: Less empty space around words */
+  padding: 0.4rem 0.6rem; 
+  
+  border-radius: 999px;
+  opacity: 0.85;
+  text-decoration: none;
+  white-space: nowrap; /* Prevents text like "Important Dates" from breaking */
+  transition: background 200ms ease, color 200ms ease, opacity 200ms ease;
+}
+
+/* Ensure the 'Register Now' button fits too */
+.nav-cta {
+  padding: 0.4rem 1rem; /* Slightly smaller button */
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.site-nav__links a:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-cta {
+  border: 1px solid rgba(252, 211, 97, 0.6);
+  color: #fcd361;
+  padding: 0.45rem 1.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+.nav-cta:hover {
+  background: rgba(252, 211, 97, 0.15);
+}
+
+.site-nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.6rem;
+  padding: 0.45rem 0.65rem;
+  cursor: pointer;
+}
+
+.site-nav__toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: #fcd361;
+}
+
+.hero,
+.section,
+.contact,
+.about,
+.split-section {
+  scroll-margin-top: 110px;
+}
+
+.hero {
+  padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1.5rem, 2vw, 2rem);
+  text-align: left;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 1rem;
+  border-radius: 1.2rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-badge__logo {
+  width: 62px;
+  height: auto;
+  border-radius: 0;
+  object-fit: contain;
+  border: none;
+}
+
+.hero__grid {
+  display: block;
+}
+
+.hero__title-row {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.hero__title {
+  flex: 1 1 360px;
+}
+
+.hero__right-column {
+  flex: 0 1 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero__logos {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  margin-left: 0;
+  margin-right: 0;
+  align-items: flex-end;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.05;
+  margin: 0.15rem 0 0.15rem;
+}
+
+.hero__title-word {
+  display: block;
+  line-height: 1;
+}
+
+.hero__title-word--accent {
+  font-size: 1.08em;
+}
+
+.hero__subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 500;
+  margin: 0.25rem 0 2rem;
+  color: #ffe1ff;
+}
+
+.hero__lede {
+  max-width: 760px;
+  font-size: 1.08rem;
+  margin-top: 0.35rem;
+  opacity: 0.9;
+}
+
+.hero__meta-row {
+  margin: 1.5rem 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.hero__meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.6rem;
+  max-width: 600px;
+  flex: 1 1 360px;
+}
+
+.hero__meta div {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+}
+
+.hero__meta span {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+}
+
+.hero__meta strong {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.hero__actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-decoration: none;
+  min-width: 190px;
+  text-align: center;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.btn--primary {
+  background: linear-gradient(120deg, #fcd361, #f431c4 60%, #7a40ff);
+  color: #12092b;
+  box-shadow: 0 15px 30px rgba(244, 49, 196, 0.25);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: #fcd361;
+  border: 1px solid rgba(252, 211, 97, 0.5);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.hero__countdown {
+  max-width: 420px;
+  width: 100%;
+  flex: 0 1 360px;
+  margin-top: 0;
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(60px, 1fr));
+  gap: 0.35rem;
+  padding: 0.45rem 0.65rem;
+  background: rgba(5, 3, 26, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.countdown__unit {
+  text-align: center;
+}
+
+.countdown__value {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.countdown__label {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.62rem;
+  opacity: 0.75;
+}
+
+.section {
+  margin: 4rem 0;
+}
+
+.section--compact {
+  margin: 3.5rem 0 0;
+}
+
+.section--compact .section-heading {
+  display: none;
+}
+
+.section-heading {
+  text-align: left;
+  max-width: 840px;
+  margin: 0 0 2rem;
+}
+
+.section-heading__kicker {
+  display: inline-block;
+  padding: 0.2rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fcd361;
+}
+
+.section-heading h2 {
+  margin: 1rem 0 0.75rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.section-heading p {
+  opacity: 0.8;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.grid--four {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.gradient-card {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(31, 46, 104, 0.4));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  transition: transform 300ms ease, border-color 300ms ease;
+}
+
+.gradient-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(252, 211, 97, 0.25), rgba(244, 49, 196, 0.18));
+  mix-blend-mode: screen;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.gradient-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(252, 211, 97, 0.7);
+}
+
+.gradient-card:hover::after {
+  opacity: 1;
+}
+
+.split-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.panel {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  height: 100%;           
+  display: flex;          
+  flex-direction: column; 
+  min-height: 450px;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.panel:hover {
+  border-color: #fcd361 !important; /* Force Golden Border */
+  transform: translateY(-4px); /* Slight lift */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  z-index: 1; /* Brings it on top of neighboring elements */
+}
+
+.split-section .section-heading h2 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+}
+
+.panel--accent {
+  background: linear-gradient(145deg, rgba(33, 51, 124, 0.8), rgba(255, 255, 255, 0.12));
+  border: 1px solid rgba(244, 49, 196, 0.25);
+}
+
+.panel--outline {
+  background: rgba(10, 16, 52, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.list {
+  padding-left: 1.2rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.list--arrow li {
+  list-style: none;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.list--arrow li::before {
+  content: '➤';
+  position: absolute;
+  left: 0;
+  color: #fcd361;
+}
+
+.list--dot {
+  list-style: disc;
+}
+
+.grid--chips {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* --- WHO CAN PARTICIPATE CHIPS (Styled like Organizers) --- */
+
+.chip {
+  /* Default State: Frosted Glass */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  
+  padding: 1.2rem 1.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  
+  /* Smooth Animation */
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.chip:hover {
+  /* Hover State: Lift Up + Electric Blue Glow */
+  transform: translateY(-5px) scale(1.02);
+  
+  /* The Electric Blue Border matching Organizers */
+  border-color: #38bdf8;
+  
+  /* Lighten background slightly */
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  
+  /* Glow Shadow */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+.sponsorship {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.note {
+  margin-top: 1.5rem;
+  text-align: center;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.about {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.contact__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.contact__card {
+  padding: 1.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(13, 20, 58, 0.65);
+}
+
+/* --- COMPACT FOOTER STYLES (Stacked) --- */
+
+/* --- UPDATED FOOTER STYLES --- */
+
+.footer {
+  width: 100%;
+  margin: 4rem 0 0 0;
+  
+  /* INCREASED SIZE: Changed padding from '1.5rem' to '3rem' */
+  padding: 3rem 0 1.5rem; 
+  
+  background: linear-gradient(to top, rgba(0, 5, 15, 1), rgba(10, 20, 50, 0.6));
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+}
+
+/* New Logo Style */
+.footer-logo {
+  height: 60px; /* Adjust this number based on your logo's shape */
+  width: auto;
+  margin-bottom: 1rem; /* Space between logo and website text */
+  object-fit: contain;
+  align-self: flex-start; /* Ensures logo stays left-aligned */
+}
+
+/* ... The rest of your footer CSS remains the same ... */
+.footer-content-compact {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 2rem;
+}
+
+/* Ensure the left side handles the stacked logo + text correctly */
+.footer-left {
+  display: flex;
+  flex-direction: column; 
+  gap: 0.6rem; 
+}
+
+.compact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #ccc;
+}
+
+.compact-item strong {
+  color: #fcd361; /* Gold labels */
+  font-weight: 500;
+}
+
+.compact-item a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+.compact-item a:hover {
+  color: #38bdf8;
+  text-decoration: underline;
+}
+
+/* Right Side: Address + Map */
+/* Right Side: Address + Map (Stacked Vertically) */
+.footer-right {
+  display: flex;
+  flex-direction: column; /* Stack them: Map Top, Text Bottom */
+  align-items: flex-end;  /* Align everything to the right edge */
+  gap: 0.8rem;
+  text-align: right;
+}
+
+.compact-address {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin: 0;
+  line-height: 1.5; /* Good spacing for the 3 lines */
+}
+
+/* Slim Copyright */
+.footer-copyright-slim {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+/* Mobile: Stack layout */
+@media (max-width: 768px) {
+  .footer-content-compact {
+    flex-direction: column;
+    align-items: flex-start; /* Align left on mobile */
+    gap: 1.5rem;
+  }
+  
+  .footer-left {
+    width: 100%;
+  }
+
+  .footer-right {
+    width: 100%;
+    flex-direction: row; /* Keep map next to address */
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+.back-to-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+}
+
+.back-to-top a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fcd361;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.logo-placeholder--nav {
+  border-radius: 50%;
+  padding: 0.6rem;
+  width: 44px;
+  height: 44px;
+}
+
+.logo-placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed rgba(252, 211, 97, 0.6);
+  border-radius: 0.9rem;
+  padding: 0.5rem 0.9rem;
+  color: #fcd361;
+  font-size: 0.8rem;
+}
+
+.hero-logo {
+  width: 100%;
+  max-width: 131px;
+  border-radius: 0;
+  object-fit: contain;
+  background: transparent;
+}
+
+.hero-logo--centenary {
+  max-width: 175px;
+}
+
+@media (max-width: 1100px) {
+  .hero__title-row {
+    gap: 1rem;
+  }
+
+  .hero__right-column {
+    flex: 1 1 100%;
+    align-items: center;
+  }
+
+  .hero__logos {
+    margin-left: 0;
+    margin-right: 0;
+    justify-content: center;
+  }
+
+  .site-nav__links {
+    gap: 0.75rem;
+  }
+
+  .hero {
+    padding: clamp(1.25rem, 2.5vw, 2rem) 0 clamp(1.25rem, 1.5vw, 1.75rem);
+  }
+
+  .hero__meta-row {
+    flex-direction: column;
+  }
+
+  .hero__meta {
+    max-width: 100%;
+  }
+
+  .hero__countdown {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .section--compact {
+    margin: 3.25rem 0 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-nav__toggle {
+    display: flex;
+    align-self: center;
+  }
+
+  .site-nav__links {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .site-nav__links.is-open {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  .site-nav__links a,
+  .nav-cta {
+    width: 100%;
+  }
+
+  .nav-cta {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: clamp(1rem, 2vw, 1.5rem) 0 clamp(1rem, 1.5vw, 1.5rem);
+    min-height: auto;
+  }
+
+  .hero__title-row {
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+
+  .hero__meta {
+    margin: 1rem 0 0.75rem;
+  }
+
+  .hero__countdown {
+    margin-top: 0.9rem;
+  }
+
+  .section--compact {
+    margin: 3rem 0 0;
+  }
+
+  .gradient-card {
+    min-height: 160px;
+    padding: 1rem;
+  }
+
+  .countdown {
+    grid-template-columns: repeat(2, minmax(80px, 1fr));
+    border-radius: 1rem;
+  }
+
+  .panel,
+  .contact__card {
+    padding: 1.5rem;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.8rem, 6vw, 2.3rem);
+  }
+}
+
+@media (max-width: 540px) {
+  .site-nav__brand {
+    font-size: 0.95rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 10vw, 3.2rem);
+  }
+
+  .hero__meta {
+    grid-template-columns: 1fr;
+  }
+
+  .countdown {
+    grid-template-columns: repeat(2, minmax(70px, 1fr));
+  }
+
+  .panel,
+  .contact__card {
+    padding: 1.25rem;
+  }
+}
+
+.college-panel {
+  position: relative;
+  background-image: 
+    linear-gradient(to bottom, rgba(5, 10, 35, 0.85), rgba(5, 10, 35, 0.7)),
+    url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.college-panel h2 {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  color: #fff;
+}
+
+.college-panel p {
+  font-weight: 400;
+  opacity: 0.95;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+/* src/App.css - Add this at the bottom */
+
+/* 1. The Container: Stacks items vertically */
+.section-stack {
+  display: flex;
+  flex-direction: column; /* This forces them Up and Down */
+  gap: 1.5rem;            /* Space between the two sections */
+  width: 100%;
+}
+
+/* 2. The Card: Full Width and Slimmer Height */
+/* --- ANIMATED BACKGROUND CARDS --- */
+
+.wide-glass-card {
+  position: relative;
+  overflow: hidden; /* Cuts off the edges when image is zoomed in */
+  
+  /* Layout & Border */
+  width: 100%;
+  padding: 2.5rem 3rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  color: white;
+  
+  /* Smooth border transition */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* 1. The Fake Background Layer */
+.wide-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0; /* Stretches to fill box */
+  
+  /* We use a Variable so we can change image in React */
+  background-image: var(--bg-full); 
+  background-size: cover;
+  background-position: center;
+  
+  /* THE ZOOM OUT LOGIC: 
+     Start at 1.1 (Zoomed In 10%) 
+  */
+  transform: scale(1.1); 
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 0; /* Sits behind text */
+}
+
+/* 2. The Hover Action */
+.wide-glass-card:hover {
+  border-color: #fcd361; /* Gold Border */
+  transform: translateY(-5px); /* Lift Card */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.wide-glass-card:hover::before {
+  /* On Hover, Scale down to 1.0 (Zoom Out effect) */
+  transform: scale(1.0);
+}
+
+/* 3. Important: Bring Text to Front */
+.wide-glass-card h2, 
+.wide-glass-card p, 
+.wide-glass-card ul, 
+.wide-glass-card .section-heading {
+  position: relative;
+  z-index: 1; /* Sits on top of the image */
+}
+/* --- UPDATED ORGANIZING COMMITTEE STYLES --- */
+
+/* 1. The Grid: Forces exactly 3 columns per row */
+.committee-grid {
+  display: grid;
+  /* Changed from 3 to 4 columns */
+  grid-template-columns: repeat(4, 1fr); 
+  
+  /* Reduced gap slightly so 4 cards fit comfortably on screen */
+  gap: 1.5rem; 
+  width: 100%;
+}
+
+/* Individual Card Styling */
+/* Individual Card Styling */
+/* Individual Card Styling - PREMIUM UPDATE */
+/* Individual Card Styling - LIGHTER FROSTED GLASS */
+.member-card {
+  /* DEFAULT: Very subtle white transparency. 
+     This lets your website's actual background show through. */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly brighter border */
+  border-radius: 1.5rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px); /* Stronger blur for the glass effect */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effect: Lighter and tinted Blue */
+.member-card:hover {
+  transform: translateY(-10px);
+  
+  /* HOVER: Increases brightness and adds a tiny hint of blue tint */
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  
+  /* Electric Blue Border */
+  border-color: #38bdf8; 
+  
+  /* Soft glow shadow */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+/* 3. Image Styling: Big Squares instead of small circles */
+.member-img {
+  width: 220px;  /* Much Bigger (was 120px) */
+  height: 220px; /* Square shape */
+  border-radius: 1.5rem; /* Rounded Square corners (not 50% circle) */
+  object-fit: cover;
+  
+  /* Blue border instead of Gold */
+  border: 2px solid rgba(56, 189, 248, 0.3); 
+  margin-bottom: 1.5rem;
+  transition: border-color 0.3s ease;
+}
+
+.member-card:hover .member-img {
+  border-color: #38bdf8; /* Solid Electric Blue on hover */
+}
+
+/* Text Hierarchy */
+.member-name {
+  color: #fff; /* Changed name to White for clean look */
+  font-size: 1.4rem;
+  margin: 0.5rem 0 0.25rem;
+  font-weight: 700;
+}
+
+.member-title {
+  color: #38bdf8; /* Blue text accent */
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.member-desig {
+  font-size: 1.05rem;
+  color: #e0e0e0;
+  margin: 0;
+}
+
+.member-company {
+  font-size: 0.95rem;
+  color: #a0a0a0;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+/* Responsive: On mobile/tablets, drop to 1 or 2 columns so it doesn't squish */
+@media (max-width: 1024px) {
+  .committee-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .committee-grid {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+}
+
+/* --- SPONSORS SECTION - UPDATED: Colorful Logos --- */
+
+.sponsors-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem; /* Space between categories */
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.sponsor-category-title {
+  color: #fcd361; /* Gold text */
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* The Grid for Logos */
+.sponsor-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3rem; /* Space between logos */
+}
+
+/* The Logo styling */
+.sponsor-logo {
+  object-fit: contain;
+  transition: all 0.3s ease;
+  
+  /* REMOVED: filter: grayscale(100%) brightness(10) opacity(0.5); 
+     Logos are now colorful by default! */
+  
+  /* DEFAULT LOOK: Slightly transparent so they blend into the background,
+     but still retain their color. */
+  opacity: 0.8; 
+  transform: scale(0.95); /* Slightly smaller by default */
+}
+
+/* HOVER LOOK: Full color, full opacity, and a slight lift/zoom */
+.sponsor-logo:hover {
+  opacity: 1; /* Full opacity */
+  transform: scale(1.05); /* Slight zoom and lift */
+  
+  /* Add a subtle drop shadow to make them pop */
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4)); 
+}
+
+/* Specific Sizes (these remain the same) */
+.logo-large { height: 80px; width: auto; }
+.logo-medium { height: 50px; width: auto; }
+.logo-small { height: 35px; width: auto; }
+
+/* Mobile Adjustments (these remain the same) */
+@media (max-width: 768px) {
+  .sponsor-row { gap: 2rem; }
+  .logo-large { height: 60px; }
+  .logo-medium { height: 40px; }
+  .logo-small { height: 30px; }
+}
+
+/* --- GOLDEN VERTICAL TIMELINE --- */
+.Event_cont{
+  padding-left: 3rem;
+}
+/* The Container Line */
+.timeline {
+  position: relative;
+  padding-left: 2rem; /* Space for the line */
+  
+  /* This creates the continuous vertical line */
+  border-left: 2px solid rgba(252, 211, 97, 0.3); 
+  margin-top: 1rem;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem; /* Space between events */
+}
+
+/* The Glowing Dot */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.4rem; /* Moves dot onto the line */
+  top: 0.3rem;   /* Aligns dot with the date text */
+  
+  width: 14px;
+  height: 14px;
+  background: #fcd361; /* Solid Gold */
+  border-radius: 50%;  /* Circle */
+  border: 3px solid rgba(10, 16, 52, 1); /* Dark border creates a "cutout" look */
+  box-shadow: 0 0 15px rgba(252, 211, 97, 0.6); /* Golden Glow */
+}
+
+/* Text Styling */
+.timeline-date {
+  display: block;
+  color: #fcd361; /* Gold Text */
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline-event {
+  color: #fff;
+  font-size: 1.05rem;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Hover Effect for Timeline Items */
+.timeline-item:hover .timeline-date {
+  text-shadow: 0 0 8px rgba(252, 211, 97, 0.4);
+}
+
+.timeline-item:hover::before {
+  transform: scale(1.2); /* Dot grows slightly */
+}
+
+/* --- DISABLE HOVER FOR STATIC PANELS --- */
