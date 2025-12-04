@@ -815,16 +815,16 @@ function App() {
       </div>
     </section>
 
-    <section className="section" id="speakers">
+     <section className="section" id="speakers">
       
-    {/* NEW SECTION: Speakers (Wrapped in Card) 
+    
       <div className="panel panel--outline">
         <SectionHeading
           kicker="Lineup"
           title="Distinguished Speakers"
           subtitle="Visionaries shaping the future of technology."
         />
-        
+        {/* NEW SECTION: Speakers (Wrapped in Card) 
         <div className="committee-grid">
           {speakersList.map((speaker, index) => (
             <div className="member-card" key={index}>
@@ -834,8 +834,8 @@ function App() {
               <p className="member-desig">{speaker.company}</p>
             </div>
           ))}
-        </div>
-      </div>*/}
+        </div>*/}
+      </div>
     </section>
 
       {/* 1. COMMUNITY SECTION (Wrapped) */}
