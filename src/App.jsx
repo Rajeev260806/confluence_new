@@ -6,6 +6,12 @@ import iicLogo from './assets/iic.jpeg'
 import myCollegePic from './assets/college.jpg'
 import confluenceBg from './assets/confluence_.png'; 
 import collLogo from './assets/coll_logo.png'; 
+import trusteeImg from './assets/Trustee.jpg'
+import principalImg from './assets/Principal.jpg'
+import adv1 from './assets/Ramshankar.jpg'
+import adv2 from './assets/Sivanambuttu.jpg'
+import adv3 from './assets/Ganapathi.jpg'
+import adv4 from './assets/Person.jpg'
 import './App.css'
 
 const eventDate = new Date('2026-02-20T09:00:00+05:30')
@@ -110,52 +116,45 @@ const eventChecklist = [
 
 const advisoryBoard = [
   {
-    name: 'Dr. V. Kovaichelvan',
-    designation: 'Director - TVS Institute for Quality and Leadership',
-    title: 'Chief Advisor',
-    company: 'TVS Motor Company',
-    image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    name: 'Shri. Ramshankar C S',
+    designation: 'Co-founder and CEO',
+    company: 'Maxbyte Technologies',
+    image: adv1,
+  },
+  {
+    name: 'Mr. Sivan Ambattu',
+    designation: 'Entrepreneurship Development Institute of India (EDII)',
+    company: 'Ahmedabad',
+    image: adv2,
+  },
+  {
+    name: 'Mr. Ganapathi Batthini',
+    designation: 'Coordinator ',
+    company: 'Centre for Research in Entrepreneurship Education and Development (CREED) EDII, Ahmedabad',
+    image: adv3,
   },
   {
     name: 'Mr. C. Ravi',
     designation: 'Chief Financial Officer',
     title: 'Financial Advisor',
     company: 'Roots Industries India Ltd',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-  },
-  {
-    name: 'Dr. V. Kovaichelvan',
-    designation: 'Director - TVS Institute for Quality and Leadership',
-    title: 'Chief Advisor',
-    company: 'TVS Motor Company',
-    image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
-  },
-  {
-    name: 'Mr. C. Ravi',
-    designation: 'Chief Financial Officer',
-    title: 'Financial Advisor',
-    company: 'Roots Industries India Ltd',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    image: adv4,
   },
 ]
-
-// 1. TOP ROW LEADERS (Keep Photos)
 const committeeLeaders = [
   {
     name: 'Shri L Gopalakrishnan',
     designation: 'Managing Trustee',
     title: 'Chief Patron',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    image: trusteeImg,
   },
   {
     name: 'Dr K Prakasan',
     designation: 'Principal',
     title: 'Patron',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    image: principalImg,
   },
 ]
-
-// 2. TEAM LISTS (No Photos, Text Only)
 const committeeTeams = [
   {
     title: 'Organizing Secretary',
@@ -362,15 +361,20 @@ const aboutEvent = `The Institution’s Innovation Council (IIC) of PSG College 
 const navigationLinks = [
   {href: '#page', label: 'Home'},
   { label: 'About',
-    dropdown: [ // New Dropdown Structure
+    dropdown: [ 
       { label: 'The College', href: '#about' },
       { label: 'The Confluence', href: '#the-confluence' },
+      {label: 'Schedule', href: '#important-dates'},
       { label: 'Advisory Committee', href: '#advisory'},
       { label: 'Organizing Committee', href: '#committee' }
     ] },
-  { href: '#competitions', label: "Idea Pitching" },
-  { href: '#competitions', label: "Inventors' Exhibit" },
-  { href: '#important-dates', label: 'Schedule' },
+  { 
+    label: 'Events', 
+    dropdown: [
+      { label: 'Idea Pitching', href: '#idea-pitch' },
+      { label: "Inventors' Exhibit", href: '#inventors-exhibit' }
+    ]
+  },
   { href: '#speakers', label: 'Speakers' },
   { href: '#sponsorship', label: 'Sponsorship' },
   { href: '#contact', label: 'Contact' },
@@ -480,7 +484,6 @@ function App() {
         <div id="site-nav-links" className={`site-nav__links${navOpen ? ' is-open' : ''}`}>
           
           {navigationLinks.map((link) => {
-            // CHECK: Does this item have a dropdown?
             if (link.dropdown) {
               return (
                 <div key={link.label} className="nav-item-dropdown">
@@ -499,7 +502,6 @@ function App() {
                 </div>
               )
             }
-            // If no dropdown, return normal link
             return (
               <a key={link.href} href={link.href} onClick={() => setNavOpen(false)}>
                 {link.label}
@@ -653,7 +655,9 @@ function App() {
 
     </section>
       <section id="competitions" className="section split-section">
-        <div className="panel panel--accent">
+        
+        {/* 1. Idea Pitching Card -> Added id="idea-pitch" */}
+        <div id="idea-pitch" className="panel panel--accent">
           <SectionHeading
             kicker="Idea Pitching Competition"
             title="Showcase your most impactful solutions"
@@ -665,7 +669,9 @@ function App() {
             ))}
           </ul>
         </div>
-        <div className="panel panel--outline">
+
+        {/* 2. Inventors' Exhibit Card -> Added id="inventors-exhibit" */}
+        <div id="inventors-exhibit" className="panel panel--outline">
           <SectionHeading
             kicker="Inventors’ Exhibit"
             title="Spotlight for breakthrough prototypes"
@@ -677,6 +683,7 @@ function App() {
             ))}
           </ul>
         </div>
+        
       </section>
 
     {/* NEW SECTION: Important Dates (With Golden Timeline) */}
@@ -699,8 +706,6 @@ function App() {
             {/* The Timeline Container */}
             <div className="timeline">
               {importantDates.map((item, index) => {
-                // Split the string into Date and Event Name
-                // Example: "Dec 15, 2025: Registration Opens" -> ["Dec 15, 2025", "Registration Opens"]
                 const [datePart, eventPart] = item.split(':');
                 
                 return (
