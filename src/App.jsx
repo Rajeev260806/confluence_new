@@ -134,10 +134,10 @@ const advisoryBoard = [
     image: adv3,
   },
   {
-    name: 'Mr. C. Ravi',
-    designation: 'Chief Financial Officer',
-    title: 'Financial Advisor',
-    company: 'Roots Industries India Ltd',
+    name: '',
+    designation: '',
+    title: '',
+    company: '',
     image: adv4,
   },
 ]
@@ -257,7 +257,7 @@ const committeeTeams = [
     ]
   },
 ]
-
+{/*
 const speakersList = [
   {
     name: 'Elon Musk',
@@ -307,7 +307,7 @@ const speakersList = [
     company: 'OpenAI',
     image: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
   },
-]
+]*/}
 
 const sponsorsData = [
   {
@@ -815,10 +815,9 @@ function App() {
       </div>
     </section>
 
-    {/* NEW SECTION: Speakers (Wrapped in Card) */}
     <section className="section" id="speakers">
       
-      {/* Added 'panel panel--outline' here too */}
+    {/* NEW SECTION: Speakers (Wrapped in Card) 
       <div className="panel panel--outline">
         <SectionHeading
           kicker="Lineup"
@@ -836,7 +835,7 @@ function App() {
             </div>
           ))}
         </div>
-      </div>
+      </div>*/}
     </section>
 
       {/* 1. COMMUNITY SECTION (Wrapped) */}
