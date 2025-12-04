@@ -108,48 +108,154 @@ const eventChecklist = [
   'Lunch and refreshments are provided for all registered attendees.',
 ]
 
-const committeeMembers = [
+const advisoryBoard = [
   {
-    name: 'Dr. J. Siddharth Nandha Roy',
-    designation: 'Professor',
-    title: 'Patron',
-    company: 'Techno',
+    name: 'Dr. V. Kovaichelvan',
+    designation: 'Director - TVS Institute for Quality and Leadership',
+    title: 'Chief Advisor',
+    company: 'TVS Motor Company',
+    image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    name: 'Mr. C. Ravi',
+    designation: 'Chief Financial Officer',
+    title: 'Financial Advisor',
+    company: 'Roots Industries India Ltd',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    name: 'Dr. V. Kovaichelvan',
+    designation: 'Director - TVS Institute for Quality and Leadership',
+    title: 'Chief Advisor',
+    company: 'TVS Motor Company',
+    image: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+  },
+  {
+    name: 'Mr. C. Ravi',
+    designation: 'Chief Financial Officer',
+    title: 'Financial Advisor',
+    company: 'Roots Industries India Ltd',
+    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+  },
+]
+
+// 1. TOP ROW LEADERS (Keep Photos)
+const committeeLeaders = [
+  {
+    name: 'Shri L Gopalakrishnan',
+    designation: 'Managing Trustee',
+    title: 'Chief Patron',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
   },
   {
-    name: 'Dr. R. Gandhinathan',
-    designation: 'Professor',
-    title: 'Convenor',
-    company: 'TEQIP',
+    name: 'Dr K Prakasan',
+    designation: 'Principal',
+    title: 'Patron',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
   },
+]
+
+// 2. TEAM LISTS (No Photos, Text Only)
+const committeeTeams = [
   {
-    name: 'Dr. S. Neelakrishnan',
-    designation: 'Head of Dept',
-    title: 'Co-Convenor',
-    company: 'Automobile Engineering',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    title: 'Organizing Secretary',
+    members: [
+      { name: 'Dr V Senthil Kumaran', desig: 'Associate Professor', dept: 'Department of AMCS' },
+    ]
   },
   {
-    name: 'Ms. Sarah Jenkins',
-    designation: 'CTO',
-    title: 'Industry Chair',
-    company: 'Innovate AI Labs',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    title: 'Programme Committee',
+    members: [
+      { name: 'Dr Vaideki K', desig: 'Professor', dept: 'Department of Applied Science' },
+      { name: 'Dr A Natarajan ', desig: 'Professor & HoD (i/c)', dept: 'Department of EEE' },
+      { name: 'Dr Vasanthamani K', desig: 'Convenor IIC',desig2: 'Assistant Professor (Sl. Gr.)', dept: 'Department of ECE' },
+      { name: 'Dr K P Radhika',desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Humanities' }
+    ]
   },
   {
-    name: 'Mr. David Ross',
-    designation: 'Director',
-    title: 'Alumni Advisor',
-    company: 'TechStarts Inc.',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    title: 'Sponsorship & Finance Committee',
+    members: [
+      { name: 'Dr R Murugan', desig: 'Professor', dept: 'Department of Textile' },
+      { name: 'Dr Prasanth A S', desig: 'Associate Professor', dept: 'Department of Mechanical' },
+      { name: 'Dr Elangovan S', desig: 'Associate Professor', dept: 'Department of Production' },
+    ]
   },
   {
-    name: 'Dr. Anita Roy',
-    designation: 'Assoc. Professor',
-    title: 'Event Coordinator',
-    company: 'Robotics Centre',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    title: 'Logistics & Venue Committee',
+    members: [
+      { name: 'Dr Dhanabal P', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Mechanical' },
+      { name: 'Dr R Priya', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of AMCS' },
+      { name: 'Dr M S Sangeetha', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Biomedical' },
+    ]
+  },
+  {
+    title: 'Publicity & Communications Committee',
+    members: [
+      { name: 'Dr Santhanalakshmi M', desig: 'Associate Professor', dept: 'Department of ECE' },
+      { name: 'Dr Mariyam Adnan', desig: 'Associate Professor', dept: 'Department of AFD' },
+      { name: 'Dr M Parthiban', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department Fashion Technology' },
+      { name: 'Dr P Komakhan Sudar Vendan', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of EEE' },
+      { name: 'Dr J Krishnasamy', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Textile Technology' },
+    ]
+  },
+  {
+    title: 'Registration & Reception Committee',
+    members: [
+      { name: 'Dr Suriya S', desig: 'Associate Professor', dept: 'Department of CSE' },
+      { name: 'Dr M R Nivitha', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Civil' },
+      { name: 'Dr Gayathri K', desig: 'Assistant Professor', dept: 'Department of Civil' },
+      { name: 'Dr K P Devakaran', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Automobile Engineering' },
+    ]
+  },
+  {
+    title: 'Startup & Innovation Expo Committee',
+    members: [
+      { name: 'Dr Prabukarthi A', desig: 'Assistant Professor', dept: 'Department of Mechanical' },
+      { name: 'Dr Vairam T', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of IT' },
+      { name: 'Ms Charmini B', desig: 'Assistant Professor', dept: 'Department of Fashion Technology' },
+      { name: 'Dr K Krishnakumar', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Metallurgical Engg.' },
+    ]
+  },
+  {
+    title: 'Idea Pitching Competition ',
+    members: [
+      { name: 'Dr Muthuram N', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Production' },
+      { name: 'Mr Sundar C', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of MCA' },
+      { name: 'Dr S Vidyalakshmi', desig: 'Associate Professor', dept: 'Department of Biotechnology' },
+    ]
+  },
+  {
+    title: 'Hospitality & Guest Relations Committee',
+    members: [
+      { name: 'Dr Syath Abuthakeer S', desig: 'Associate Professor', dept: 'Department of Mechanical' },
+      { name: 'Dr S Navaneeethan', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of I&CE' },
+      { name: 'Dr S D Gopal Ram', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Physics' },
+      { name: 'Dr R Rekha', desig: 'Associate Professor', dept: 'Department of IT' },
+    ]
+  },
+  {
+    title: 'Technical & AV Support Committee',
+    members: [
+      { name: 'Dr Thulasimani L', desig: 'Associate Professor', dept: 'Department of ECE' },
+      { name: 'Mr Veerakumar S', desig: 'Assistant Professor', dept: 'Department of CSE' },
+      { name: 'Dr S Udhayakumar', desig: 'Assistant Professor', dept: 'Department of Mechanical' },
+    ]
+  },
+  {
+    title: 'Catering & Refreshments Committee',
+    members: [
+      { name: 'Dr Ilayaraja N', desig: 'Assistant Professor', dept: 'Department of MCA' },
+      { name: 'Dr S Prabhakaran', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of RAE' },
+      { name: 'Dr J Palraj', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Mathematics' },
+    ]
+  },
+  {
+    title: 'Overall Coordination Committee',
+    members: [
+      { name: 'Dr G Thilagavathi', desig2: 'Professor and Head', dept: 'Department of Textile Technology',desig: 'IPR Activity Coordinator'},
+      { name: 'Dr S Saravanan', desig: 'Dean – Autonomous Functioning', dept: 'Department of Production',desig2: 'Professor' },
+      { name: 'Dr L S Jayashree', desig: 'Vice President (IIC)', dept: 'Department of CSE'},
+    ]
   },
 ]
 
@@ -254,14 +360,20 @@ const aboutCollege = `PSG College of Technology (PSG Tech), established in 1951 
 const aboutEvent = `The Institution’s Innovation Council (IIC) of PSG College of Technology organizes “The Confluence – PSG Tech Innovation & Entrepreneurship Summit 2026” to foster a culture of innovation and entrepreneurial thinking. The summit provides a platform for students, faculty, startups, and industry experts to collaborate, share ideas, and showcase successful projects, startups, IPR achievements, and research outcomes of PSG Tech. Aligned with the national innovation agenda, it strengthens PSG Tech’s position as a leading contributor to India’s innovation ecosystem.`
 
 const navigationLinks = [
-  { href: '#highlights', label: 'Highlights' },     // 1.
-  { href: '#about', label: 'About' },               // 2. Moved up
-  { href: '#sessions', label: 'Competitions' }, // 3. Moved down
-  { href: '#important-dates', label: 'Dates' },     // 4. NEW
-  { href: '#committee', label: 'Organisers' },      // 5. NEW
-  { href: '#speakers', label: 'Speakers' },         // 6. NEW
-  { href: '#sponsorship', label: 'Sponsorship' },   // 7.
-  { href: '#contact', label: 'Contact' },           // 8.
+  {href: '#page', label: 'Home'},
+  { label: 'About',
+    dropdown: [ // New Dropdown Structure
+      { label: 'The College', href: '#about' },
+      { label: 'The Confluence', href: '#the-confluence' },
+      { label: 'Advisory Committee', href: '#advisory'},
+      { label: 'Organizing Committee', href: '#committee' }
+    ] },
+  { href: '#competitions', label: "Idea Pitching" },
+  { href: '#competitions', label: "Inventors' Exhibit" },
+  { href: '#important-dates', label: 'Schedule' },
+  { href: '#speakers', label: 'Speakers' },
+  { href: '#sponsorship', label: 'Sponsorship' },
+  { href: '#contact', label: 'Contact' },
 ]
 
 const Countdown = ({ targetDate }) => {
@@ -339,7 +451,15 @@ function App() {
 
   return (
     <>
-    <div className="page">
+    <div className="bubble-container">
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+        <div className="bubble"></div>
+      </div>
+
+    <div className="page" id="page">
       <nav className="site-nav">
         <span className="site-nav__brand">
           <img src={psgTechLogo} alt="PSG Tech logo" className="nav-logo" />
@@ -358,11 +478,35 @@ function App() {
           <span />
         </button>
         <div id="site-nav-links" className={`site-nav__links${navOpen ? ' is-open' : ''}`}>
-          {navigationLinks.map(({ href, label }) => (
-            <a key={href} href={href} onClick={() => setNavOpen(false)}>
-              {label}
-            </a>
-          ))}
+          
+          {navigationLinks.map((link) => {
+            // CHECK: Does this item have a dropdown?
+            if (link.dropdown) {
+              return (
+                <div key={link.label} className="nav-item-dropdown">
+                  <span className="nav-label">{link.label} ▾</span>
+                  <div className="dropdown-menu">
+                    {link.dropdown.map((subLink) => (
+                      <a 
+                        key={subLink.href} 
+                        href={subLink.href} 
+                        onClick={() => setNavOpen(false)}
+                      >
+                        {subLink.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+            // If no dropdown, return normal link
+            return (
+              <a key={link.href} href={link.href} onClick={() => setNavOpen(false)}>
+                {link.label}
+              </a>
+            )
+          })}
+
           <a
             className="nav-cta"
             href="https://confluence.psgtech.ac.in"
@@ -384,11 +528,27 @@ function App() {
             </div>
             <div className="hero__title-row">
               <div className="hero__title">
-                <h1>
-                  <span className="hero__title-word">The</span>
-                  <span className="hero__title-word hero__title-word--accent">Confluence</span>
-                </h1>
-                <p className="hero__subtitle">PSG Tech Innovation & Entrepreneurship Summit 2026</p>
+                <div className="hero-container">
+                  
+                  {/* ROW 1: THE MAIN TITLE (Aligned Left) */}
+                  <h1 className="hero-main-text">THE CONFLUENCE</h1>
+
+                  {/* ROW 2: LINES (Fill space) + YEAR (Right) */}
+                  <div className="hero-middle-row">
+                    <div className="hero-lines-group">
+                      <span className="decor-line"></span>
+                      <span className="decor-line"></span>
+                      <span className="decor-line"></span>
+                    </div>
+                    <div className="hero-year-text">2026</div>
+                  </div>
+
+                  {/* ROW 3: SUBTITLE (Aligned Right) */}
+                  <div className="hero-sub-container">
+                    <p className="hero-sub-text">Research, Innovation & Start-up Summit</p>
+                  </div>
+
+                </div>
               </div>
               <div className="hero__right-column">
                 <div className="hero__logos hero__logos--pair">
@@ -427,7 +587,7 @@ function App() {
       <section className="section section-stack" id="about">
       
       {/* 1. The College Banner */}
-      <div className="wide-glass-card" style={{ 
+      <div id="the-college" className="wide-glass-card" style={{ 
            '--bg-full': `linear-gradient(to right, rgba(5, 10, 35, 0.9), rgba(5, 10, 35, 0.6)), url(${myCollegePic})` 
         }}>
         <SectionHeading kicker="The College" title="PSG College of Technology" />
@@ -435,7 +595,7 @@ function App() {
       </div>
 
       {/* 2. The Confluence Banner */}
-      <div className="wide-glass-card" style={{
+      <div id="the-confluence" className="wide-glass-card" style={{
           '--bg-full': `linear-gradient(to right, rgba(5, 10, 35, 0.9), rgba(5, 10, 35, 0.6)), url(${confluenceBg})`  
         }}>
         <SectionHeading kicker="The Confluence" title="Innovation Summit 2026" />
@@ -572,19 +732,20 @@ function App() {
       </div>
     </section>
 
-    {/* NEW SECTION: Organizing Committee (Wrapped in Card) */}
-    <section className="section" id="committee">
+    {/* NEW SECTION: Advisory Committee */}
+    <section className="section" id="advisory">
       
-      {/* Added 'panel panel--outline' for the Card look + Golden Hover */}
+      {/* Wrapped in Panel for the Glass Card + Golden Hover look */}
       <div className="panel panel--outline">
         <SectionHeading
-          kicker="Team"
-          title="Organizing Committee"
-          subtitle="The minds behind The Confluence 2026."
+          kicker="Mentors"
+          title="Advisory Committee"
+          subtitle="Guiding us towards excellence."
         />
         
+        {/* Uses the new 'advisory-grid' class for centering */}
         <div className="committee-grid">
-          {committeeMembers.map((member, index) => (
+          {advisoryBoard.map((member, index) => (
             <div className="member-card" key={index}>
               <img src={member.image} alt={member.name} className="member-img" />
               <div className="member-title">{member.title}</div>
@@ -594,6 +755,58 @@ function App() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+
+   {/* ORGANIZING COMMITTEE */}
+    <section className="section" id="committee">
+      
+      <div className="panel panel--outline">
+        <SectionHeading
+          kicker="Team"
+          title="Organizing Committee"
+          subtitle="The minds behind The Confluence 2026."
+        />
+        
+        {/* ROW 1: TOP 2 LEADERS (Old Style: Photos + Center) */}
+        <div className="advisory-grid" style={{ marginBottom: '3rem' }}>
+          {committeeLeaders.map((member, index) => (
+            <div className="member-card" key={`leader-${index}`}>
+              <img src={member.image} alt={member.name} className="member-img" />
+              <div className="member-title">{member.title}</div>
+              <h3 className="member-name">{member.name}</h3>
+              <p className="member-desig">{member.designation}</p>
+              <p className="member-company">{member.company}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* ROWS 2,3,4: THE 12 TEAMS (New Style: Text Lists + 4 Cols) */}
+        <div className="committee-grid">
+          {committeeTeams.map((team, index) => (
+            
+            /* Apply member-card for glass effect, team-card for new layout */
+            <div className="member-card team-card" key={`team-${index}`}>
+              
+              {/* Blue Title */}
+              <h3 className="team-card-title">{team.title}</h3>
+              
+              {/* Member List */}
+              <div className="team-list">
+                {team.members.map((m, i) => (
+                  <div className="team-member-item" key={i}>
+                    <div className="tm-name">{m.name}</div>
+                    <div className="tm-desig">{m.desig}</div>
+                    <div className="tm-desig2">{m.desig2}</div>
+                    <div className="tm-dept">{m.dept}</div>
+                  </div>
+                ))}
+              </div>
+
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
 
@@ -651,7 +864,7 @@ function App() {
           <div style={{ marginTop: '1.5rem', textAlign: 'left' }}>
              {/* Added a placeholder button to make this section look complete */}
              <button className="nav-cta" style={{ background: 'transparent' }}>
-               Registration Link Coming Soon
+               Registration Now
              </button>
           </div>
         </div>
@@ -701,45 +914,11 @@ function App() {
             {/* The Category Title (e.g. Platinum Sponsor) */}
             <h3 className="sponsor-category-title">{tier.category}</h3>
             
-            {/* The Logos */}
-            <div className="sponsor-row">
-              {tier.logos.map((logoUrl, i) => (
-                <img 
-                  key={i} 
-                  src={logoUrl} 
-                  alt={`${tier.category} logo`} 
-                  className={`sponsor-logo logo-${tier.size}`} 
-                />
-              ))}
-            </div>
+            
           </div>
         ))}
       </div>
     </section>
-
-      <section className="section contact" id="contact">
-        <SectionHeading kicker="Contact Details" title="Connect with The Confluence Team" />
-        <div className="contact__grid">
-          <div className="contact__card">
-            <strong>Institution’s Innovation Council</strong>
-            <p>
-              PSG College of Technology
-              <br />
-              Peelamedu, Coimbatore – 641 004
-            </p>
-          </div>
-          <div className="contact__card">
-            <p>
-              Website:{' '}
-              <a href="https://confluence.psgtech.ac.in" target="_blank" rel="noreferrer">
-                https://confluence.psgtech.ac.in
-              </a>
-            </p>
-            <p>Email: <a href="mailto:confluence@psgtech.ac.in">confluence@psgtech.ac.in</a></p>
-            <p>Mobile: <a href="tel:+919952418357">+91 99524 18357</a></p>
-          </div>
-        </div>
-      </section>
 
       <div className="back-to-top">
         <a href="#top" aria-label="Back to top">
@@ -752,65 +931,70 @@ function App() {
       <footer className="footer">
         <div className="footer-content-compact">
           
-          {/* LEFT SIDE: Logo + Contact Info */}
+          {/* COLUMN 1: LEFT (Contact Info) */}
           <div className="footer-left">
-            
-            {/* Logo */}
-            <img src={collLogo} alt="College Logo" className="footer-logo" />
+            <img src={collLogo} alt="College Logo" className="footer-logo" width="250px" height="65px"/>
 
-            {/* Line 1: Website */}
             <div className="compact-item">
               <svg width="16" height="16" fill="none" stroke="#fcd361" strokeWidth="2" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
               </svg>
-              <strong>Website:</strong>
-              <a href="https://psgtech.edu" target="_blank" rel="noreferrer">https://psgtech.edu</a>
+              <strong>Website: </strong>
+              <a href="https://psgtech.edu" target="_blank" rel="noreferrer" style={{ color: '#ccc', textDecoration: 'none' }}>https://psgtech.edu</a>
             </div>
 
-            {/* Line 2: Email */}
             <div className="compact-item">
               <svg width="16" height="16" fill="none" stroke="#fcd361" strokeWidth="2" viewBox="0 0 24 24">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <strong>Email:</strong>
-              <a href="mailto:principal@psgtech.ac.in">principal@psgtech.ac.in</a>
+              <strong>Email:  </strong>
+              <a href="mailto:confluence@psgtech.ac.in" style={{ color: '#ccc', textDecoration: 'none' }}>confluence@psgtech.ac.in</a>
             </div>
 
-            {/* Line 3: Mobile */}
             <div className="compact-item">
               <svg width="16" height="16" fill="none" stroke="#fcd361" strokeWidth="2" viewBox="0 0 24 24">
                 <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
                 <line x1="12" y1="18" x2="12.01" y2="18"></line>
               </svg>
-              <strong>Mobile:</strong>
-              <span>0422-2572177, 2572477</span>
+              <strong>Mobile: </strong>
+              <a href="tel:+919952418357" style={{ color: '#ccc', textDecoration: 'none' }}>
+    +91 99524 18357
+  </a>
             </div>
           </div>
 
-          {/* RIGHT SIDE: Map on Top, Address Below */}
-          <div className="footer-right">
-            
-            {/* 1. Map First */}
+          {/* COLUMN 2: CENTER (The Map) */}
+          <div className="footer-center">
             <iframe 
+              className="footer-map"
               title="PSG Tech Location"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.155822989784!2d76.99847931480113!3d11.02649599215197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba8582f1da8a671%3A0x6e76554867928c9!2sPSG%20College%20of%20Technology!5e0!3m2!1sen!2sin!4v1689254826123!5m2!1sen!2sin" 
-              width="80" 
-              height="80" 
-              style={{ border: '1px solid rgba(255,255,255,0.3)', borderRadius: '8px' }} 
+              width="160" 
+              height="160" 
               allowFullScreen="" 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
+          </div>
 
-            {/* 2. Address Second */}
-            <p className="compact-address">
-              PSG College of Technology<br/>
-              Peelamedu<br/>
-              Coimbatore-641004
-            </p>
+          {/* COLUMN 3: RIGHT (Faculty & Address) */}
+          <div className="footer-right">
+            
+            {/* Faculty Details */}
+            <div className="secretary-block">
+              <h3 className="sec-name">Dr. Senthil Kumaran V</h3>
+              <p className="sec-role">Organizing Secretary</p>
+              <p className="sec-event">The Confluence 2026</p>
+            </div>
+
+            {/* Address */}
+            <div className="footer-address-block">
+              <strong>PSG College of Technology</strong><br/>
+              Peelamedu, Coimbatore - 641004
+            </div>
 
           </div>
 
