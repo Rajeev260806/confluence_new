@@ -187,10 +187,15 @@
 .hero__title-word {
   display: block;
   line-height: 1;
+  padding-top: 30px;
 }
 
 .hero__title-word--accent {
   font-size: 1.08em;
+  background: linear-gradient(to right, #d4af37 0%, #ffe57f 50%, #fbc02d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .hero__subtitle {
@@ -198,6 +203,114 @@
   font-weight: 500;
   margin: 0.25rem 0 2rem;
   color: #ffe1ff;
+}
+
+/* --- FIXED HERO LAYOUT (Clean & Even) --- */
+
+/* Wrapper to ensure the block stays compact and aligned */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px; /* Prevents it from stretching too wide on huge screens */
+  margin: 0 auto; /* Centers the whole block */
+}
+
+/* 1. Main Title */
+.hero-main-text {
+  font-size: 4.5rem; /* Big and impactful */
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 0.9; /* Tighter line height removes gaps */
+  letter-spacing: 1px;
+  text-align: left; /* Aligns with the start of the lines */
+  padding-top: 10px;
+  
+  /* RICH GOLD GRADIENT */
+  background: linear-gradient(to right, #d4af37 0%, #ffe57f 50%, #fbc02d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.2));
+}
+
+/* 2. Middle Row container */
+.hero-middle-row {
+  display: flex;
+  align-items: center; /* Vertically centers lines with 2026 */
+  justify-content: space-between;
+  width: 63.5%;
+  margin: 0.5rem 0; /* Small breathing room */
+}
+
+/* 3. The Lines (The "Flexible" part) */
+.hero-lines-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 40px; /* Height of the 3-line stack */
+  
+  /* CRITICAL: This makes the lines stretch to fill the gap */
+  flex-grow: 1; 
+  margin-right: 1.5rem; /* Precise gap between lines and 2026 */
+}
+
+.decor-line {
+  display: block;
+  width: 100%;
+  height: 4px; /* Thickness */
+  border-radius: 2px;
+  
+  /* Solid Gold Gradient Line */
+  background: linear-gradient(to right, #d4af37, #fbc02d);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+}
+
+/* 4. The Year */
+.hero-year-text {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1;
+  
+  /* Matching Gold Gradient */
+  background: linear-gradient(to right, #d4af37 0%, #ffe57f 50%, #fbc02d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.2));
+}
+
+/* 5. Subtitle */
+.hero-sub-container {
+  display: flex;
+  justify-content: flex-start; /* Pushes text to the right */
+  width: 100%;
+}
+
+.hero-sub-text {
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 2px;
+  margin: 0;
+  opacity: 0.9;
+  text-align: left; /* Ensures text aligns right under 2026 */
+  padding-bottom: 20px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero-main-text { font-size: 2.8rem; text-align: center; }
+  .hero-year-text { font-size: 2.5rem; }
+  .hero-lines-group { height: 16px; margin-right: 1rem; }
+  .decor-line { height: 3px; }
+  .hero-sub-text { font-size: 0.9rem; text-align: center; }
+  
+  /* On mobile, stack them differently if needed, or keep same */
+  .hero-middle-row { margin: 1rem 0; }
+  .hero-sub-container { justify-content: center; }
 }
 
 .hero__lede {
@@ -527,89 +640,110 @@
   background: rgba(13, 20, 58, 0.65);
 }
 
-/* --- COMPACT FOOTER STYLES (Stacked) --- */
-
-/* --- UPDATED FOOTER STYLES --- */
+/* --- 3-COLUMN FOOTER LAYOUT --- */
 
 .footer {
   width: 100%;
-  margin: 4rem 0 0 0;
-  
-  /* INCREASED SIZE: Changed padding from '1.5rem' to '3rem' */
-  padding: 3rem 0 1.5rem; 
-  
+  margin-top: 4rem;
+  padding: 3rem 0 1rem;
   background: linear-gradient(to top, rgba(0, 5, 15, 1), rgba(10, 20, 50, 0.6));
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.9rem;
 }
 
-/* New Logo Style */
-.footer-logo {
-  height: 60px; /* Adjust this number based on your logo's shape */
-  width: auto;
-  margin-bottom: 1rem; /* Space between logo and website text */
-  object-fit: contain;
-  align-self: flex-start; /* Ensures logo stays left-aligned */
-}
-
-/* ... The rest of your footer CSS remains the same ... */
 .footer-content-compact {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  width: 100%;
+  padding: 0 4rem; /* More breathing room on sides */
+  
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between; /* Spreads Left, Center, Right apart */
+  align-items: center; /* Vertically centers the map with text */
   gap: 2rem;
 }
 
-/* Ensure the left side handles the stacked logo + text correctly */
+/* 1. LEFT COLUMN (Contact) */
 .footer-left {
   display: flex;
-  flex-direction: column; 
-  gap: 0.6rem; 
+  flex-direction: column;
+  gap: 0.8rem;
+  flex: 1; /* Takes up 1/3 space */
 }
 
-.compact-item {
+/* 2. CENTER COLUMN (Map) */
+.footer-center {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 0.6rem;
-  color: #ccc;
+  flex: 1; /* Takes up 1/3 space */
 }
 
-.compact-item strong {
-  color: #fcd361; /* Gold labels */
-  font-weight: 500;
+.footer-map {
+  border: 2px solid rgba(252, 211, 97, 0.3); /* Gold border for map */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
 }
 
-.compact-item a {
-  color: #ccc;
-  text-decoration: none;
+.footer-map:hover {
+  transform: scale(1.05);
+  border-color: #fcd361;
 }
 
-.compact-item a:hover {
-  color: #38bdf8;
-  text-decoration: underline;
-}
-
-/* Right Side: Address + Map */
-/* Right Side: Address + Map (Stacked Vertically) */
+/* 3. RIGHT COLUMN (Faculty + Address) */
 .footer-right {
   display: flex;
-  flex-direction: column; /* Stack them: Map Top, Text Bottom */
-  align-items: flex-end;  /* Align everything to the right edge */
-  gap: 0.8rem;
+  flex-direction: column;
+  align-items: flex-end; /* Aligns text to the Right */
   text-align: right;
+  flex: 1; /* Takes up 1/3 space */
+  gap: 1.5rem;
 }
 
-.compact-address {
-  font-size: 0.85rem;
-  color: #aaa;
+/* Faculty Styling */
+.secretary-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sec-name {
+  color: #fcd361; /* Gold Name */
+  font-size: 1.4rem;
+  font-weight: 700;
   margin: 0;
-  line-height: 1.5; /* Good spacing for the 3 lines */
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-/* Slim Copyright */
+.sec-role {
+  color: #fff;
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.sec-event {
+  color: #38bdf8; /* Electric Blue */
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+/* Address Styling */
+.footer-address-block {
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  line-height: 1.5;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 0.8rem;
+  width: fit-content;
+}
+
+.footer-address-block strong {
+  color: #e0e0e0;
+}
 .footer-copyright-slim {
   text-align: center;
   margin-top: 1rem;
@@ -618,24 +752,19 @@
   font-size: 0.75rem;
   opacity: 0.5;
 }
-
-/* Mobile: Stack layout */
-@media (max-width: 768px) {
+/* Mobile: Stack everything */
+@media (max-width: 900px) {
   .footer-content-compact {
     flex-direction: column;
-    align-items: flex-start; /* Align left on mobile */
-    gap: 1.5rem;
+    text-align: center;
+    gap: 3rem;
   }
-  
-  .footer-left {
-    width: 100%;
-  }
-
   .footer-right {
-    width: 100%;
-    flex-direction: row; /* Keep map next to address */
-    justify-content: flex-start;
-    text-align: left;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left {
+    align-items: center;
   }
 }
 .back-to-top {
@@ -1154,3 +1283,277 @@
 }
 
 /* --- DISABLE HOVER FOR STATIC PANELS --- */
+/* --- NAVIGATION DROPDOWN STYLES --- */
+
+.nav-item-dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* --- FIX: MAKE 'ABOUT' LOOK LIKE OTHER LINKS --- */
+
+.nav-label {
+  /* 1. Match the exact shape/size of other links */
+  padding: 0.4rem 0.6rem; 
+  border-radius: 999px; /* Pill shape */
+  cursor: pointer;
+  
+  /* 2. Text styling */
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  
+  /* 3. Smooth transition for the effect */
+  transition: background 200ms ease, color 200ms ease;
+}
+
+/* 4. The Hover Effect */
+.nav-item-dropdown:hover .nav-label {
+  /* Add the background "pill" glow like others */
+  background: rgba(255, 255, 255, 0.1);
+  
+  /* Text stays white (as you requested no gold glow for this one) */
+  color: #fff; 
+}
+
+/* The Hidden Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px); /* Center below parent */
+  
+  background: rgba(18, 20, 58, 0.95); /* Dark Blue Background */
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.5rem;
+  min-width: 200px; /* Wide enough for text */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  
+  /* Hide by default */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 200;
+}
+
+/* Show on Hover */
+.nav-item-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Links inside Dropdown */
+.dropdown-menu a {
+  display: block;
+  padding: 0.6rem 1rem !important; /* Override default nav padding */
+  border-radius: 8px;
+  margin-bottom: 2px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff !important;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+  .nav-item-dropdown {
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  .dropdown-menu {
+    position: static; /* Stack normally on mobile */
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+    display: none; /* Hidden unless we add click logic, but for now simple hover on desktop */
+  }
+  
+  /* Show dropdown items in mobile list */
+  .nav-item-dropdown:hover .dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* --- ADVISORY COMMITTEE (Centered Layout) --- */
+.advisory-grid {
+  display: flex;           /* Use Flexbox instead of Grid */
+  justify-content: center; /* Centers items horizontally */
+  flex-wrap: wrap;         /* Allows stacking on mobile */
+  gap: 3rem;               /* Space between the two cards */
+  margin-top: 1rem;
+}
+
+/* Ensure these cards behave like the grid ones */
+.advisory-grid .member-card {
+  width: 300px;           /* Fixed width to ensure uniformity */
+  flex-shrink: 0;         /* Prevents shrinking */
+}
+
+/* --- NEW TEAM LIST CARD STYLE --- */
+
+.team-card {
+  text-align: left; /* Align text to left, unlike the center leaders */
+  height: 100%;     /* Forces card to fill the grid height */
+  display: flex;
+  flex-direction: column;
+}
+
+/* The Blue Title at the top */
+.team-card-title {
+  color: #38bdf8; /* Electric Blue */
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.3); /* Subtle blue line */
+  padding-bottom: 0.5rem;
+}
+
+/* The List Container */
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* Space between members */
+  flex-grow: 1;
+}
+
+/* Individual Member Block */
+.team-member-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.tm-name {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.tm-desig {
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.tm-desig2 {
+  color: #ccc;
+  font-size: 0.85rem;
+}
+
+.tm-dept {
+  color: #fcd361; /* Gold tint for Dept */
+  font-size: 0.75rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* --- FALLING BUBBLES ANIMATION (Top to Bottom) --- */
+
+.bubble-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; 
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bubble {
+  position: absolute;
+  top: -100px; /* Start ABOVE the screen */
+  border-radius: 50%;
+  
+  /* Gold Tint */
+  background: radial-gradient(circle at 30% 30%, rgba(252, 211, 97, 0.1), rgba(252, 211, 97, 0.05));
+  border: 1px solid rgba(252, 211, 97, 0.15);
+  box-shadow: 0 0 10px rgba(252, 211, 97, 0.1);
+  
+  opacity: 0;
+  animation: fall linear infinite; /* Using the 'fall' animation */
+}
+
+/* The Falling Animation */
+@keyframes fall {
+  0% {
+    top: -100px; /* Start above screen */
+    transform: translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1; /* Fade in quickly */
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    top: 110vh; /* End BELOW the screen */
+    transform: translateX(-50px); /* Drift slightly left */
+    opacity: 0;
+  }
+}
+
+/* --- INDIVIDUAL BUBBLE VARIATIONS --- */
+
+/* Bubble 1: Small, Fast */
+.bubble:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  left: 10%;
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+
+/* Bubble 2: Medium, Slower */
+.bubble:nth-child(2) {
+  width: 80px;
+  height: 80px;
+  left: 35%;
+  animation-duration: 12s;
+  animation-delay: 2s;
+}
+
+/* Bubble 3: Large, Very Slow */
+.bubble:nth-child(3) {
+  width: 120px;
+  height: 120px;
+  left: 55%;
+  animation-duration: 15s;
+  animation-delay: 1s;
+}
+
+/* Bubble 4: Medium, Fast */
+.bubble:nth-child(4) {
+  width: 60px;
+  height: 60px;
+  left: 75%;
+  animation-duration: 10s;
+  animation-delay: 4s;
+}
+
+/* Bubble 5: Small, Slow */
+.bubble:nth-child(5) {
+  width: 50px;
+  height: 50px;
+  left: 90%;
+  animation-duration: 14s;
+  animation-delay: 0.5s;
+}
