@@ -815,7 +815,7 @@ function App() {
       </div>
     </section>
 
-     <section className="section" id="speakers">
+    <section className="section" id="speakers">
       
     
       <div className="panel panel--outline">
