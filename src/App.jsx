@@ -172,13 +172,11 @@ const committeeTeams = [
     ]
   },
   {
-    title: 'Publicity & Communications Committee',
+    title: 'Idea Pitching Competition ',
     members: [
-      { name: 'Dr Santhanalakshmi M', desig: 'Associate Professor', dept: 'Department of ECE' },
-      { name: 'Dr Mariyam Adnan', desig: 'Associate Professor', dept: 'Department of AFD' },
-      { name: 'Dr M Parthiban', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department Fashion Technology' },
-      { name: 'Dr P Komakhan Sudar Vendan', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of EEE' },
-      { name: 'Dr J Krishnasamy', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Textile Technology' },
+      { name: 'Dr Muthuram N', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Production' },
+      { name: 'Mr Sundar C', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of MCA' },
+      { name: 'Dr S Vidyalakshmi', desig: 'Associate Professor', dept: 'Department of Biotechnology' },
     ]
   },
   {
@@ -191,11 +189,13 @@ const committeeTeams = [
     ]
   },
   {
-    title: 'Idea Pitching Competition ',
+    title: 'Publicity & Communications Committee',
     members: [
-      { name: 'Dr Muthuram N', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Production' },
-      { name: 'Mr Sundar C', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of MCA' },
-      { name: 'Dr S Vidyalakshmi', desig: 'Associate Professor', dept: 'Department of Biotechnology' },
+      { name: 'Dr Santhanalakshmi M', desig: 'Associate Professor', dept: 'Department of ECE' },
+      { name: 'Dr Mariyam Adnan', desig: 'Associate Professor', dept: 'Department of AFD' },
+      { name: 'Dr M Parthiban', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department Fashion Technology' },
+      { name: 'Dr P Komakhan Sudar Vendan', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of EEE' },
+      { name: 'Dr J Krishnasamy', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Textile Technology' },
     ]
   },
   {
