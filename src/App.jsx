@@ -172,22 +172,6 @@ const committeeTeams = [
     ]
   },
   {
-    title: 'Sponsorship & Finance Committee',
-    members: [
-      { name: 'Dr R Murugan', desig: 'Professor', dept: 'Department of Textile' },
-      { name: 'Dr Prasanth A S', desig: 'Associate Professor', dept: 'Department of Mechanical' },
-      { name: 'Dr Elangovan S', desig: 'Associate Professor', dept: 'Department of Production' },
-    ]
-  },
-  {
-    title: 'Logistics & Venue Committee',
-    members: [
-      { name: 'Dr Dhanabal P', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Mechanical' },
-      { name: 'Dr R Priya', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of AMCS' },
-      { name: 'Dr M S Sangeetha', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Biomedical' },
-    ]
-  },
-  {
     title: 'Publicity & Communications Committee',
     members: [
       { name: 'Dr Santhanalakshmi M', desig: 'Associate Professor', dept: 'Department of ECE' },
@@ -198,16 +182,7 @@ const committeeTeams = [
     ]
   },
   {
-    title: 'Registration & Reception Committee',
-    members: [
-      { name: 'Dr Suriya S', desig: 'Associate Professor', dept: 'Department of CSE' },
-      { name: 'Dr M R Nivitha', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Civil' },
-      { name: 'Dr Gayathri K', desig: 'Assistant Professor', dept: 'Department of Civil' },
-      { name: 'Dr K P Devakaran', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Automobile Engineering' },
-    ]
-  },
-  {
-    title: 'Startup & Innovation Expo Committee',
+    title: "Inventors' Exhibit Committee",
     members: [
       { name: 'Dr Prabukarthi A', desig: 'Assistant Professor', dept: 'Department of Mechanical' },
       { name: 'Dr Vairam T', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of IT' },
@@ -221,6 +196,31 @@ const committeeTeams = [
       { name: 'Dr Muthuram N', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Production' },
       { name: 'Mr Sundar C', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of MCA' },
       { name: 'Dr S Vidyalakshmi', desig: 'Associate Professor', dept: 'Department of Biotechnology' },
+    ]
+  },
+  {
+    title: 'Registration & Reception Committee',
+    members: [
+      { name: 'Dr Suriya S', desig: 'Associate Professor', dept: 'Department of CSE' },
+      { name: 'Dr M R Nivitha', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of Civil' },
+      { name: 'Dr Gayathri K', desig: 'Assistant Professor', dept: 'Department of Civil' },
+      { name: 'Dr K P Devakaran', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Automobile Engineering' },
+    ]
+  },
+  {
+    title: 'Sponsorship & Finance Committee',
+    members: [
+      { name: 'Dr R Murugan', desig: 'Professor', dept: 'Department of Textile' },
+      { name: 'Dr Prasanth A S', desig: 'Associate Professor', dept: 'Department of Mechanical' },
+      { name: 'Dr Elangovan S', desig: 'Associate Professor', dept: 'Department of Production' },
+    ]
+  },
+  {
+    title: 'Logistics & Venue Committee',
+    members: [
+      { name: 'Dr Dhanabal P', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Mechanical' },
+      { name: 'Dr R Priya', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of AMCS' },
+      { name: 'Dr M S Sangeetha', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Biomedical' },
     ]
   },
   {
@@ -308,7 +308,7 @@ const speakersList = [
     image: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
   },
 ]*/}
-
+{/*
 const sponsorsData = [
   {
     category: 'Platinum Sponsor',
@@ -353,7 +353,7 @@ const sponsorsData = [
     ]
   },
 ]
-
+*/}
 const aboutCollege = `PSG College of Technology (PSG Tech), established in 1951 by PSG & Sons' Charities, is an ISO 9001:2015 certified autonomous institution affiliated with Anna University, Chennai. Celebrating its Platinum Jubilee, PSG Tech offers 21 undergraduate and 24 postgraduate programs spanning Engineering and Technology, Computer Applications, Management Sciences, and Basic and Advanced Sciences. The campus hosts state-of-the-art Centers of Excellence including TIFAC-CORE in Product Design, Machine Tool Research Centre, Engineering Design Centre, Virtual Reality Centre, Tool and Die Centre, Centre for Nanotechnology, Centre for Robotics, Centre of Excellence in Artificial Intelligence and Software, Centre for Non-Linear Dynamics, Danfoss Centre of Excellence in Climate and Energy, and the Centre of Excellence in Welding Engineering and Technology. PSG Tech partners closely with industry, operates on-campus manufacturing units, and consistently ranks among India’s top institutions for innovation and industry linkage.`
 
 const aboutEvent = `The Institution’s Innovation Council (IIC) of PSG College of Technology organizes “The Confluence – PSG Tech Innovation & Entrepreneurship Summit 2026” to foster a culture of innovation and entrepreneurial thinking. The summit provides a platform for students, faculty, startups, and industry experts to collaborate, share ideas, and showcase successful projects, startups, IPR achievements, and research outcomes of PSG Tech. Aligned with the national innovation agenda, it strengthens PSG Tech’s position as a leading contributor to India’s innovation ecosystem.`
@@ -371,6 +371,8 @@ const navigationLinks = [
   { 
     label: 'Events', 
     dropdown: [
+      { label: 'Technical Sessions', href: '#technical-sessions' },
+      { label: "Panel Discussion", href: '#panel-discussion' },
       { label: 'Idea Pitching', href: '#idea-pitch' },
       { label: "Inventors' Exhibit", href: '#inventors-exhibit' }
     ]
@@ -600,7 +602,7 @@ function App() {
       <div id="the-confluence" className="wide-glass-card" style={{
           '--bg-full': `linear-gradient(to right, rgba(5, 10, 35, 0.9), rgba(5, 10, 35, 0.6)), url(${confluenceBg})`  
         }}>
-        <SectionHeading kicker="The Confluence" title="Innovation Summit 2026" />
+        <SectionHeading kicker="The Confluence" title="Research, Innovation & Start-up Summit" />
         <p>{aboutEvent}</p>
           <ul className="list list--dot">
             <li>
@@ -627,7 +629,7 @@ function App() {
       <section id="sessions" className="section split-section">
       
       
-      <div className="panel panel--outline">
+      <div className="panel panel--outline" id='technical-sessions'>
         <SectionHeading
           kicker="Technical Sessions"
           title="Come and explore the incredible technical sessions"
@@ -640,7 +642,7 @@ function App() {
         </ul>
       </div>
 
-      <div className="panel panel--accent">
+      <div className="panel panel--accent" id='panel-discussion'>
         <SectionHeading
           kicker="Panel Discussion"
           title="Participate in the talks of the Industrial Great Minds"
@@ -908,20 +910,19 @@ function App() {
     <section className="section" id="sponsors-wall">
       <SectionHeading
         kicker="Support"
-        title="Our Partners"
+        title="Our Sponsors"
         subtitle="Powering innovation through collaboration."
       />
-      
+      {/*
       <div className="sponsors-container">
         {sponsorsData.map((tier, index) => (
           <div key={index} className="sponsor-group">
-            {/* The Category Title (e.g. Platinum Sponsor) */}
             <h3 className="sponsor-category-title">{tier.category}</h3>
             
             
           </div>
         ))}
-      </div>
+      </div>*/}
     </section>
 
       <div className="back-to-top">
