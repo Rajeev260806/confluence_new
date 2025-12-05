@@ -472,7 +472,7 @@
 }
 
 .section-heading h2 {
-  font-size: 2rem; /* Reduced from ~2.5rem/3rem */
+  font-size: 1rem; /* Reduced from ~2.5rem/3rem */
   margin-bottom: 0.5rem;
   line-height: 1.2;
 }
@@ -1586,4 +1586,42 @@
 #advisory .member-company {
   color: #ffffff !important; /* Forces it to White */
   opacity: 1; /* Removes any dimming/transparency */
+}
+
+.panel .section-heading h2,
+.gradient-card .section-heading h2 {
+  font-size: 2rem !important; /* Force it to be smaller (was ~2.5rem) */
+  line-height: 1.2;
+}
+
+/* Optional: Make the small "kicker" text above it smaller too */
+.panel .section-heading__kicker,
+.gradient-card .section-heading__kicker {
+  font-size: 0.8rem !important;
+}
+
+/* Optional: Make the subtitle smaller too */
+.panel .section-heading p,
+.gradient-card .section-heading p {
+  font-size: 0.95rem !important;
+}
+
+/* --- INCREASE HEADINGS FOR SPECIFIC SECTIONS --- */
+
+/* Targets the main title inside 'The College' and 'The Confluence' sections */
+#the-college .section-heading h2,
+#the-confluence .section-heading h2 {
+  font-size: 2rem !important; /* Make these significantly bigger */
+  line-height: 1.1;
+  
+  /* Optional: Increase the Kicker (small gold text) for these too */
+  font-weight: 800;
+}
+
+/* Mobile Adjustment for these specific big headings */
+@media (max-width: 768px) {
+  #the-college .section-heading h2,
+  #the-confluence .section-heading h2 {
+    font-size: 2.2rem !important;
+  }
 }
