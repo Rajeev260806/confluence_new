@@ -13,8 +13,9 @@ import adv2 from './assets/Sivanambuttu.jpg'
 import adv3 from './assets/Ganapathi.jpg'
 import adv4 from './assets/Person.jpg'
 import './App.css'
+import { Link } from 'react-router-dom'
 
-const eventDate = new Date('2026-02-20T09:00:00+05:30')
+const eventDate = new Date('2026-02-27T09:00:00+05:30')
 
 const highlights = [
   {
@@ -511,15 +512,7 @@ function App() {
             )
           })}
 
-          <a
-            className="nav-cta"
-            href="https://confluence.psgtech.ac.in"
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => setNavOpen(false)}
-          >
-            Register Now
-          </a>
+        <Link to="/signin" className="nav-cta">Register Now</Link>
         </div>
       </nav>
 

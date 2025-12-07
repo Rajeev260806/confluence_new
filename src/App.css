@@ -37,6 +37,57 @@
   }
 }
 
+/* --- UPDATED NAVBAR STYLES --- */
+
+/* 1. Make College Name Bigger */
+.site-nav__brand span {
+  font-size: 1.5rem !important; /* Increased from 1.2rem */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* 2. New Centered Date Element */
+/* --- UPDATED NAVBAR CENTER (Date + Mini Timer) --- */
+
+.nav-center-block {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  display: flex;
+  flex-direction: column; /* Stacks Date and Timer */
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.nav-date {
+  font-size: 0.95rem;
+  color: #e0e0e0;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.nav-timer {
+  font-family: 'Courier New', monospace; /* Tech/Code look */
+  color: #fcd361; /* Gold */
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  
+  /* Adds a subtle "digital clock" glow */
+  text-shadow: 0 0 8px rgba(252, 211, 97, 0.4);
+}
+
+/* Mobile: Hide the whole center block to save space */
+@media (max-width: 900px) {
+  .nav-center-block {
+    display: none;
+  }
+}
+
 .nav-logo {
   width: 48px;
   height: auto;
@@ -1624,4 +1675,280 @@
   #the-confluence .section-heading h2 {
     font-size: 2.2rem !important;
   }
+}
+
+/* --- REGISTRATION FORM STYLES --- */
+
+.form-container {
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #fcd361; /* Gold */
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.form-input, 
+.form-select, 
+.form-textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus, 
+.form-select:focus, 
+.form-textarea:focus {
+  outline: none;
+  border-color: #38bdf8; /* Electric Blue focus */
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+}
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #e0e0e0;
+}
+
+.checkbox-input {
+  width: 18px;
+  height: 18px;
+  accent-color: #fcd361; /* Gold Checkbox */
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #fcd361;
+}
+
+/* --- SPLIT SCREEN AUTH LAYOUT --- */
+/* ========================================= */
+/* SPLIT SCREEN AUTH LAYOUT (FINAL)     */
+/* ========================================= */
+
+/* 1. Main Wrapper (Splits page in half) */
+.auth-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: calc(100vh - 80px); /* Full height minus Navbar */
+  overflow-x: hidden; /* Prevents horizontal scroll */
+}
+
+/* 2. Left Side (Hero Text) */
+.auth-left {
+  width: 50%;
+  display: flex;
+  align-items: center;      /* Vertically Center */
+  justify-content: flex-end; /* Horizontally Align to RIGHT (near the line) */
+  padding-right: 40px;      /* Gap between text and the split center */
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Optional: The Vertical Line Separator */
+.auth-left::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 215, 0, 0.3), transparent);
+}
+
+/* 3. Right Side (Form) */
+.auth-right {
+  width: 50%;
+  display: flex;
+  align-items: center;      /* Vertically Center */
+  justify-content: flex-start; /* Horizontally Align to LEFT (near the line) */
+  padding-left: 40px;       /* Gap between form and the split center */
+  box-sizing: border-box;
+}
+
+/* ========================================= */
+/* HERO TEXT OVERRIDES (Left Panel Only)   */
+/* ========================================= */
+
+/* 1. CONTAINER: Push the whole block to the Right */
+.auth-left .hero-container {
+  width: fit-content;
+  max-width: 100%;
+  
+  /* CRITICAL: Keeps text left-aligned (for design) but moves box to right */
+  margin-left: auto; 
+  margin-right: 0;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. MAIN TITLE: Big, Bold, Left-Aligned (Original Design) */
+.auth-left .hero-main-text {
+  font-size: 4rem !important; /* Large Size */
+  white-space: nowrap;        
+  text-align: left !important; /* Keep left align to match lines */
+  line-height: 0.9;
+}
+
+/* 3. MIDDLE ROW: Lines + Year */
+.auth-left .hero-middle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0.2rem 0;
+}
+
+/* 4. LINES: Restore 'Start under E' Logic */
+.auth-left .hero-lines-group {
+  height: 20px;
+  flex-grow: 1;
+  
+  /* Indent to start under 'E' of 'THE' */
+  margin-left: 6rem; 
+  
+  margin-right: 1.5rem;
+}
+
+.auth-left .decor-line {
+  height: 4px;
+}
+
+/* 5. YEAR: Matches Title */
+.auth-left .hero-year-text {
+  font-size: 3.2rem !important;
+  line-height: 1;
+}
+
+/* 6. SUBTITLE: Justified to fill width (Original Design) */
+.auth-left .hero-sub-text {
+  font-size: 1.2rem !important;
+  font-weight: 600;
+  letter-spacing: 1px !important;
+  word-spacing: normal;
+  
+  /* Force Full Width Justify */
+  text-align: justify !important;
+  text-align-last: justify !important;
+  width: 100%;
+  white-space: nowrap;
+}
+
+/* --- MOBILE FIX --- */
+@media (max-width: 900px) {
+  .auth-left .hero-container {
+    margin: 0 auto; /* Center it back on mobile */
+  }
+  .auth-left .hero-main-text {
+    font-size: 2.5rem !important;
+    text-align: center !important;
+  }
+  .auth-left .hero-lines-group {
+    margin-left: 0;
+  }
+  .auth-left .hero-sub-text {
+    text-align: center !important;
+    text-align-last: center !important;
+  }
+
+}
+
+/* ========================================= */
+/* HOVER EFFECTS FOR HERO BLOCK (Auth Page) */
+/* ========================================= */
+
+/* 1. Base Transition State */
+.auth-left .hero-container {
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: default; /* Shows it's interactive */
+}
+
+/* 2. Scale Up (Zoom) on Hover */
+.auth-left .hero-container:hover {
+  transform: scale(1.05) translateY(-5px); /* Zooms in and lifts up slightly */
+}
+
+/* 3. Text Glow Intensifies */
+.auth-left .hero-container:hover .hero-main-text,
+.auth-left .hero-container:hover .hero-year-text {
+  /* Increases the gold shadow size and opacity */
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.5)); 
+}
+
+/* 4. Lines Glow Brighter */
+.auth-left .hero-container:hover .decor-line {
+  /* Shifts gradient to a brighter, whitish-gold */
+  background: linear-gradient(to right, #ffe57f, #ffd700); 
+  
+  /* Adds a strong glow around the lines */
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+}
+
+/* 5. Subtitle becomes slightly brighter */
+.auth-left .hero-container:hover .hero-sub-text {
+  opacity: 1; /* Make it fully opaque (was 0.9) */
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* --- PAGE LABEL (Above The Confluence) --- */
+/* --- PAGE LABEL (Big, Centered, Gold) --- */
+.auth-page-label {
+  font-size: 3rem; /* Made it BIG */
+  color: #fcd361;    /* Gold */
+  font-weight: 700;  /* Bold */
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  
+  /* Centering */
+  display: block;
+  width: 100%;
+  text-align: center; 
+  
+  margin-bottom: 2rem; /* Space before 'The Confluence' */
+  opacity: 1;
+  line-height: 1;
+  text-shadow: 0 0 15px rgba(252, 211, 97, 0.2);
+}
+
+/* Hover Effect: Make it glow slightly when the whole block is hovered */
+.auth-left .hero-container:hover .auth-page-label {
+  color: #fff; /* Turns white on hover */
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
 }
