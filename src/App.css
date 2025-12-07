@@ -1952,3 +1952,205 @@
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
 }
+
+/* --- EXPANDABLE CARD STYLES --- */
+
+.expand-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  
+  background: rgba(252, 211, 97, 0.1); /* Subtle Gold Background */
+  border: 1px solid #fcd361;          /* Gold Border */
+  color: #fcd361;
+  
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.expand-btn:hover {
+  background: #fcd361;
+  color: #000; /* Text turns black on hover */
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(252, 211, 97, 0.4);
+}
+
+/* Rotate the plus to make an X when active */
+.expand-btn.active {
+  transform: rotate(45deg); /* Turns + into × */
+  background: #fcd361;
+  color: #000;
+}
+
+/* The Content Area that Slides Open */
+.card-expanded-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out; /* Smooth Slide */
+  margin-top: 0;
+}
+
+/* When the parent has class 'expanded', show this content */
+.panel.expanded .card-expanded-content {
+  max-height: 25000px; /* Big enough to fit form */
+  opacity: 1;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================= */
+/* DASHBOARD SPECIFIC OVERRIDES          */
+/* ========================================= */
+
+/* Hides the vertical gold line behind "The Confluence" block only on the dashboard */
+.auth-left.dashboard-hero::after {
+  display: none !important;
+  content: none !important; /* Double check to ensure it's gone */
+}
+
+/* --- FORM STYLES --- */
+.reg-form {
+  text-align: left;
+  margin-top: 1rem;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+  padding-bottom: 1.5rem;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  color: #fcd361;
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Two Column Grid Helper */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-grid-2 {
+    grid-template-columns: 1fr; /* Stack on mobile */
+  }
+}
+
+/* ========================================= */
+/* ENHANCED FORM ELEMENTS (Dropdowns & File) */
+/* ========================================= */
+
+/* 1. PREMIUM DROPDOWN STYLE */
+.form-select {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  
+  /* Glassy Dark Background */
+  background-color: rgba(255, 255, 255, 0.07); 
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  
+  color: #fff;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* Removes default ugly arrow */
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Custom High-Res Arrow (White) */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1.2rem center;
+  background-size: 1.1em;
+}
+
+/* Hover State: Slight brighten + Gold Border hint */
+.form-select:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(252, 211, 97, 0.5); /* Gold tint */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus State: Gold Glow */
+.form-select:focus {
+  border-color: #fcd361;
+  background-color: rgba(20, 20, 20, 0.123);
+  box-shadow: 0 0 0 3px rgba(252, 211, 97, 0.15);
+}
+
+/* Dropdown Options (The list that opens up) */
+.form-select option {
+  background-color: #111827; /* Deep Blue-Black */
+  color: #ffffff;            /* Crisp White Text */
+  padding: 15px;             /* More breathing room */
+  font-size: 1rem;
+}
+
+/* 2. PREMIUM FILE UPLOAD BUTTON */
+.form-file-input {
+  width: 100%;
+  padding: 0.6rem; /* Padding around the internal button */
+  
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  
+  color: #bbb; /* Text color for "No file chosen" */
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover on the container area */
+.form-file-input:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #fcd361;
+}
+
+/* STYLE THE ACTUAL 'CHOOSE FILE' BUTTON */
+.form-file-input::file-selector-button {
+  margin-right: 1rem;
+  padding: 0.6rem 1.2rem;
+  
+  /* Gradient Gold Background */
+  background: linear-gradient(135deg, #fcd361 0%, #d4af37 100%);
+  border: none;
+  border-radius: 6px;
+  
+  color: #000; /* Black text for contrast on gold */
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect for the button itself */
+.form-file-input::file-selector-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(252, 211, 97, 0.3);
+  background: #fff; /* Turns white on hover for a crisp look */
+}

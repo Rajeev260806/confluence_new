@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import psgTechLogo from './assets/college.jpeg'
 import './App.css'
 
 export default function SignIn() {
-  
+  const navigate = useNavigate()
   // --- STATE ---
   const [credentials, setCredentials] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
@@ -49,12 +49,15 @@ export default function SignIn() {
       return
     }
 
-    setLoading(true)
-    setFeedback({ type: '', message: '' })
-
     setTimeout(() => {
       setLoading(false)
       setFeedback({ type: 'success', message: 'Sign In Successful!' })
+
+      // REDIRECT TO DASHBOARD
+      setTimeout(() => {
+        navigate('/dashboard') 
+      }, 1000)
+      
     }, 1500)
   }
 

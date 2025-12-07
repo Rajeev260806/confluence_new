@@ -218,7 +218,7 @@ export default function SignUp() {
           <div className="form-container" style={{ width: '100%', maxWidth: '500px', margin: '0' }}>
             <div className="panel panel--outline">
               <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                <h2 style={{ color: '#fcd361', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Create Account</h2>
+                <h2 style={{ color: '#fcd361', textTransform: 'uppercase', marginBottom: '0.5rem', fontSize: '2rem'}}>Create Account</h2>
                 <p style={{ color: '#ccc' }}>Register with your email to get started.</p>
               </div>
 
