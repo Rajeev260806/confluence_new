@@ -24,7 +24,6 @@ export default function SignUp() {
 
   // --- EFFECT: MINI COUNTDOWN LOGIC ---
   useEffect(() => {
-    // UPDATED DATE: February 27, 2026
     const eventDate = new Date('2026-02-27T09:00:00+05:30')
     
     const interval = setInterval(() => {
@@ -123,16 +122,51 @@ export default function SignUp() {
     })
   }
 
-  const handleVerifyAndRegister = (e) => {
+  // --- UPDATED HANDLER: VERIFY OTP + REGISTER IN BACKEND ---
+  const handleVerifyAndRegister = async (e) => {
     e.preventDefault()
     setFeedback({ type: '', message: '' })
 
+    // 1. Verify OTP first (Frontend Check)
     if (otpInput === generatedOtp) {
-      setFeedback({ type: 'success', message: "Account Created! Redirecting..." })
-      setTimeout(() => {
-        navigate('/signin')
-      }, 1500)
+      
+      // 2. If OTP is correct, send data to Backend
+      setLoading(true)
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            email: formData.email, 
+            password: formData.password 
+          }),
+        })
+
+        const data = await response.json()
+
+        if (response.ok) {
+          // Success: Database entry created
+          setFeedback({ type: 'success', message: "Account Created! Redirecting..." })
+          setTimeout(() => {
+            navigate('/signin')
+          }, 1500)
+        } else {
+          // Failure: Show error from backend (e.g., "User already exists")
+          setFeedback({ type: 'error', message: data.message || "Registration failed." })
+          setLoading(false)
+        }
+
+      } catch (err) {
+        console.error("Signup Error:", err)
+        setFeedback({ type: 'error', message: "Server connection failed. Is the backend running?" })
+        setLoading(false)
+      }
+
     } else {
+      // Wrong OTP Logic
       const newAttempts = attempts - 1
       setAttempts(newAttempts)
 
@@ -302,8 +336,8 @@ export default function SignUp() {
                       {loading ? 'Sending OTP...' : 'Send OTP'}
                     </button>
                   ) : (
-                    <button type="submit" className="btn btn--primary" style={{ width: '100%' }}>
-                      Verify & Create Account
+                    <button type="submit" className="btn btn--primary" style={{ width: '100%' }} disabled={loading}>
+                      {loading ? 'Creating Account...' : 'Verify & Create Account'}
                     </button>
                   )}
                 </div>

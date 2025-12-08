@@ -13,12 +13,16 @@ export default function Dashboard() {
   })
   const [expandedCard, setExpandedCard] = useState(null)
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 })
+  const [loading, setLoading] = useState(true) // New loading state
+
+  // Get User ID from Login
+  const userId = localStorage.getItem('userId')
 
   // ==========================================
-  // FORM 1: IDEA PITCHING STATE (Updated to match Inventors)
+  // FORM 1: IDEA PITCHING STATE
   // ==========================================
   const [ideaForm, setIdeaForm] = useState({
-    fullName: '', gender: '', email: '', mobile: '', altMobile: '',
+    leadName: '', leadGender: '', leadEmail: '', leadMobile: '',
     institutionName: '', exhibitorType: '', department: '', degree: '', yearOfStudy: '', city: '', state: '',
     participationMode: 'Individual',
     teamName: '', teamSize: '', teamMembers: [],
@@ -44,13 +48,32 @@ export default function Dashboard() {
   const ideaAllChecked = ideaForm.declarationOriginal && ideaForm.declarationRules && ideaForm.declarationPhoto
   const inventorAllChecked = inventorForm.declarationOriginal && inventorForm.declarationRules && inventorForm.declarationPhoto
 
-  // --- SIMULATION ---
+  // --- 1. FETCH REAL STATUS FROM BACKEND ---
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setRegistrationStatus({ ideaPitching: false, inventorsExhibit: false })
-    }, 500) 
-    return () => clearTimeout(timer) 
-  }, [])
+    if (!userId) {
+      navigate('/signin')
+      return
+    }
+
+    const fetchStatus = async () => {
+      try {
+        const response = await fetch(`http://127.0.0.1:5000/api/status/${userId}`)
+        if (response.ok) {
+          const data = await response.json()
+          setRegistrationStatus({
+            ideaPitching: data.ideaPitching,
+            inventorsExhibit: data.inventorsExhibit
+          })
+        }
+      } catch (err) {
+        console.error("Error fetching status:", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchStatus()
+  }, [userId, navigate])
 
   // --- TIMER ---
   useEffect(() => {
@@ -70,7 +93,11 @@ export default function Dashboard() {
     return () => clearInterval(interval)
   }, [])
 
-  const handleLogout = () => navigate('/signin')
+  const handleLogout = () => {
+    localStorage.removeItem('userId')
+    localStorage.removeItem('userEmail')
+    navigate('/signin')
+  }
   const toggleCard = (cardName) => setExpandedCard(expandedCard === cardName ? null : cardName)
 
   // ==========================================
@@ -85,7 +112,7 @@ export default function Dashboard() {
   
   const handleIdeaTeamSize = (e) => {
     const size = parseInt(e.target.value) || 0
-    const membersNeeded = size > 0 ? size : 0
+    const membersNeeded = size >= 2 ? size : 0
     const newMembers = Array(membersNeeded).fill().map(() => ({ name: '', email: '', mobile: '', designation: '', institution: '' }))
     setIdeaForm({ ...ideaForm, teamSize: e.target.value, teamMembers: newMembers })
   }
@@ -94,11 +121,43 @@ export default function Dashboard() {
     updated[index][field] = value
     setIdeaForm({ ...ideaForm, teamMembers: updated })
   }
-  const handleIdeaSubmit = (e) => {
+
+  // --- SUBMIT IDEA TO BACKEND ---
+  const handleIdeaSubmit = async (e) => {
     e.preventDefault()
     if (!ideaAllChecked) return
-    alert("Idea Pitching Submitted! (Check Console)")
-    console.log("IDEA DATA:", ideaForm)
+
+    const formData = new FormData()
+    // Append all text fields
+    Object.keys(ideaForm).forEach(key => {
+      if (key === 'teamMembers') {
+        formData.append(key, JSON.stringify(ideaForm[key])) // Send array as JSON string
+      } else if (key !== 'abstractFile') {
+        formData.append(key, ideaForm[key])
+      }
+    })
+    // Append File
+    if (ideaForm.abstractFile) {
+      formData.append('abstractFile', ideaForm.abstractFile)
+    }
+    formData.append('userId', userId) // Important: Link to user
+
+    try {
+      const res = await fetch('http://127.0.0.1:5000/api/register/idea', {
+        method: 'POST',
+        body: formData // No headers needed, fetch sets multipart/form-data automatically
+      })
+      if (res.ok) {
+        alert("Idea Pitching Registered Successfully!")
+        setRegistrationStatus(prev => ({ ...prev, ideaPitching: true })) // Turn Green
+        setExpandedCard(null) // Close card
+      } else {
+        alert("Registration Failed. Check backend logs.")
+      }
+    } catch (err) {
+      console.error(err)
+      alert("Server Error")
+    }
   }
 
   // ==========================================
@@ -113,7 +172,7 @@ export default function Dashboard() {
   
   const handleInventorTeamSize = (e) => {
     const size = parseInt(e.target.value) || 0
-    const membersNeeded = size > 0 ? size : 0
+    const membersNeeded = size >= 2 ? size : 0
     const newMembers = Array(membersNeeded).fill().map(() => ({ name: '', email: '', mobile: '', designation: '', institution: '' }))
     setInventorForm({ ...inventorForm, teamSize: e.target.value, teamMembers: newMembers })
   }
@@ -122,12 +181,45 @@ export default function Dashboard() {
     updated[index][field] = value
     setInventorForm({ ...inventorForm, teamMembers: updated })
   }
-  const handleInventorSubmit = (e) => {
+
+  // --- SUBMIT INVENTOR TO BACKEND ---
+  const handleInventorSubmit = async (e) => {
     e.preventDefault()
     if (!inventorAllChecked) return 
-    alert("Inventors Exhibit Submitted! (Check Console)")
-    console.log("INVENTOR DATA:", inventorForm)
+
+    const formData = new FormData()
+    Object.keys(inventorForm).forEach(key => {
+      if (key === 'teamMembers') {
+        formData.append(key, JSON.stringify(inventorForm[key]))
+      } else if (key !== 'abstractFile') {
+        formData.append(key, inventorForm[key])
+      }
+    })
+    if (inventorForm.abstractFile) {
+      formData.append('abstractFile', inventorForm.abstractFile)
+    }
+    formData.append('userId', userId)
+
+    try {
+      const res = await fetch('http://127.0.0.1:5000/api/register/inventor', {
+        method: 'POST',
+        body: formData
+      })
+      if (res.ok) {
+        alert("Inventors Exhibit Registered Successfully!")
+        setRegistrationStatus(prev => ({ ...prev, inventorsExhibit: true })) // Turn Green
+        setExpandedCard(null)
+      } else {
+        alert("Registration Failed.")
+      }
+    } catch (err) {
+      console.error(err)
+      alert("Server Error")
+    }
   }
+
+  // Loading Screen if checking status
+  if (loading) return <div style={{color:'#fff', textAlign:'center', marginTop:'20%'}}>Loading Dashboard...</div>
 
   return (
     <div className="page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -151,7 +243,7 @@ export default function Dashboard() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
         
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2rem', color: '#ffffff', letterSpacing: '2px', textTransform: 'uppercase' }}>Event Registration For</h1>
+          <h1 style={{ fontSize: '2rem', color: '#ffffff', letterSpacing: '2px', textTransform: 'uppercase' }}>Event Registration</h1>
         </div>
 
         <div className="auth-left dashboard-hero" style={{ width: 'auto', padding: 0, justifyContent: 'center', marginBottom: '3rem' }}>
@@ -172,7 +264,7 @@ export default function Dashboard() {
         <div className="grid grid--two" style={{ maxWidth: '1000px', width: '100%', gap: '1.5rem' }}>
           
           {/* ========================================================== */}
-          {/* CARD 1: IDEA PITCHING (Structure now identical to Inventors) */}
+          {/* CARD 1: IDEA PITCHING                                    */}
           {/* ========================================================== */}
           <div className={`panel panel--outline ${expandedCard === 'idea' ? 'expanded' : ''}`} style={{ 
             position: 'relative', transition: 'all 0.3s ease', padding: expandedCard === 'idea' ? '2rem' : '0.8rem 2rem', 
@@ -182,8 +274,8 @@ export default function Dashboard() {
             <button className={`expand-btn ${expandedCard === 'idea' ? 'active' : ''}`} onClick={() => toggleCard('idea')} style={{ position: 'absolute', top: expandedCard === 'idea' ? '1.5rem' : '50%', right: '1.5rem', transform: expandedCard === 'idea' ? 'rotate(45deg)' : 'translateY(-50%)', width: '35px', height: '35px', fontSize: '1.2rem' }}>+</button>
             <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: '600', marginBottom: '0', marginTop: '0', paddingRight: '3rem', paddingTop: '1rem' }}>Idea Pitching</h2>
             <p style={{ color: '#aaa', marginBottom: '1.5rem', marginTop: '1rem'}}>Pitch your innovative ideas to industry experts.</p>
-
             <div className="card-expanded-content">
+              
               {registrationStatus.ideaPitching ? (
                 <div style={{ padding: '1.5rem', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', borderRadius: '8px', color: '#38bdf8', fontWeight: '600', textAlign: 'center' }}>✓ You have successfully registered for Idea Pitching.</div>
               ) : (
@@ -192,16 +284,16 @@ export default function Dashboard() {
                   {/* 1. Basic Details */}
                   <div className="form-section">
                     <h3 className="section-title">1. Basic Details</h3>
-                    <div className="form-group"><label className="form-label">Full Name</label><input type="text" name="fullName" className="form-input" required value={ideaForm.fullName} onChange={handleIdeaChange} /></div>
+                    <div className="form-group"><label className="form-label">Full Name</label><input type="text" name="leadName" className="form-input" required value={ideaForm.leadName} onChange={handleIdeaChange} /></div>
                     <div className="form-group">
                       <label className="form-label">Gender</label>
-                      <select name="gender" className="form-select" required value={ideaForm.gender} onChange={handleIdeaChange}>
-                        <option value="">Select Gender</option><option value="Male">Male</option><option value="Female">Female</option><option value="Others">Others</option>
+                      <select name="leadGender" className="form-select" required value={ideaForm.leadGender} onChange={handleIdeaChange}>
+                        <option value="">Select Gender</option><option>Male</option><option>Female</option><option>Others</option>
                       </select>
                     </div>
-                    <div className="form-group"><label className="form-label">Email ID</label><input type="email" name="email" className="form-input" required value={ideaForm.email} onChange={handleIdeaChange} /></div>
+                    <div className="form-group"><label className="form-label">Email ID</label><input type="email" name="leadEmail" className="form-input" required value={ideaForm.leadEmail} onChange={handleIdeaChange} /></div>
                     <div className="form-grid-2">
-                      <div className="form-group"><label className="form-label">Mobile</label><input type="tel" name="mobile" className="form-input" required value={ideaForm.mobile} onChange={handleIdeaChange} /></div>
+                      <div className="form-group"><label className="form-label">Mobile</label><input type="tel" name="leadMobile" className="form-input" required value={ideaForm.leadMobile} onChange={handleIdeaChange} /></div>
                       <div className="form-group"><label className="form-label">Alt Contact</label><input type="tel" name="altMobile" className="form-input" value={ideaForm.altMobile} onChange={handleIdeaChange} /></div>
                     </div>
                   </div>
@@ -211,7 +303,7 @@ export default function Dashboard() {
                     <h3 className="section-title">2. Organisation Details</h3>
                     <div className="form-group"><label className="form-label">Institution / Startup Name</label><input type="text" name="institutionName" className="form-input" required value={ideaForm.institutionName} onChange={handleIdeaChange} /></div>
                     <div className="form-group">
-                      <label className="form-label">Type of Idea Pitcher</label>
+                      <label className="form-label">Type of Exhibitor</label>
                       <select name="exhibitorType" className="form-select" required value={ideaForm.exhibitorType} onChange={handleIdeaChange}>
                         <option value="">Select Type</option><option value="Student">Student</option><option value="Faculty">Faculty</option><option value="Startup">Startup</option><option value="Industry">Industry</option><option value="Independent Innovator">Independent Innovator</option>
                       </select>
@@ -247,6 +339,7 @@ export default function Dashboard() {
                       <h3 className="section-title">Team Details</h3>
                       <div className="form-group"><label className="form-label">Team Name</label><input type="text" name="teamName" className="form-input" required value={ideaForm.teamName} onChange={handleIdeaChange} /></div>
                       <div className="form-group"><label className="form-label">Total Members (Including You)</label><input type="number" name="teamSize" className="form-input" min="2" required value={ideaForm.teamSize} onChange={handleIdeaTeamSize} /></div>
+                      
                       {ideaForm.teamMembers.map((m, i) => (
                         <div key={i} style={{marginTop:'1rem', padding:'1rem', background:'rgba(255,255,255,0.05)'}}>
                           <h4 style={{color:'#aaa', marginBottom:'0.5rem'}}>Member {i+1}</h4>
@@ -280,15 +373,15 @@ export default function Dashboard() {
                     <div style={{display:'flex', flexDirection:'column', gap:'0.8rem'}}>
                       <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
                         <input type="checkbox" name="declarationOriginal" checked={ideaForm.declarationOriginal} onChange={handleIdeaChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I declare that the idea submitted is original</span>
+                        <span>I confirm that the innovation being exhibited is original</span>
                       </label>
                       <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
                         <input type="checkbox" name="declarationRules" checked={ideaForm.declarationRules} onChange={handleIdeaChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I agree to abide by the rules of the competition</span>
+                        <span>I agree to follow event rules and safety guidelines</span>
                       </label>
                       <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
                         <input type="checkbox" name="declarationPhoto" checked={ideaForm.declarationPhoto} onChange={handleIdeaChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I permit the organizers to use submitted content for academic/promotional purposes</span>
+                        <span>I grant permission for photography & promotional use</span>
                       </label>
                     </div>
                   </div>
@@ -311,9 +404,10 @@ export default function Dashboard() {
           }}>
             <button className={`expand-btn ${expandedCard === 'inventor' ? 'active' : ''}`} onClick={() => toggleCard('inventor')} style={{ position: 'absolute', top: expandedCard === 'inventor' ? '1.5rem' : '50%', right: '1.5rem', transform: expandedCard === 'inventor' ? 'rotate(45deg)' : 'translateY(-50%)', width: '35px', height: '35px', fontSize: '1.2rem' }}>+</button>
             <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: '600', marginBottom: '0', marginTop: '0', paddingRight: '3rem', paddingTop: '1rem' }}>Inventors' Exhibit</h2>
-                          <p style={{ color: '#aaa', marginBottom: '1.5rem', marginTop: '1rem'}}>Showcase your working prototypes to a global audience.</p>
-
+             <p style={{ color: '#aaa', marginBottom: '1.5rem', marginTop: '1rem'}}>Showcase your working prototypes to a global audience.</p>
             <div className="card-expanded-content">
+             
+
               {registrationStatus.inventorsExhibit ? (
                 <div style={{ padding: '1.5rem', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', borderRadius: '8px', color: '#38bdf8', fontWeight: '600', textAlign: 'center' }}>✓ Successfully Registered</div>
               ) : (
@@ -377,6 +471,8 @@ export default function Dashboard() {
                       <h3 className="section-title">Team Details</h3>
                       <div className="form-group"><label className="form-label">Team Name</label><input type="text" name="teamName" className="form-input" required value={inventorForm.teamName} onChange={handleInventorChange} /></div>
                       <div className="form-group"><label className="form-label">Total Members (Including You)</label><input type="number" name="teamSize" className="form-input" min="2" required value={inventorForm.teamSize} onChange={handleInventorTeamSize} /></div>
+                      
+                      {/* Only renders members if size >= 2 */}
                       {inventorForm.teamMembers.map((m, i) => (
                         <div key={i} style={{marginTop:'1rem', padding:'1rem', background:'rgba(255,255,255,0.05)'}}>
                           <h4 style={{color:'#aaa', marginBottom:'0.5rem'}}>Member {i+1}</h4>
@@ -391,7 +487,7 @@ export default function Dashboard() {
                   {/* 5. Innovation Details */}
                   <div className="form-section">
                     <h3 className="section-title">4. Innovation Details</h3>
-                    <div className="form-group"><label className="form-label">Title of Innovation</label><input type="text" name="title" className="form-input" required value={inventorForm.title} onChange={handleInventorChange} /></div>
+                    <div className="form-group"><label className="form-label">Title of Idea/Innovation</label><input type="text" name="title" className="form-input" required value={inventorForm.title} onChange={handleInventorChange} /></div>
                     <div className="form-group">
                       <label className="form-label">Category / Domain</label>
                       <select name="category" className="form-select" required value={inventorForm.category} onChange={handleInventorChange}>
@@ -401,10 +497,7 @@ export default function Dashboard() {
                     {inventorForm.category === 'Others' && (
                       <div className="form-group"><label className="form-label">Specify Category</label><input type="text" name="otherCategory" className="form-input" required value={inventorForm.otherCategory} onChange={handleInventorChange} /></div>
                     )}
-                    <div className="form-group">
-                      <label className="form-label">Abstract (Upload File)</label>
-                      <input type="file" className="form-file-input" required onChange={handleInventorFile} />
-                    </div>
+                    <div className="form-group"><label className="form-label">Abstract (Upload File)</label><input type="file" className="form-file-input" required onChange={handleInventorFile} /></div>
                   </div>
 
                   {/* 6. Declarations */}

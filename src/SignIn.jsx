@@ -15,7 +15,6 @@ export default function SignIn() {
 
   // --- EFFECT: MINI COUNTDOWN LOGIC ---
   useEffect(() => {
-    // UPDATED DATE: February 27, 2026
     const eventDate = new Date('2026-02-27T09:00:00+05:30')
     const interval = setInterval(() => {
       const now = new Date()
@@ -41,7 +40,8 @@ export default function SignIn() {
     if (feedback.message) setFeedback({ type: '', message: '' })
   }
 
-  const handleSubmit = (e) => {
+  // --- UPDATED HANDLER: REAL BACKEND LOGIN ---
+  const handleSubmit = async (e) => {
     e.preventDefault()
     
     if (!credentials.email || !credentials.password) {
@@ -49,16 +49,40 @@ export default function SignIn() {
       return
     }
 
-    setTimeout(() => {
-      setLoading(false)
-      setFeedback({ type: 'success', message: 'Sign In Successful!' })
+    setLoading(true)
+    setFeedback({ type: '', message: '' })
 
-      // REDIRECT TO DASHBOARD
-      setTimeout(() => {
-        navigate('/dashboard') 
-      }, 1000)
-      
-    }, 1500)
+    try {
+      // 1. Connect to Backend
+      const response = await fetch('http://127.0.0.1:5000/api/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        // 2. Success: Save User ID for Dashboard
+        localStorage.setItem('userId', data.user_id) 
+        localStorage.setItem('userEmail', data.email)
+
+        setFeedback({ type: 'success', message: 'Sign In Successful!' })
+
+        // 3. Redirect
+        setTimeout(() => {
+          navigate('/dashboard') 
+        }, 1000)
+      } else {
+        // Failure (Wrong password/email)
+        setFeedback({ type: 'error', message: data.message || 'Invalid credentials' })
+      }
+    } catch (err) {
+      console.error("Login Error:", err)
+      setFeedback({ type: 'error', message: 'Server connection failed. Is backend running?' })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
