@@ -624,7 +624,7 @@ function App() {
       
       <div className="panel panel--outline" id='technical-sessions'>
         <SectionHeading
-          kicker="Technical Sessions"
+          kicker="Keynote Address/Technical Sessions"
           title="Come and explore the incredible technical sessions"
           subtitle="Deep dives into breakthrough technologies."
         />
