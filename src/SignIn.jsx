@@ -54,7 +54,7 @@ export default function SignIn() {
 
     try {
       // 1. Connect to Backendhtt
-      const response = await fetch('https://confluence-backend-cgxl.onrender.com/api/signin', {
+      const response = await fetch('/api/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials),
