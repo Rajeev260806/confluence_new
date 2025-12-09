@@ -103,8 +103,8 @@ export default function SignUp() {
     }
 
     emailjs.send(
-      'service_0xn147n', 
-      'template_r7admia',
+      'service_uuayf5a', 
+      'template_9ebh548',
       templateParams,
       'Hu-mV4mive9rzziRU' 
     )
