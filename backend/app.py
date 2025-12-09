@@ -10,13 +10,17 @@ import json
 app = Flask(__name__)
 CORS(app) 
 
+# --- DATABASE CONFIGURATION ---
+# 1. Try to get the database URL from Render's Environment Variables
 database_url = os.environ.get('DATABASE_URL') 
 
+# 2. Fix Render's URL format if needed (Postgres requirement)
 if database_url and database_url.startswith("postgres://"):
-    # Fix for Render's postgres URL format (SQLAlchemy requires postgresql://)
     database_url = database_url.replace("postgres://", "postgresql://", 1)
 
+# 3. Use the Cloud URL if it exists, otherwise use Localhost (fallback)
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'postgresql://postgres:root@localhost/confluence_db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
