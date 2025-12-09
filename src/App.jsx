@@ -158,6 +158,14 @@ const committeeLeaders = [
 ]
 const committeeTeams = [
   {
+    title: 'Overall Coordination Committee',
+    members: [
+      { name: 'Dr G Thilagavathi', desig2: 'Professor and Head', dept: 'Department of Textile Technology',desig: 'IPR Activity Coordinator'},
+      { name: 'Dr S Saravanan', desig: 'Dean – Autonomous Functioning', dept: 'Department of Production',desig2: 'Professor' },
+      { name: 'Dr L S Jayashree', desig: 'Vice President (IIC)', dept: 'Department of CSE'},
+    ]
+  },
+  {
     title: 'Organizing Secretary',
     members: [
       { name: 'Dr V Senthil Kumaran', desig: 'Associate Professor', dept: 'Department of AMCS' },
@@ -247,14 +255,6 @@ const committeeTeams = [
       { name: 'Dr Ilayaraja N', desig: 'Assistant Professor', dept: 'Department of MCA' },
       { name: 'Dr S Prabhakaran', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of RAE' },
       { name: 'Dr J Palraj', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Mathematics' },
-    ]
-  },
-  {
-    title: 'Overall Coordination Committee',
-    members: [
-      { name: 'Dr G Thilagavathi', desig2: 'Professor and Head', dept: 'Department of Textile Technology',desig: 'IPR Activity Coordinator'},
-      { name: 'Dr S Saravanan', desig: 'Dean – Autonomous Functioning', dept: 'Department of Production',desig2: 'Professor' },
-      { name: 'Dr L S Jayashree', desig: 'Vice President (IIC)', dept: 'Department of CSE'},
     ]
   },
 ]
