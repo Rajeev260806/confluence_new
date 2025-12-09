@@ -19,7 +19,7 @@ const eventDate = new Date('2026-02-27T09:00:00+05:30')
 
 const highlights = [
   {
-    title: 'Keynote Address/Technical Sessions',
+    title: 'Keynote/Technical Sessions',
     copy:
       'Deep-dive talks with industry leaders, researchers, and innovators covering breakthrough technologies and entrepreneurship trends.',
   },
