@@ -10,12 +10,17 @@ import json
 app = Flask(__name__)
 CORS(app) 
 
-# --- DATABASE CONFIGURATION ---
-# REPLACE 'your_password' WITH YOUR ACTUAL POSTGRES PASSWORD
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost/confluence_db'
+database_url = os.environ.get('DATABASE_URL') 
+
+if database_url and database_url.startswith("postgres://"):
+    # Fix for Render's postgres URL format (SQLAlchemy requires postgresql://)
+    database_url = database_url.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'postgresql://postgres:root@localhost/confluence_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = 'uploads'
 
+# Create uploads folder if it doesn't exist (Critical for Render to not crash)
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
     os.makedirs(app.config['UPLOAD_FOLDER'])
 
