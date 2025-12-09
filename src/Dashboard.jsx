@@ -57,7 +57,7 @@ export default function Dashboard() {
 
     const fetchStatus = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/api/status/${userId}`)
+        const response = await fetch(`https://confluence-backend-cgxl.onrender.com/api/status/${userId}`)
         if (response.ok) {
           const data = await response.json()
           setRegistrationStatus({
@@ -143,7 +143,7 @@ export default function Dashboard() {
     formData.append('userId', userId) // Important: Link to user
 
     try {
-      const res = await fetch('http://127.0.0.1:5000/api/register/idea', {
+      const res = await fetch('https://confluence-backend-cgxl.onrender.com/api/register/idea', {
         method: 'POST',
         body: formData // No headers needed, fetch sets multipart/form-data automatically
       })
@@ -201,7 +201,7 @@ export default function Dashboard() {
     formData.append('userId', userId)
 
     try {
-      const res = await fetch('http://127.0.0.1:5000/api/register/inventor', {
+      const res = await fetch('https://confluence-backend-cgxl.onrender.com/api/register/inventor', {
         method: 'POST',
         body: formData
       })
