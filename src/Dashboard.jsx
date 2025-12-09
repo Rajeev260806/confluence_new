@@ -246,7 +246,7 @@ export default function Dashboard() {
           <h1 style={{ fontSize: '2rem', color: '#ffffff', letterSpacing: '2px', textTransform: 'uppercase' }}>Event Registration</h1>
         </div>
 
-        <div className="auth-left dashboard-hero" style={{ width: 'auto', padding: 0, justifyContent: 'center', marginBottom: '3rem' }}>
+        <div className="auth-left dashboard-hero" style={{ justifyContent: 'center', marginBottom: '3rem' }}>
           <div className="hero-container" style={{ marginLeft: 0 }}>
             <h1 className="hero-main-text">THE CONFLUENCE</h1>
             <div className="hero-middle-row">

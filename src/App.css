@@ -2154,3 +2154,150 @@
   box-shadow: 0 4px 10px rgba(252, 211, 97, 0.3);
   background: #fff; /* Turns white on hover for a crisp look */
 }
+
+/* =========================================================================
+   MOBILE RESPONSIVENESS
+   (Paste this at the bottom of App.css)
+   ========================================================================= */
+
+@media screen and (max-width: 900px) {
+
+  /* --- 1. GENERAL PAGE STRUCTURE --- */
+  .page {
+    height: auto;
+    min-height: 100vh;
+    padding: 10px;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+
+  /* --- 2. NAVIGATION BAR --- */
+  .site-nav {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.8); /* Darker background for readability */
+  }
+
+  .site-nav__brand {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .site-nav__brand img {
+    height: 40px; /* Slightly smaller logo */
+  }
+
+  .nav-center-block {
+    margin: 0;
+    order: 2; /* Move timer below branding */
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-timer {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* --- 3. AUTH LAYOUT (Sign In / Sign Up) --- */
+  .auth-wrapper {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  /* The Left Side (Hero Text) */
+  .auth-left {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    padding: 2rem 1rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-container {
+    margin-left: 0;
+    align-items: center; /* Center align text */
+  }
+
+  .hero-main-text {
+    font-size: 2.5rem; /* Smaller text */
+    text-align: center;
+  }
+
+  .hero-middle-row {
+    justify-content: center;
+  }
+
+  .hero-year-text {
+    font-size: 1.5rem;
+  }
+
+  /* The Right Side (Form) */
+  .auth-right {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .form-container, .auth-box {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .panel {
+    padding: 1.5rem; /* Less padding on mobile cards */
+  }
+
+  /* --- 4. DASHBOARD SPECIFICS --- */
+  /* Stack the grid columns (Idea & Inventor cards) */
+  .grid--two {
+    grid-template-columns: 1fr !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Fix the dashboard hero spacing */
+  .dashboard-hero {
+    margin-bottom: 2rem !important;
+  }
+
+  /* Fix the expanded card forms */
+  .card-expanded-content {
+    padding: 0;
+  }
+
+  /* Stack form inputs that are side-by-side */
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* --- 5. FORM ELEMENTS --- */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  /* Make inputs easier to tap */
+  .form-input, .form-select, .btn {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 12px;
+  }
+
+  /* Radio buttons vertical stack */
+  .form-group[style*="display: flex"] {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px !important;
+  }
+
+  /* Bubbles: Reduce count/opacity to save mobile battery */
+  .bubble {
+    opacity: 0.3;
+  }
+}
