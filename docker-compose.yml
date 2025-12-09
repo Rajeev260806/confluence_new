@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # 1. DATABASE SERVICE
   db:
     image: postgres:15
     restart: always
@@ -10,28 +9,36 @@ services:
       POSTGRES_PASSWORD: mypassword
       POSTGRES_DB: confluence_db
     volumes:
-      - pgdata:/var/lib/postgresql/data # Persist data even if container stops
+      - pgdata:/var/lib/postgresql/data
 
-  # 2. BACKEND SERVICE
   backend:
     build: ./backend
     restart: always
     ports:
       - "5000:5000"
     environment:
-      # Connect to the 'db' service defined above
       DATABASE_URL: postgresql://myuser:mypassword@db:5432/confluence_db
     depends_on:
       - db
+    # --- ADD THIS SECTION ---
+    volumes:
+      - ./backend:/app        # Syncs your laptop's backend folder to the container
+      - /app/venv             # (Optional) Prevents syncing the virtual env
+    # ------------------------
 
-  # 3. FRONTEND SERVICE
   frontend:
     build: .
     restart: always
     ports:
-      - "80:80" # Standard Web Port
+      - "80:80"
     depends_on:
       - backend
+    # --- ADD THIS SECTION ---
+    volumes:
+      - ./src:/app/src        # Syncs your React source code
+      - ./public:/app/public  # Syncs public assets
+      - /app/node_modules     # Crucial: Uses container's installed modules, not yours
+    # ------------------------
 
 volumes:
   pgdata:
