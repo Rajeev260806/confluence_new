@@ -19,7 +19,7 @@ const eventDate = new Date('2026-02-27T09:00:00+05:30')
 
 const highlights = [
   {
-    title: 'Technical Sessions',
+    title: 'Keynote Address/Technical Sessions',
     copy:
       'Deep-dive talks with industry leaders, researchers, and innovators covering breakthrough technologies and entrepreneurship trends.',
   },
@@ -624,7 +624,7 @@ function App() {
       
       <div className="panel panel--outline" id='technical-sessions'>
         <SectionHeading
-          kicker="Keynote Address/Technical Sessions"
+          kicker="Technical Sessions"
           title="Come and explore the incredible technical sessions"
           subtitle="Deep dives into breakthrough technologies."
         />
