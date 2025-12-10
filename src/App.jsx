@@ -16,6 +16,13 @@ import adv5 from './assets/Suresh.jpg'
 import adv6 from './assets/NakulParameswar.jpg'
 import adv7 from './assets/Sriram.jpg'
 import adv8 from './assets/SureshMuthuswami.jpg'
+import sdg1 from './assets/sdg3.png'
+import sdg2 from './assets/sdg6.png'
+import sdg3 from './assets/sdg7.png'
+import sdg4 from './assets/sdg9.png'
+import sdg5 from './assets/sdg11.png'
+import sdg6 from './assets/sdg12.png'
+import sdg7 from './assets/sdg13.png'
 import './App.css'
 import { Link } from 'react-router-dom'
 
@@ -117,6 +124,51 @@ const eventChecklist = [
   'Teams must report to the registration desk by 8:30 AM.',
   'Participation certificates will be provided digitally.',
   'Lunch and refreshments are provided for all registered attendees.',
+]
+
+const sdgData = [
+  {
+    id: 3,
+    title: "SDG 3: Good Health & Well-being",
+    img: sdg1, 
+    topics: ["AI in Diagnostics & Telemedicine", "Wearable Health Monitoring", "Mental Health Tech Solutions"]
+  },
+  {
+    id: 6,
+    title: "SDG 6: Clean Water & Sanitation",
+    img: sdg2,
+    topics: ["Smart Water Management Systems", "Advanced Filtration Technologies", "Wastewater Treatment & Recycling"]
+  },
+  {
+    id: 7,
+    title: "SDG 7: Affordable & Clean Energy",
+    img: sdg3,
+    topics: ["Solar & Wind Energy Innovations", "Electric Vehicle (EV) Infrastructure", "Smart Grid Technologies"]
+  },
+  {
+    id: 9,
+    title: "SDG 9: Industry, Innovation & Infrastructure",
+    img: sdg4,
+    topics: ["IoT & Smart Manufacturing", "Sustainable Construction Materials", "Robotics & Automation"]
+  },
+  {
+    id: 11,
+    title: "SDG 11: Sustainable Cities & Communities",
+    img: sdg5,
+    topics: ["Urban Mobility & Traffic AI", "Green Building Architecture", "Disaster Resilient Infrastructure"]
+  },
+  {
+    id: 12,
+    title: "SDG 12: Responsible Consumption",
+    img: sdg6,
+    topics: ["Waste-to-Wealth Technologies", "Bio-degradable Packaging", "Supply Chain Transparency"]
+  },
+  {
+    id: 13,
+    title: "SDG 13: Climate Action",
+    img: sdg7,
+    topics: ["Carbon Capture & Storage", "Climate Modeling & AI", "Renewable Ag-Tech"]
+  }
 ]
 
 const advisoryBoard = [
@@ -384,7 +436,9 @@ const sponsorsData = [
 */}
 const aboutCollege = `PSG College of Technology (PSG Tech), established in 1951 by PSG & Sons' Charities, is an ISO 9001:2015 certified autonomous institution affiliated with Anna University, Chennai. Celebrating its Platinum Jubilee, PSG Tech offers 21 undergraduate and 24 postgraduate programs spanning Engineering and Technology, Computer Applications, Management Sciences, and Basic and Advanced Sciences. The campus hosts state-of-the-art Centers of Excellence including TIFAC-CORE in Product Design, Machine Tool Research Centre, Engineering Design Centre, Virtual Reality Centre, Tool and Die Centre, Centre for Nanotechnology, Centre for Robotics, Centre of Excellence in Artificial Intelligence and Software, Centre for Non-Linear Dynamics, Danfoss Centre of Excellence in Climate and Energy, and the Centre of Excellence in Welding Engineering and Technology. PSG Tech partners closely with industry, operates on-campus manufacturing units, and consistently ranks among India’s top institutions for innovation and industry linkage.`
 
-const aboutEvent = `The Institution’s Innovation Council (IIC) of PSG College of Technology organizes “The Confluence – PSG Tech Innovation & Entrepreneurship Summit 2026” to foster a culture of innovation and entrepreneurial thinking. The summit provides a platform for students, faculty, startups, and industry experts to collaborate, share ideas, and showcase successful projects, startups, IPR achievements, and research outcomes of PSG Tech. Aligned with the national innovation agenda, it strengthens PSG Tech’s position as a leading contributor to India’s innovation ecosystem.`
+const aboutEvent1 = "The Institution’s Innovation Council (IIC) of PSG College of Technology proudly presents “The Confluence 2026 – Research, Innovation & Start-up Summit” as part of the Platinum Jubilee celebrations of PSG College of Technology. This one-day national-level flagship event that brings together researchers, innovators, entrepreneurs, investors, industry leaders, and academicians on a single vibrant platform."
+const aboutEvent2 = "The summit aims to foster a strong culture of innovation, nurture entrepreneurial thinking among students and faculty, and showcase PSG Tech’s research and start-up ecosystem in alignment with the national innovation and entrepreneurship agenda. The Confluence 2026 serves as a powerful interface between research, technology, industry, and societal needs."
+
 
 const navigationLinks = [
   {href: '#page', label: 'Home'},
@@ -623,28 +677,61 @@ function App() {
           '--bg-full': `linear-gradient(to right, rgba(5, 10, 35, 0.9), rgba(5, 10, 35, 0.6)), url(${confluenceBg})`  
         }}>
         <SectionHeading kicker="The Confluence" title="Research, Innovation & Start-up Summit" />
-        <p>{aboutEvent}</p>
-          <ul className="list list--dot">
-            <li>
-              Provide a platform for students, faculty, startups, and industry experts to collaborate and
-              exchange innovative ideas.
-            </li>
-            <li>
-              Conduct workshops, keynote sessions, panel discussions, and exhibitions that promote
-              innovation and entrepreneurship.
-            </li>
-            <li>
-              Showcase successful projects, startups, IPR achievements, and research outcomes of PSG Tech.
-            </li>
-            <li>
-              Strengthen PSG Tech’s role in India’s innovation ecosystem under the IIC framework.
-            </li>
-            <li>
-              Identify and nurture early-stage student innovations for pre-incubation and incubation support.
-            </li>
-          </ul>
+        <p>{aboutEvent1}</p>
+        <p>{aboutEvent2}</p>
+        
         </div>
       </section>
+
+      <section className="section" id="purpose-driven">
+  
+  <div className="panel panel--outline">
+    {/* Reusing your existing SectionHeading component */}
+    <SectionHeading
+      kicker="Sustainability"
+      title="Purpose-Driven Focus"
+      subtitle="In line with global sustainability priorities, The Confluence 2026 is aligned with the United Nations Sustainable Development Goals (UN SDGs) and will focus on the following purpose-driven thematic domains:"
+    />
+    
+    {/* Reusing 'sponsorship' class for outer container 
+      Added inline grid style to ensure the 7 cards layout nicely
+    */}
+    <div className="sponsorship" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+      
+      {sdgData.map((sdg) => (
+        /* Reusing 'Event_cont' creates the exact same card look as your timeline */
+        <div className="Event_cont" key={sdg.id} style={{ height: '100%' }}>
+          
+          {/* Image Section */}
+          <div style={{ marginBottom: '1rem', borderRadius: '8px', overflow: 'hidden', height: '180px' }}>
+            <img 
+              src={sdg.img} 
+              alt={sdg.title} 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+            />
+          </div>
+
+          {/* Heading */}
+          <h3 style={{ marginBottom: '1rem', fontSize: '1.2rem', color: '#fcd361' }}>
+            {sdg.title}
+          </h3>
+          
+          {/* Topics List - Styled to look clean inside your card */}
+          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+            {sdg.topics.map((topic, index) => (
+              <li key={index} style={{ marginBottom: '0.5rem', color: '#ccc', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
+                <span style={{ color: '#fcd361', marginRight: '0.5rem', fontSize: '1.2rem' }}>•</span>
+                {topic}
+              </li>
+            ))}
+          </ul>
+
+        </div>
+      ))}
+      
+    </div>
+  </div>
+</section>
 
       <section id="sessions" className="section split-section">
       

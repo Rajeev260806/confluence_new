@@ -167,6 +167,10 @@
   scroll-margin-top: 110px;
 }
 
+.section{
+  margin-top: 50;
+}
+
 .hero {
   padding: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(1.5rem, 2vw, 2rem);
   text-align: left;
@@ -485,7 +489,7 @@
 }
 
 .section {
-  margin: 4rem 0;
+  margin: 2rem 0;
 }
 
 .section--compact {
@@ -2330,4 +2334,117 @@
     margin: 0 !important;
     width: auto !important;
   }
+}
+
+/* =========================================
+   SDG SECTION (Purpose-Driven Focus)
+   ========================================= */
+
+.sdg-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 2; /* Sit above bubbles */
+}
+
+.sdg-header {
+  max-width: 800px;
+  margin: 0 auto 3rem auto;
+}
+
+.sdg-title {
+  font-size: 2.5rem;
+  color: #fcd361; /* Matches your Gold/Yellow accent */
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sdg-subtitle {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* THE GRID LAYOUT */
+.sdg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* THE GLASS CARD */
+.sdg-card {
+  background: rgba(255, 255, 255, 0.05); /* Very transparent white */
+  backdrop-filter: blur(10px);           /* Frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.sdg-card:hover {
+  transform: translateY(-5px); /* Lift up on hover */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-color: rgba(252, 211, 97, 0.4); /* Glow yellow on hover */
+}
+
+/* CARD CONTENT */
+.sdg-img-container {
+  width: 100%;
+  height: 150px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.sdg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.3s ease;
+}
+
+.sdg-card:hover .sdg-img {
+  scale: 1.05; /* Slight zoom on image */
+}
+
+.sdg-card h3 {
+  color: #fff;
+  font-size: 1.25rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+}
+
+.sdg-subtopics {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sdg-subtopics li {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.sdg-subtopics li::before {
+  content: "•";
+  color: #fcd361; /* Yellow bullet point */
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* MOBILE FIXES */
+@media screen and (max-width: 768px) {
+  .sdg-title { font-size: 1.8rem; }
+  .sdg-grid { grid-template-columns: 1fr; } /* 1 column on mobile */
+  .sdg-section { padding: 3rem 1rem; }
 }
