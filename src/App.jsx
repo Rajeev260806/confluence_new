@@ -10,8 +10,6 @@ import trusteeImg from './assets/Trustee.jpg'
 import principalImg from './assets/Principal.jpg'
 import adv1 from './assets/Ramshankar.jpg'
 import adv2 from './assets/Sivanambuttu.jpg'
-import adv3 from './assets/Ganapathi.jpg'
-import adv4 from './assets/Person.jpg'
 import './App.css'
 import { Link } from 'react-router-dom'
 
@@ -129,17 +127,40 @@ const advisoryBoard = [
     image: adv2,
   },
   {
-    name: 'Mr. Ganapathi Batthini',
-    designation: 'Coordinator ',
-    company: 'Centre for Research in Entrepreneurship Education and Development (CREED) EDII, Ahmedabad',
-    image: adv3,
+    name: 'Mr. Midhu Unnithan',
+    designation: 'COO, TECHIN',
+    company: 'IIT Palakkad',
+    image: adv2,
   },
   {
-    name: '',
-    designation: '',
-    title: '',
-    company: '',
-    image: adv4,
+    name: 'Mr. Sugantharaja Radhakrishnan',
+    designation: 'Manager - Innovation and Research',
+    company: 'Titan Company Limited',
+    image: adv2,
+  },
+  {
+    name: 'Dr. Suresh D S',
+    designation: 'Director',
+    company: 'Channabasaveshwara Institute of Technology, Tumkur',
+    image: adv2,
+  },
+  {
+    name: ' Dr. Nakul Parameswar',
+    designation: 'Assistant Professor',
+    company: 'Department of Entrepreneurship and Management, Indian Institute of Technology Hyderabad (IITH)',
+    image: adv2,
+  },
+  {
+    name: 'Mr. Sriram Sankaran',
+    designation: ' Chairman and Managing Director',
+    company: 'Synchron Group',
+    image: adv2,
+  },
+  {
+    name: 'Mr. Suresh Muthuswami',
+    designation: 'Former Chairman of North America',
+    company: 'Tata Consultancy Services (TCS)',
+    image: adv2,
   },
 ]
 const committeeLeaders = [
