@@ -2335,116 +2335,109 @@
     width: auto !important;
   }
 }
-
 /* =========================================
    SDG SECTION (Purpose-Driven Focus)
    ========================================= */
 
-.sdg-section {
-  padding: 4rem 2rem;
-  text-align: center;
-  position: relative;
-  z-index: 2; /* Sit above bubbles */
-}
-
-.sdg-header {
-  max-width: 800px;
-  margin: 0 auto 3rem auto;
-}
-
-.sdg-title {
-  font-size: 2.5rem;
-  color: #fcd361; /* Matches your Gold/Yellow accent */
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.sdg-subtitle {
-  color: #e0e0e0;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-
-/* THE GRID LAYOUT */
+/* 1. The Grid Layout */
 .sdg-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive columns */
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem; /* Spacious gap between cards */
+  padding: 1rem 0;
 }
 
-/* THE GLASS CARD */
+/* 2. The Card Design (Matches Member Card Style) */
 .sdg-card {
-  background: rgba(255, 255, 255, 0.05); /* Very transparent white */
-  backdrop-filter: blur(10px);           /* Frosted glass effect */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 1.5rem;
-  text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  /* Lighter blue at top, darker blue at bottom */
+  background: linear-gradient(135deg, #ffffff14, #ffffff05);
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 1.5rem;      
+  padding: 2rem;
+  text-align: center;
+  position: relative;
   overflow: hidden;
+  transition: all 0.4s ease-out;
 }
 
+/* Keep the hover effect, but maybe make the border glow the same blue instead of gold */
 .sdg-card:hover {
-  transform: translateY(-5px); /* Lift up on hover */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border-color: rgba(252, 211, 97, 0.4); /* Glow yellow on hover */
+  transform: translateY(-12px);
+  /* Optional: stick to blue glow to match the card, or keep gold if you prefer */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 
+              0 0 20px rgba(56, 189, 248, 0.4); 
 }
 
-/* CARD CONTENT */
+/* 4. The Image Frame */
 .sdg-img-container {
-  width: 100%;
+  width: 150px;       /* Fixed square size like the member photo */
   height: 150px;
-  background: rgba(0,0,0,0.2);
-  border-radius: 10px;
-  margin-bottom: 1rem;
+  margin: 0 auto 1.5rem auto; /* Center it */
+  border-radius: 20px; /* Soft square corners */
   overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3); /* Dark background for transparent logos */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* 5. The Image Itself */
 .sdg-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: scale 0.3s ease;
+  object-fit: contain; /* Ensures full image is visible */
+  object-position: center;
+  padding: 10px;       /* Padding so logo doesn't touch edges */
+  transition: transform 0.4s ease;
 }
 
 .sdg-card:hover .sdg-img {
-  scale: 1.05; /* Slight zoom on image */
+  transform: scale(1.1); /* Subtle zoom on hover */
 }
 
+/* 6. Text Styling */
 .sdg-card h3 {
   color: #fff;
-  font-size: 1.25rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
   font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
 }
 
+/* 7. Bullet Points List */
 .sdg-subtopics {
   list-style: none;
   padding: 0;
   margin: 0;
+  text-align: left; /* Keep bullets aligned left for readability */
 }
 
 .sdg-subtopics li {
   color: #ccc;
-  font-size: 0.9rem;
-  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  line-height: 1.4;
 }
 
 .sdg-subtopics li::before {
   content: "•";
-  color: #fcd361; /* Yellow bullet point */
+  color: #fcd361; /* Gold bullet */
   font-weight: bold;
-  margin-right: 8px;
+  font-size: 1.2rem;
+  margin-right: 10px;
+  line-height: 1;
 }
 
-/* MOBILE FIXES */
+/* Mobile Adjustments */
 @media screen and (max-width: 768px) {
-  .sdg-title { font-size: 1.8rem; }
-  .sdg-grid { grid-template-columns: 1fr; } /* 1 column on mobile */
-  .sdg-section { padding: 3rem 1rem; }
+  .sdg-grid {
+    grid-template-columns: 1fr; /* Stack vertically on phone */
+    gap: 1.5rem;
+  }
+  .sdg-card {
+    padding: 1.5rem;
+  }
 }

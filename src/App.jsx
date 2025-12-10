@@ -241,6 +241,7 @@ const committeeTeams = [
     members: [
       { name: 'Dr G Thilagavathi', desig2: 'Professor and Head', dept: 'Department of Textile Technology',desig: 'IPR Activity Coordinator'},
       { name: 'Dr S Saravanan', desig: 'Dean – Autonomous Functioning', dept: 'Department of Production',desig2: 'Professor' },
+      {name: 'Dr Prabhu Raja V',desig: 'Professor', dept: 'Department of Mechanical Engineering'},
       { name: 'Dr L S Jayashree', desig: 'Vice President (IIC)', dept: 'Department of CSE'},
     ]
   },
@@ -308,6 +309,7 @@ const committeeTeams = [
     members: [
       { name: 'Dr Dhanabal P', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Mechanical' },
       { name: 'Dr R Priya', desig: 'Assistant Professor (Sr. Gr.)', dept: 'Department of AMCS' },
+      {name: 'Dr Anand M',desig: 'Assistant Professor (Sl. Gr.)', dept:'Department of EEE'},
       { name: 'Dr M S Sangeetha', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Biomedical' },
     ]
   },
@@ -325,12 +327,14 @@ const committeeTeams = [
     members: [
       { name: 'Dr Thulasimani L', desig: 'Associate Professor', dept: 'Department of ECE' },
       { name: 'Mr Veerakumar S', desig: 'Assistant Professor', dept: 'Department of CSE' },
+      {name: 'Dr Sivakumar P',desig: 'Assistant Professor (Sl. Gr.)', dept:'Department of EEE'},
       { name: 'Dr S Udhayakumar', desig: 'Assistant Professor', dept: 'Department of Mechanical' },
     ]
   },
   {
     title: 'Catering & Refreshments Committee',
     members: [
+      { name: 'Dr Srivatsun G', desig: 'Associate Professor', dept:'Department of ECE'},
       { name: 'Dr Ilayaraja N', desig: 'Assistant Professor', dept: 'Department of MCA' },
       { name: 'Dr S Prabhakaran', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of RAE' },
       { name: 'Dr J Palraj', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of Mathematics' },
@@ -684,55 +688,36 @@ function App() {
       </section>
 
       <section className="section" id="purpose-driven">
-  
-  <div className="panel panel--outline">
-    {/* Reusing your existing SectionHeading component */}
+  <div className="panel panel--outline" style={{background: '#0a103499', border: '1px solid rgba(255, 255, 255, .12)'}}>
     <SectionHeading
       kicker="Sustainability"
       title="Purpose-Driven Focus"
-      subtitle="In line with global sustainability priorities, The Confluence 2026 is aligned with the United Nations Sustainable Development Goals (UN SDGs) and will focus on the following purpose-driven thematic domains:"
+      subtitle="Aligned with UN SDGs to drive global impact."
     />
     
-    {/* Reusing 'sponsorship' class for outer container 
-      Added inline grid style to ensure the 7 cards layout nicely
-    */}
-    <div className="sponsorship" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-      
+    {/* Apply the Grid Class */}
+    <div className="sdg-grid">
       {sdgData.map((sdg) => (
-        /* Reusing 'Event_cont' creates the exact same card look as your timeline */
-        <div className="Event_cont" key={sdg.id} style={{ height: '100%' }}>
+        /* Apply the Card Class */
+        <div className="sdg-card" key={sdg.id}>
           
-          {/* Image Section */}
-          <div style={{ marginBottom: '1rem', borderRadius: '8px', overflow: 'hidden', height: '180px' }}>
-            <img 
-              src={sdg.img} 
-              alt={sdg.title} 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-            />
+          <div className="sdg-img-container">
+            <img src={sdg.img} alt={sdg.title} className="sdg-img" />
           </div>
 
-          {/* Heading */}
-          <h3 style={{ marginBottom: '1rem', fontSize: '1.2rem', color: '#fcd361' }}>
-            {sdg.title}
-          </h3>
+          <h3>{sdg.title}</h3>
           
-          {/* Topics List - Styled to look clean inside your card */}
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+          <ul className="sdg-subtopics">
             {sdg.topics.map((topic, index) => (
-              <li key={index} style={{ marginBottom: '0.5rem', color: '#ccc', display: 'flex', alignItems: 'center', fontSize: '0.95rem' }}>
-                <span style={{ color: '#fcd361', marginRight: '0.5rem', fontSize: '1.2rem' }}>•</span>
-                {topic}
-              </li>
+              <li key={index}>{topic}</li>
             ))}
           </ul>
 
         </div>
       ))}
-      
     </div>
   </div>
 </section>
-
       <section id="sessions" className="section split-section">
       
       
