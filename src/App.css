@@ -39,15 +39,6 @@
 
 /* --- UPDATED NAVBAR STYLES --- */
 
-/* 1. Make College Name Bigger */
-.site-nav__brand span {
-  font-size: 1.5rem !important; /* Increased from 1.2rem */
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: #fff;
-  white-space: nowrap;
-}
-
 /* 2. New Centered Date Element */
 /* --- UPDATED NAVBAR CENTER (Date + Mini Timer) --- */
 
@@ -2172,12 +2163,12 @@
 
   /* --- 2. NAVIGATION BAR --- */
   .site-nav {
-    flex-direction: column;
-    height: auto;
-    padding: 1rem;
-    gap: 1rem;
-    background: rgba(0, 0, 0, 0.8); /* Darker background for readability */
-  }
+  display: flex;
+  align-items: center !important; /* Vertically centers the logo */
+  height: 80px;                   /* Fixes the height of the whole bar */
+  padding: 0 2rem;
+  overflow: hidden;               /* Cuts off anything sticking out */
+}
 
   .site-nav__brand {
     width: 100%;
@@ -2185,8 +2176,31 @@
     margin-bottom: 0.5rem;
   }
   
-  .site-nav__brand img {
-    height: 40px; /* Slightly smaller logo */
+  /* Ensure the logo never exceeds the navbar height */
+.site-nav__brand img {
+  height: 50px !important;       /* Sets a fixed height */
+  width: auto !important;        /* Keeps the shape (doesn't stretch) */
+  max-width: 200px;              /* Safety limit for width */
+  object-fit: contain;           /* Ensures image stays sharp */
+  margin-right: 15px;            /* Adds space between logo and text */
+}
+
+/* 2. Ensure the text next to it looks good */
+.site-nav__brand span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;           /* Prevents text from breaking into two lines */
+}
+
+  .nav-timer {
+    font-size: 0.85rem; /* Smaller timer */
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* Make the Home button smaller on mobile */
+  .site-nav .btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
   }
 
   .nav-center-block {
@@ -2299,5 +2313,21 @@
   /* Bubbles: Reduce count/opacity to save mobile battery */
   .bubble {
     opacity: 0.3;
+  }
+}
+
+/* FORCE DESKTOP FIX (Paste at the very bottom of App.css) */
+@media screen and (min-width: 901px) {
+  .site-nav {
+    flex-direction: row !important; /* Force horizontal layout */
+    height: 70px !important;        /* Force fixed short height */
+    padding: 0 2rem !important;     /* Reset padding */
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  
+  .nav-center-block {
+    margin: 0 !important;
+    width: auto !important;
   }
 }
