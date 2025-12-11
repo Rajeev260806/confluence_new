@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import psgTechLogo from './assets/college.jpeg'
 import './App.css'
 
 export default function Dashboard() {
   const navigate = useNavigate()
+
+  // --- DOMAIN & SUB-DOMAIN DATA ---
+  const domainData = {
+    "SDG 3: Good Health & Well-being": ["Health Tech", "Telemedicine", "Mental Wellness", "Medical Devices"],
+    "SDG 6: Clean Water & Sanitation": ["Water Purification", "Waste Water Treatment", "Smart Irrigation"],
+    "SDG 7: Affordable & Clean Energy": ["Solar Tech", "EV Infrastructure", "Bio-Energy", "Smart Grids"],
+    "SDG 9: Industry, Innovation & Infrastructure": ["IoT & Automation", "Sustainable Materials", "Smart Manufacturing"],
+    "SDG 11: Sustainable Cities & Communities": ["Urban Mobility", "Green Building", "Disaster Management"],
+    "SDG 12: Responsible Consumption & Production": ["Circular Economy", "Waste Management", "Eco-Packaging"],
+    "SDG 13: Climate Action": ["Carbon Capture", "Renewable Tech", "Climate Analytics"]
+  }
 
   // --- STATE ---
   const [registrationStatus, setRegistrationStatus] = useState({
@@ -13,9 +24,8 @@ export default function Dashboard() {
   })
   const [expandedCard, setExpandedCard] = useState(null)
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 })
-  const [loading, setLoading] = useState(true) // New loading state
+  const [loading, setLoading] = useState(true)
 
-  // Get User ID from Login
   const userId = localStorage.getItem('userId')
 
   // ==========================================
@@ -26,8 +36,9 @@ export default function Dashboard() {
     institutionName: '', exhibitorType: '', department: '', degree: '', yearOfStudy: '', city: '', state: '',
     participationMode: 'Individual',
     teamName: '', teamSize: '', teamMembers: [],
+    // New Fields
+    domain: '', subDomain: '',
     title: '', category: '', otherCategory: '', abstractFile: null,
-    // Declarations
     declarationOriginal: false, declarationRules: false, declarationPhoto: false
   })
 
@@ -39,8 +50,9 @@ export default function Dashboard() {
     institutionName: '', exhibitorType: '', department: '', degree: '', yearOfStudy: '', city: '', state: '',
     participationMode: 'Individual',
     teamName: '', teamSize: '', teamMembers: [],
+    // New Fields
+    domain: '', subDomain: '',
     title: '', category: '', otherCategory: '', abstractFile: null,
-    // Declarations
     declarationOriginal: false, declarationRules: false, declarationPhoto: false
   })
 
@@ -48,15 +60,15 @@ export default function Dashboard() {
   const ideaAllChecked = ideaForm.declarationOriginal && ideaForm.declarationRules && ideaForm.declarationPhoto
   const inventorAllChecked = inventorForm.declarationOriginal && inventorForm.declarationRules && inventorForm.declarationPhoto
 
-  // --- 1. FETCH REAL STATUS FROM BACKEND ---
+  // --- FETCH STATUS ---
   useEffect(() => {
     if (!userId) {
       navigate('/signin')
       return
     }
-
     const fetchStatus = async () => {
       try {
+        // NOTE: Ensure this URL matches your backend (add /api if needed)
         const response = await fetch(`api/status/${userId}`)
         if (response.ok) {
           const data = await response.json()
@@ -71,7 +83,6 @@ export default function Dashboard() {
         setLoading(false)
       }
     }
-
     fetchStatus()
   }, [userId, navigate])
 
@@ -106,8 +117,15 @@ export default function Dashboard() {
   const handleIdeaChange = (e) => {
     const { name, value, type, checked } = e.target
     const val = type === 'checkbox' ? checked : value
-    setIdeaForm({ ...ideaForm, [name]: val })
+    
+    // Logic: If Domain changes, clear the Sub-Domain
+    if (name === 'domain') {
+      setIdeaForm({ ...ideaForm, domain: val, subDomain: '' })
+    } else {
+      setIdeaForm({ ...ideaForm, [name]: val })
+    }
   }
+  
   const handleIdeaFile = (e) => setIdeaForm({ ...ideaForm, abstractFile: e.target.files[0] })
   
   const handleIdeaTeamSize = (e) => {
@@ -116,41 +134,38 @@ export default function Dashboard() {
     const newMembers = Array(membersNeeded).fill().map(() => ({ name: '', email: '', mobile: '', designation: '', institution: '' }))
     setIdeaForm({ ...ideaForm, teamSize: e.target.value, teamMembers: newMembers })
   }
+  
   const handleIdeaMemberUpdate = (index, field, value) => {
     const updated = [...ideaForm.teamMembers]
     updated[index][field] = value
     setIdeaForm({ ...ideaForm, teamMembers: updated })
   }
 
-  // --- SUBMIT IDEA TO BACKEND ---
   const handleIdeaSubmit = async (e) => {
     e.preventDefault()
     if (!ideaAllChecked) return
 
     const formData = new FormData()
-    // Append all text fields
     Object.keys(ideaForm).forEach(key => {
       if (key === 'teamMembers') {
-        formData.append(key, JSON.stringify(ideaForm[key])) // Send array as JSON string
+        formData.append(key, JSON.stringify(ideaForm[key]))
       } else if (key !== 'abstractFile') {
         formData.append(key, ideaForm[key])
       }
     })
-    // Append File
-    if (ideaForm.abstractFile) {
-      formData.append('abstractFile', ideaForm.abstractFile)
-    }
-    formData.append('userId', userId) // Important: Link to user
+    if (ideaForm.abstractFile) formData.append('abstractFile', ideaForm.abstractFile)
+    formData.append('userId', userId)
 
     try {
-      const res = await fetch('/api/register/idea', {
+      // Ensure URL is correct
+      const res = await fetch('api/register/idea', {
         method: 'POST',
-        body: formData // No headers needed, fetch sets multipart/form-data automatically
+        body: formData
       })
       if (res.ok) {
         alert("Idea Pitching Registered Successfully!")
-        setRegistrationStatus(prev => ({ ...prev, ideaPitching: true })) // Turn Green
-        setExpandedCard(null) // Close card
+        setRegistrationStatus(prev => ({ ...prev, ideaPitching: true }))
+        setExpandedCard(null)
       } else {
         alert("Registration Failed. Check backend logs.")
       }
@@ -166,8 +181,15 @@ export default function Dashboard() {
   const handleInventorChange = (e) => {
     const { name, value, type, checked } = e.target
     const val = type === 'checkbox' ? checked : value
-    setInventorForm({ ...inventorForm, [name]: val })
+
+    // Logic: If Domain changes, clear the Sub-Domain
+    if (name === 'domain') {
+      setInventorForm({ ...inventorForm, domain: val, subDomain: '' })
+    } else {
+      setInventorForm({ ...inventorForm, [name]: val })
+    }
   }
+
   const handleInventorFile = (e) => setInventorForm({ ...inventorForm, abstractFile: e.target.files[0] })
   
   const handleInventorTeamSize = (e) => {
@@ -176,13 +198,13 @@ export default function Dashboard() {
     const newMembers = Array(membersNeeded).fill().map(() => ({ name: '', email: '', mobile: '', designation: '', institution: '' }))
     setInventorForm({ ...inventorForm, teamSize: e.target.value, teamMembers: newMembers })
   }
+
   const handleInventorMemberUpdate = (index, field, value) => {
     const updated = [...inventorForm.teamMembers]
     updated[index][field] = value
     setInventorForm({ ...inventorForm, teamMembers: updated })
   }
 
-  // --- SUBMIT INVENTOR TO BACKEND ---
   const handleInventorSubmit = async (e) => {
     e.preventDefault()
     if (!inventorAllChecked) return 
@@ -195,9 +217,7 @@ export default function Dashboard() {
         formData.append(key, inventorForm[key])
       }
     })
-    if (inventorForm.abstractFile) {
-      formData.append('abstractFile', inventorForm.abstractFile)
-    }
+    if (inventorForm.abstractFile) formData.append('abstractFile', inventorForm.abstractFile)
     formData.append('userId', userId)
 
     try {
@@ -207,7 +227,7 @@ export default function Dashboard() {
       })
       if (res.ok) {
         alert("Inventors Exhibit Registered Successfully!")
-        setRegistrationStatus(prev => ({ ...prev, inventorsExhibit: true })) // Turn Green
+        setRegistrationStatus(prev => ({ ...prev, inventorsExhibit: true }))
         setExpandedCard(null)
       } else {
         alert("Registration Failed.")
@@ -218,7 +238,6 @@ export default function Dashboard() {
     }
   }
 
-  // Loading Screen if checking status
   if (loading) return <div style={{color:'#fff', textAlign:'center', marginTop:'20%'}}>Loading Dashboard...</div>
 
   return (
@@ -351,12 +370,40 @@ export default function Dashboard() {
                     </div>
                   )}
 
+                  {/* ================================================= */}
+                  {/* NEW SECTION: DOMAIN SELECTION                     */}
+                  {/* ================================================= */}
+                  <div className="form-section">
+                    <h3 className="section-title">4. Domain & Theme</h3>
+                    
+                    <div className="form-group">
+                      <label className="form-label">Domain (SDG)</label>
+                      <select name="domain" className="form-select" required value={ideaForm.domain} onChange={handleIdeaChange}>
+                        <option value="">-- Select SDG Domain --</option>
+                        {Object.keys(domainData).map((sdg) => (
+                          <option key={sdg} value={sdg}>{sdg}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">Sub-Domain</label>
+                      <select name="subDomain" className="form-select" required value={ideaForm.subDomain} onChange={handleIdeaChange} disabled={!ideaForm.domain}>
+                        <option value="">-- Select Sub-Domain --</option>
+                        {ideaForm.domain && domainData[ideaForm.domain].map((sub, index) => (
+                          <option key={index} value={sub}>{sub}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  {/* ================================================= */}
+
                   {/* 5. Innovation Details */}
                   <div className="form-section">
-                    <h3 className="section-title">4. Innovation Details</h3>
+                    <h3 className="section-title">5. Innovation Details</h3>
                     <div className="form-group"><label className="form-label">Title of Idea/Innovation</label><input type="text" name="title" className="form-input" required value={ideaForm.title} onChange={handleIdeaChange} /></div>
                     <div className="form-group">
-                      <label className="form-label">Category / Domain</label>
+                      <label className="form-label">Category</label>
                       <select name="category" className="form-select" required value={ideaForm.category} onChange={handleIdeaChange}>
                         <option value="">Select Category</option><option>AI & ML</option><option>Healthcare</option><option>Agriculture</option><option>Smart Cities</option><option>Clean Energy</option><option>Robotics & IoT</option><option>Cyber Security</option><option>Manufacturing</option><option>EdTech</option><option>FinTech</option><option>Biotechnology</option><option>Others</option>
                       </select>
@@ -369,7 +416,7 @@ export default function Dashboard() {
 
                   {/* 6. Declarations */}
                   <div className="form-section" style={{borderBottom:'none'}}>
-                    <h3 className="section-title">5. Declaration & Permission</h3>
+                    <h3 className="section-title">6. Declaration & Permission</h3>
                     <div style={{display:'flex', flexDirection:'column', gap:'0.8rem'}}>
                       <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
                         <input type="checkbox" name="declarationOriginal" checked={ideaForm.declarationOriginal} onChange={handleIdeaChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
@@ -395,7 +442,7 @@ export default function Dashboard() {
           </div>
 
           {/* ========================================================== */}
-          {/* CARD 2: INVENTORS EXHIBIT                    */}
+          {/* CARD 2: INVENTORS EXHIBIT                                */}
           {/* ========================================================== */}
           <div className={`panel panel--outline ${expandedCard === 'inventor' ? 'expanded' : ''}`} style={{ 
             position: 'relative', transition: 'all 0.3s ease', padding: expandedCard === 'inventor' ? '2rem' : '0.8rem 2rem', 
@@ -483,10 +530,38 @@ export default function Dashboard() {
                       ))}
                     </div>
                   )}
+                  
+                  {/* ================================================= */}
+                  {/* NEW SECTION: DOMAIN SELECTION                     */}
+                  {/* ================================================= */}
+                  <div className="form-section">
+                    <h3 className="section-title">4. Domain & Theme</h3>
+                    
+                    <div className="form-group">
+                      <label className="form-label">Domain (SDG)</label>
+                      <select name="domain" className="form-select" required value={inventorForm.domain} onChange={handleInventorChange}>
+                        <option value="">-- Select SDG Domain --</option>
+                        {Object.keys(domainData).map((sdg) => (
+                          <option key={sdg} value={sdg}>{sdg}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">Sub-Domain</label>
+                      <select name="subDomain" className="form-select" required value={inventorForm.subDomain} onChange={handleInventorChange} disabled={!inventorForm.domain}>
+                        <option value="">-- Select Sub-Domain --</option>
+                        {inventorForm.domain && domainData[inventorForm.domain].map((sub, index) => (
+                          <option key={index} value={sub}>{sub}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  {/* ================================================= */}
 
                   {/* 5. Innovation Details */}
                   <div className="form-section">
-                    <h3 className="section-title">4. Innovation Details</h3>
+                    <h3 className="section-title">5. Innovation Details</h3>
                     <div className="form-group"><label className="form-label">Title of Idea/Innovation</label><input type="text" name="title" className="form-input" required value={inventorForm.title} onChange={handleInventorChange} /></div>
                     <div className="form-group">
                       <label className="form-label">Category / Domain</label>
@@ -502,7 +577,7 @@ export default function Dashboard() {
 
                   {/* 6. Declarations */}
                   <div className="form-section" style={{borderBottom:'none'}}>
-                    <h3 className="section-title">5. Declaration & Permission</h3>
+                    <h3 className="section-title">6. Declaration & Permission</h3>
                     <div style={{display:'flex', flexDirection:'column', gap:'0.8rem'}}>
                       <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
                         <input type="checkbox" name="declarationOriginal" checked={inventorForm.declarationOriginal} onChange={handleInventorChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
