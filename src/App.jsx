@@ -559,56 +559,6 @@ function App() {
       </div>
 
     <div className="page" id="page">
-      <nav className="site-nav">
-        <span className="site-nav__brand">
-          <img src={psgTechLogo} alt="PSG Tech logo" className="nav-logo" />
-          PSG College of Technology
-        </span>
-        <button
-          type="button"
-          className="site-nav__toggle"
-          aria-label="Toggle navigation menu"
-          aria-controls="site-nav-links"
-          aria-expanded={navOpen}
-          onClick={() => setNavOpen(!navOpen)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-        {/* In src/App.jsx, find the div that holds the links and CHANGE it to this: */}
-<div className={`site-nav__links ${navOpen ? 'is-open' : ''}`}>
-          
-          {navigationLinks.map((link) => {
-            if (link.dropdown) {
-              return (
-                <div key={link.label} className="nav-item-dropdown">
-                  <span className="nav-label">{link.label} ▾</span>
-                  <div className="dropdown-menu">
-                    {link.dropdown.map((subLink) => (
-                      <a 
-                        key={subLink.href} 
-                        href={subLink.href} 
-                        onClick={() => setNavOpen(false)}
-                      >
-                        {subLink.label}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )
-            }
-            return (
-              <a key={link.href} href={link.href} onClick={() => setNavOpen(false)}>
-                {link.label}
-              </a>
-            )
-          })}
-
-        <Link to="/signin" className="nav-cta">Register Now</Link>
-        </div>
-      </nav>
-
       <header className="hero" id="top">
         <div className="hero__grid">
           <div className="hero__main">
@@ -1113,6 +1063,55 @@ function App() {
         </div>
       </footer>
       </div>
+      <nav className="site-nav">
+        <span className="site-nav__brand">
+          <img src={psgTechLogo} alt="PSG Tech logo" className="nav-logo" />
+          PSG College of Technology
+        </span>
+        <button
+          type="button"
+          className="site-nav__toggle"
+          aria-label="Toggle navigation menu"
+          aria-controls="site-nav-links"
+          aria-expanded={navOpen}
+          onClick={() => setNavOpen(!navOpen)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        {/* In src/App.jsx, find the div that holds the links and CHANGE it to this: */}
+<div className={`site-nav__links ${navOpen ? 'is-open' : ''}`}>
+          
+          {navigationLinks.map((link) => {
+            if (link.dropdown) {
+              return (
+                <div key={link.label} className="nav-item-dropdown">
+                  <span className="nav-label">{link.label} ▾</span>
+                  <div className="dropdown-menu">
+                    {link.dropdown.map((subLink) => (
+                      <a 
+                        key={subLink.href} 
+                        href={subLink.href} 
+                        onClick={() => setNavOpen(false)}
+                      >
+                        {subLink.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )
+            }
+            return (
+              <a key={link.href} href={link.href} onClick={() => setNavOpen(false)}>
+                {link.label}
+              </a>
+            )
+          })}
+
+        <Link to="/signin" className="nav-cta">Register Now</Link>
+        </div>
+      </nav>
       </>
   )
 }

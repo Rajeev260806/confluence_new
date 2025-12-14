@@ -1,15 +1,16 @@
 .page {
-  max-width: 1480px;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
-  padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 4vw, 3.5rem);
-  color: #f2f6ff;
+  position: relative;
+  /* Push content down so it doesn't hide behind the Fixed Navbar */
+  padding-top: 80px; 
 }
 
 .site-nav {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 100;
+  z-index: 99999;
   display: flex;
   justify-content: space-between; 
   align-items: center;
@@ -29,12 +30,6 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-}
-
-@media (max-width: 900px) {
-  .site-nav__brand {
-    font-size: 1.1rem; /* Keep it smaller on mobile to fit nicely */
-  }
 }
 
 /* --- UPDATED NAVBAR STYLES --- */
@@ -70,13 +65,6 @@
   
   /* Adds a subtle "digital clock" glow */
   text-shadow: 0 0 8px rgba(252, 211, 97, 0.4);
-}
-
-/* Mobile: Hide the whole center block to save space */
-@media (max-width: 900px) {
-  .nav-center-block {
-    display: none;
-  }
 }
 
 .nav-logo {
@@ -926,39 +914,6 @@
   }
 }
 
-@media (max-width: 900px) {
-  .site-nav__toggle {
-    display: flex;
-    align-self: center;
-  }
-
-  .site-nav__links {
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding-top: 0.75rem;
-    margin-top: 0.25rem;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-  }
-
-  .site-nav__links.is-open {
-    max-height: 600px;
-    opacity: 1;
-  }
-
-  .site-nav__links a,
-  .nav-cta {
-    width: 100%;
-  }
-
-  .nav-cta {
-    text-align: center;
-  }
-}
-
 @media (max-width: 768px) {
   .hero {
     padding: clamp(1rem, 2vw, 1.5rem) 0 clamp(1rem, 1.5vw, 1.5rem);
@@ -1435,35 +1390,6 @@
 .dropdown-menu a:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #fff !important;
-}
-
-/* Mobile Adjustments */
-@media (max-width: 900px) {
-  .nav-item-dropdown {
-    width: 100%;
-    text-align: center;
-    padding: 1rem 0;
-  }
-  
-  .dropdown-menu {
-    position: static; /* Stack normally on mobile */
-    transform: none;
-    opacity: 1;
-    visibility: visible;
-    background: transparent;
-    box-shadow: none;
-    border: none;
-    padding-left: 0;
-    margin-top: 0.5rem;
-    display: none; /* Hidden unless we add click logic, but for now simple hover on desktop */
-  }
-  
-  /* Show dropdown items in mobile list */
-  .nav-item-dropdown:hover .dropdown-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 /* --- ADVISORY COMMITTEE (Centered Layout) --- */
@@ -2157,191 +2083,6 @@
   background: #fff; /* Turns white on hover for a crisp look */
 }
 
-/* =========================================================================
-   MOBILE RESPONSIVENESS
-   (Paste this at the bottom of App.css)
-   ========================================================================= */
-
-@media screen and (max-width: 900px) {
-
-  /* --- 1. GENERAL PAGE STRUCTURE --- */
-  .page {
-    height: auto;
-    min-height: 100vh;
-    padding: 10px;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-  }
-
-  /* --- 2. NAVIGATION BAR --- */
-  .site-nav {
-  display: flex;
-  align-items: center !important; /* Vertically centers the logo */
-  height: 80px;                   /* Fixes the height of the whole bar */
-  padding: 0 2rem;
-  overflow: hidden;               /* Cuts off anything sticking out */
-}
-
-  .site-nav__brand {
-    width: 100%;
-    justify-content: center;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Ensure the logo never exceeds the navbar height */
-.site-nav__brand img {
-  height: 50px !important;       /* Sets a fixed height */
-  width: auto !important;        /* Keeps the shape (doesn't stretch) */
-  max-width: 200px;              /* Safety limit for width */
-  object-fit: contain;           /* Ensures image stays sharp */
-  margin-right: 15px;            /* Adds space between logo and text */
-}
-
-/* 2. Ensure the text next to it looks good */
-.site-nav__brand span {
-  font-size: 1.2rem;
-  font-weight: bold;
-  white-space: nowrap;           /* Prevents text from breaking into two lines */
-}
-
-  .nav-timer {
-    font-size: 0.85rem; /* Smaller timer */
-    padding: 0.3rem 0.8rem;
-  }
-
-  /* Make the Home button smaller on mobile */
-  .site-nav .btn {
-    padding: 0.4rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .nav-center-block {
-    margin: 0;
-    order: 2; /* Move timer below branding */
-    margin-bottom: 0.5rem;
-  }
-
-  .nav-timer {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-  }
-
-  /* --- 3. AUTH LAYOUT (Sign In / Sign Up) --- */
-  .auth-wrapper {
-    flex-direction: column;
-    height: auto;
-    width: 100%;
-  }
-
-  /* The Left Side (Hero Text) */
-  .auth-left {
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    padding: 2rem 1rem;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .hero-container {
-    margin-left: 0;
-    align-items: center; /* Center align text */
-  }
-
-  .hero-main-text {
-    font-size: 2.5rem; /* Smaller text */
-    text-align: center;
-  }
-
-  .hero-middle-row {
-    justify-content: center;
-  }
-
-  .hero-year-text {
-    font-size: 1.5rem;
-  }
-
-  /* The Right Side (Form) */
-  .auth-right {
-    width: 100%;
-    padding: 0;
-    justify-content: center;
-  }
-
-  .form-container, .auth-box {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 1rem;
-  }
-
-  .panel {
-    padding: 1.5rem; /* Less padding on mobile cards */
-  }
-
-  /* --- 4. DASHBOARD SPECIFICS --- */
-  /* Stack the grid columns (Idea & Inventor cards) */
-  .grid--two {
-    grid-template-columns: 1fr !important;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  /* Fix the dashboard hero spacing */
-  .dashboard-hero {
-    margin-bottom: 2rem !important;
-  }
-
-  /* Fix the expanded card forms */
-  .card-expanded-content {
-    padding: 0;
-  }
-
-  /* Stack form inputs that are side-by-side */
-  .form-grid-2 {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  /* --- 5. FORM ELEMENTS --- */
-  .form-group {
-    margin-bottom: 1rem;
-  }
-
-  /* Make inputs easier to tap */
-  .form-input, .form-select, .btn {
-    font-size: 16px; /* Prevents iOS zoom on focus */
-    padding: 12px;
-  }
-
-  /* Radio buttons vertical stack */
-  .form-group[style*="display: flex"] {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px !important;
-  }
-
-  /* Bubbles: Reduce count/opacity to save mobile battery */
-  .bubble {
-    opacity: 0.3;
-  }
-}
-
-/* FORCE DESKTOP FIX (Paste at the very bottom of App.css) */
-@media screen and (min-width: 901px) {
-  .site-nav {
-    flex-direction: row !important; /* Force horizontal layout */
-    height: 70px !important;        /* Force fixed short height */
-    padding: 0 2rem !important;     /* Reset padding */
-    align-items: center !important;
-    justify-content: space-between !important;
-  }
-  
-  .nav-center-block {
-    margin: 0 !important;
-    width: auto !important;
-  }
-}
 /* =========================================
    SDG SECTION (Purpose-Driven Focus)
    ========================================= */
@@ -2448,123 +2189,140 @@
     padding: 1.5rem;
   }
 }
-/* =========================================================
-   FINAL CONFLICT-FREE MOBILE MENU CSS
-   Paste at the very bottom of App.css
-   ========================================================= */
+/* =================================================================
+   FINAL MOBILE MENU & DROPDOWN FIX
+   Paste at the VERY bottom of src/App.css
+   ================================================================= */
 
 @media screen and (max-width: 900px) {
 
-  /* 0. CRITICAL FIX: Force the Parent Bar to be on TOP of the Page Content */
+  /* --- 1. NAVBAR CONTAINER --- */
+  /* Forces the navbar to stay at the top and sit above everything else */
   .site-nav {
     position: fixed !important;
-    top: 0; left: 0; right: 0;
+    top: 0; 
+    left: 0; 
+    right: 0;
     height: 70px !important;
-    background: #05031a !important;
-    z-index: 2147483647 !important; /* Maximum Browser Z-Index */
+    background: #05031a !important; /* Solid Navy Background */
+    z-index: 2147483647 !important; /* Max Z-Index (Top Layer) */
+    
     display: flex !important;
+    justify-content: space-between !important;
     align-items: center !important;
+    padding: 0 1rem !important;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 
-  /* 1. Toggle Button (Highest Priority) */
-  .site-nav__toggle {
-    display: flex !important;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 35px;
-    height: 30px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    z-index: 2147483647 !important; /* Same as nav to stay clickable */
-    pointer-events: auto;
-  }
-  
-  .site-nav__toggle span {
-    width: 100%;
-    height: 3px;
-    background: #fcd361 !important;
-    border-radius: 4px;
-  }
-
-  /* 2. The Menu Container (The Black Overlay) */
+  /* --- 2. MENU DRAWER (The List of Links) --- */
+  /* Covers the whole screen below the navbar */
   .site-nav__links {
     position: fixed !important;
-    top: 70px !important;
+    top: 70px !important; /* Starts exactly below the navbar */
     left: 0 !important;
     width: 100vw !important;
-    height: 100vh !important;
-    background-color: #05031a !important; /* Solid Opaque Background */
+    height: calc(100vh - 70px) !important; /* Full height minus navbar */
+    background-color: #05031a !important;
     
-    /* Layering: Above content, below button */
-    z-index: 2147483646 !important; 
+    z-index: 2147483646 !important; /* Just below the navbar strip */
     
-    /* DEFAULT STATE: HIDDEN */
-    display: none !important; 
-    
+    display: none !important; /* Hidden by default */
     flex-direction: column !important;
     padding: 2rem 1.5rem !important;
-    gap: 1.5rem !important;
-    overflow-y: auto !important;
+    overflow-y: auto !important; /* Allows scrolling if menu is long */
   }
 
-  /* 3. THE OPEN STATE */
+  /* Shows the menu when open */
   .site-nav__links.is-open {
     display: flex !important;
   }
 
-  /* 4. Link Styling */
-  .site-nav__links a {
-    font-size: 1.2rem !important;
-    color: #ffffff !important;
-    display: block;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  
-  /* 5. Force Dropdowns to be VISIBLE and FLAT */
-  .nav-item-dropdown {
-    display: block !important; 
-    width: 100% !important;
-    margin-bottom: 1.5rem;
-  }
-
-  .dropdown-menu {
-    display: block !important;      /* Force show */
-    position: static !important;    /* No floating */
-    opacity: 1 !important;          /* Fully Visible */
-    visibility: visible !important;
-    transform: none !important;
-    
-    background: transparent !important;
-    box-shadow: none !important;
-    border: none !important;
-    padding-left: 1.5rem !important; /* Indent sub-links */
-    width: 100% !important;
-    margin-top: 0.5rem !important;
-  }
-  
+  /* --- 3. MENU LINKS --- */
+  .site-nav__links a,
   .nav-label {
     display: block !important;
-    font-size: 1.3rem !important;
-    font-weight: bold;
-    color: #fcd361 !important;
-    margin-bottom: 0.5rem;
+    color: #ffffff !important;
+    font-size: 1.2rem !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    text-decoration: none !important;
   }
 
-  .dropdown-menu a {
+  /* --- 4. DROPDOWN FIX (CRITICAL) --- */
+  /* Forces dropdowns to stay permanently open and sit flat in the list */
+  .nav-item-dropdown {
     display: block !important;
-    color: #e0e0e0 !important;
-    font-size: 1.1rem !important;
-    padding: 8px 0 !important;
+    height: auto !important;
+    margin-bottom: 0.5rem;
     border-bottom: 1px solid rgba(255,255,255,0.05);
   }
 
-  /* 6. Push Page Content Down so it doesn't overlap */
-  .page {
-    padding-top: 90px !important;
+  /* The actual dropdown list */
+  .dropdown-menu {
+    display: block !important;        /* Always Show */
+    visibility: visible !important;
+    opacity: 1 !important;
+    
+    position: static !important;      /* Sit naturally in flow (don't float) */
+    transform: none !important;       /* No animation */
+    box-shadow: none !important;
+    background: transparent !important;
+    
+    padding-left: 1.5rem !important;  /* Indent sub-items */
+    margin-top: 0 !important;
+    width: 100% !important;
+    border-left: 2px solid #fcd361;   /* Gold line to show it's a sub-menu */
+  }
+
+  /* Sub-links inside the dropdown */
+  .dropdown-menu a {
+    color: #e0e0e0 !important;       /* Slightly dimmer white */
+    font-size: 1rem !important;
+    border-bottom: none !important;
+  }
+
+  /* --- 5. HAMBURGER BUTTON --- */
+  .site-nav__toggle {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px; 
+    height: 25px;
+    background: transparent; 
+    border: none;
+    cursor: pointer;
+    z-index: 2147483648 !important; /* Above everything */
+  }
+  
+  .site-nav__toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #fcd361 !important; /* Gold Color */
+    border-radius: 2px;
+  }
+
+  /* --- 6. FIX THE HERO TEXT OVERLAP BUG --- */
+  /* Disables the 3D gradient effect on mobile so the menu can cover it */
+  .hero-main-text, 
+  .hero-year-text,
+  .hero h1 {
     position: relative !important;
-    z-index: 1 !important; /* Lower priority than menu */
+    z-index: 0 !important;        /* Force to back */
+    background: transparent !important;
+    background-clip: border-box !important;
+    -webkit-background-clip: border-box !important;
+    -webkit-text-fill-color: #fcd361 !important; /* Flat Gold Color */
+    color: #fcd361 !important;
+    filter: none !important;      /* Remove shadow/glow */
+    transform: none !important;
+  }
+
+  /* --- 7. PAGE SPACING --- */
+  /* Pushes content down so it doesn't hide behind the fixed navbar */
+  .page {
+    padding-top: 80px !important;
+    position: relative !important;
+    z-index: 1 !important;
   }
 }
