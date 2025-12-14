@@ -2383,7 +2383,7 @@
   /* 3. TITLE TEXT - SUPER SPECIFIC SELECTOR */
   /* This long chain forces the browser to use THIS font-size */
   html body .page .auth-wrapper .auth-left .hero-container .hero-main-text {
-    font-size: 2.5rem !important; /* Approx 22px */
+    font-size: 2.25rem !important; /* Approx 22px */
     width: 100% !important;
     white-space: nowrap !important; /* Force Single Line */
     text-align: center !important;
@@ -2394,14 +2394,16 @@
   }
 
   .auth-left .hero-year-text{
-    font-size: 2.5rem !important;
+    font-size: 2.25rem !important;
     line-height: 1 !important;
+    padding-left: 5px !important;
   }
 
   html body .page .auth-wrapper .auth-left .hero-container .hero-sub-container .hero-sub-text {
-    font-size: 0.8rem !important;
+    font-size: 0.6rem !important;
     text-align: center !important;
     line-height: 1 !important;
+    padding: 0 5px !important;
   }
 
   /* Label */
