@@ -2344,12 +2344,17 @@
     overflow-x: hidden !important;
     width: 100% !important;
   }
-
+  .page{
+    padding-top: 80px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+  }
   .auth-wrapper {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    padding: 0 1rem !important;
+    padding: 0 !important;
     margin-top: 60px !important;
     width: 100% !important;
   }
@@ -2440,6 +2445,10 @@
     font-size: 1rem !important;
     color: #fcd361 !important;
     margin: 0 !important;
+  }
+
+  .form-container{
+    padding: 2rem 0rem !important;
   }
 
   /* 5. FORM & NAV */
