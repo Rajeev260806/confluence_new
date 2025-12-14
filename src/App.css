@@ -518,7 +518,7 @@
 }
 
 .section-heading h2 {
-  font-size: 1rem; /* Reduced from ~2.5rem/3rem */
+  font-size: 1.2rem; /* Reduced from ~2.5rem/3rem */
   margin-bottom: 0.5rem;
   line-height: 1.2;
 }
@@ -531,6 +531,13 @@
 .grid {
   display: grid;
   gap: 1.5rem;
+}
+
+#the-iic .section-heading h2
+{
+    font-size: 2rem !important;
+    line-height: 1.1;
+    font-weight: 800
 }
 
 .grid--four {

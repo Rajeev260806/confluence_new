@@ -95,7 +95,7 @@ const panelDiscussionTopics = [
 const ideaPitchRules = [
   'Open to students, innovators, researchers, and early-stage entrepreneurs.',
   'Individual or team participation (up to 4 members).',
-  'Submit a 150–200 word abstract during registration.',
+  ' The problem statement and the solution should be submitted online using only the provided template',
   'Only shortlisted submissions will be invited for the final pitch.',
   'Ideas must be original and not submitted elsewhere.',
   'Judging Criteria : Problem Solution fit, Innovation, Societal Impact, Product Market fit.',
@@ -440,7 +440,13 @@ const sponsorsData = [
 ]
 */}
 const aboutCollege = `PSG College of Technology (PSG Tech), established in 1951 by PSG & Sons' Charities, is an ISO 9001:2015 certified autonomous institution affiliated with Anna University, Chennai. Celebrating its Platinum Jubilee, PSG Tech offers 21 undergraduate and 24 postgraduate programs spanning Engineering and Technology, Computer Applications, Management Sciences, and Basic and Advanced Sciences. The campus hosts state-of-the-art Centers of Excellence including TIFAC-CORE in Product Design, Machine Tool Research Centre, Engineering Design Centre, Virtual Reality Centre, Tool and Die Centre, Centre for Nanotechnology, Centre for Robotics, Centre of Excellence in Artificial Intelligence and Software, Centre for Non-Linear Dynamics, Danfoss Centre of Excellence in Climate and Energy, and the Centre of Excellence in Welding Engineering and Technology. PSG Tech partners closely with industry, operates on-campus manufacturing units, and consistently ranks among India’s top institutions for innovation and industry linkage.`
-
+const aboutIIC = 'Institution’s Innovation Council (IIC) at PSG College of Technology is a dedicated innovation and entrepreneurship support body established under the directive of the Ministry of Education’s Innovation Cell (MIC), Government of India. Its purpose is to cultivate and strengthen an innovation-driven mindset among students and faculty by organizing activities throughout the year that promote creative thinking, problem-solving, and entrepreneurial skills. The IIC at PSG Tech works to:'
+const aboutIICPoints = [
+  'Conduct innovation and entrepreneurship programs, workshops, and contests to nurture skills and idea generation',
+  'Provide access to resources, mentorship, and supportive environments that help convert ideas into prototypes and potential startups.',
+  'Encourage students to participate in hackathons, demo days, and design challenges to build real-world experience.',
+  'Offer pre-incubation and hand-holding support for early-stage entrepreneurial ventures.',
+]
 const aboutEvent1 = "The Institution’s Innovation Council (IIC) of PSG College of Technology proudly presents “The Confluence 2026 – Research, Innovation & Start-up Summit” as part of the Platinum Jubilee celebrations of PSG College of Technology. This one-day national-level flagship event that brings together researchers, innovators, entrepreneurs, investors, industry leaders, and academicians on a single vibrant platform."
 const aboutEvent2 = "The summit aims to foster a strong culture of innovation, nurture entrepreneurial thinking among students and faculty, and showcase PSG Tech’s research and start-up ecosystem in alignment with the national innovation and entrepreneurship agenda. The Confluence 2026 serves as a powerful interface between research, technology, industry, and societal needs."
 const aboutEvent3 = "In line with global sustainability priorities, The Confluence 2026 is aligned with the United Nations Sustainable Development Goals (UN SDGs). These themes will guide the keynote addresses, technical sessions, panel discussions, idea pitching competition, and the inventors’ exhibit, ensuring that every innovation presented contributes toward a sustainable, inclusive, and technology-driven future. Through this platform, innovators will gain direct exposure to investors, incubators, and industry mentors. Participants with validated PoCs will receive strategic guidance to convert innovations into scalable start-ups. The event also enables high-impact networking and expert interactions, fostering meaningful collaborations. The Confluence 2026 is not just an event—it is a launchpad for impactful ideas, sustainable technologies, and next-generation start-ups."
@@ -675,6 +681,18 @@ function App() {
         }}>
         <SectionHeading kicker="The College" title="PSG College of Technology" />
         <p>{aboutCollege}</p>
+      </div>
+      
+        <div id="the-iic" className="wide-glass-card" style={{ 
+           '--bg-full': `linear-gradient(to right, rgba(5, 10, 35, 0.9), rgba(5, 10, 35, 0.6)), url(${myCollegePic})` 
+        }}>
+        <SectionHeading kicker="The Council" title="Institution’s Innovation Council (IIC)" />
+        <p>{aboutIIC}</p>
+        <ul className="list list--arrow">
+            {aboutIICPoints.map((points) => (
+              <li key={points}>{points}</li>
+            ))}
+          </ul>
       </div>
 
       {/* 2. The Confluence Banner */}
