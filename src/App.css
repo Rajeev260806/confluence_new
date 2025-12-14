@@ -511,7 +511,7 @@
   padding: 0.2rem 0.9rem;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #fcd361;
@@ -1643,7 +1643,7 @@
 /* Optional: Make the small "kicker" text above it smaller too */
 .panel .section-heading__kicker,
 .gradient-card .section-heading__kicker {
-  font-size: 0.8rem !important;
+  font-size: 1.2rem !important;
 }
 
 /* Optional: Make the subtitle smaller too */

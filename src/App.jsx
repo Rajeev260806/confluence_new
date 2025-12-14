@@ -16,6 +16,7 @@ import adv5 from './assets/Suresh.jpg'
 import adv6 from './assets/NakulParameswar.jpg'
 import adv7 from './assets/Sriram.jpg'
 import adv8 from './assets/SureshMuthuswami.jpg'
+import adv9 from './assets/Gandhi.jpeg'
 import sdg1 from './assets/sdg3.png'
 import sdg2 from './assets/sdg6.png'
 import sdg3 from './assets/sdg7.png'
@@ -61,9 +62,9 @@ const sponsorshipReasons = [
 const sponsorshipCategories = [
   'Platinum Sponsor',
   'Gold Sponsor',
+  'Silver Sponsor',
+  'Event Sponsor', 
   'Session Sponsor',
-  'Stall',
-  'Idea Pitching Competition Sponsor',
 ]
 
 const participationProfiles = [
@@ -74,7 +75,7 @@ const participationProfiles = [
   'Industry Experts & Professionals',
   'Investors & Incubation/Innovation Cell Members',
 ]
-
+/*
 const technicalSessionTopics = [
   'Generative AI: Beyond the Hype – Real world applications.',
   'Sustainable Energy: The future of Green Tech and EV infrastructure.',
@@ -89,25 +90,26 @@ const panelDiscussionTopics = [
   'Women in Tech: Breaking barriers and leading innovation.',
   'Industry 5.0: Bridging the gap between humans and machines.',
   'The role of Incubators in shaping student entrepreneurs.',
-]
+]*/
 
 const ideaPitchRules = [
   'Open to students, innovators, researchers, and early-stage entrepreneurs.',
   'Individual or team participation (up to 3 members).',
-  'Submit a 150–200 word abstract during registration.',
+  'Submission of an abstract (Max. 200 words) is mandatory during the registration.',
   'Only shortlisted submissions will be invited for the final pitch.',
   'Ideas must be original and not submitted elsewhere.',
-  'Judging criteria: problem clarity, innovation, feasibility, impact, presentation.',
-  '3-minute pitch followed by a 2-minute Q&A.',
+  'Judging criteria: problem clarity, innovation, feasibility, impact and presentation.',
+  'A 3-minute pitch followed by a 2-minute Q&A.',
 ]
 
 const exhibitGuidelines = [
   'Individual inventors, student innovators, R&D teams, and early-stage product developers are invited.',
   'Exhibits must represent an original invention or prototype.',
-  'Provide a brief description of the invention during registration.',
+  'A brief description of the invention to be provided during the registration.',
   'Working models, demos, or proof-of-concepts are mandatory.',
   'Space and basic display arrangements will be provided.',
   'Participants must be present during exhibit hours to explain their innovation.',
+  "Jury's decision will be final",
 ]
 
 const importantDates = [
@@ -116,14 +118,6 @@ const importantDates = [
   'Jan 25, 2026: Shortlisted Candidates Announced',
   'Feb 10, 2026: Final Pitch Deck Submission',
   'Feb 27, 2026: The Grand Event',
-]
-
-const eventChecklist = [
-  'Bring your College ID card (Mandatory).',
-  'Laptops required for workshop participants.',
-  'Teams must report to the registration desk by 8:30 AM.',
-  'Participation certificates will be provided digitally.',
-  'Lunch and refreshments are provided for all registered attendees.',
 ]
 
 const sdgData = [
@@ -219,6 +213,12 @@ const advisoryBoard = [
     designation: 'Former Chairman of North America',
     company: 'Tata Consultancy Services (TCS)',
     image: adv8,
+  },
+  {
+    name: 'Prof. Dr. Gandhi',
+    designation: 'Head ERP',
+    company: ' Textile Design Dept. of NIFT Chennai',
+    image: adv9,
   },
 ]
 const committeeLeaders = [
@@ -442,7 +442,7 @@ const aboutCollege = `PSG College of Technology (PSG Tech), established in 1951 
 
 const aboutEvent1 = "The Institution’s Innovation Council (IIC) of PSG College of Technology proudly presents “The Confluence 2026 – Research, Innovation & Start-up Summit” as part of the Platinum Jubilee celebrations of PSG College of Technology. This one-day national-level flagship event that brings together researchers, innovators, entrepreneurs, investors, industry leaders, and academicians on a single vibrant platform."
 const aboutEvent2 = "The summit aims to foster a strong culture of innovation, nurture entrepreneurial thinking among students and faculty, and showcase PSG Tech’s research and start-up ecosystem in alignment with the national innovation and entrepreneurship agenda. The Confluence 2026 serves as a powerful interface between research, technology, industry, and societal needs."
-
+const aboutEvent3 = "In line with global sustainability priorities, The Confluence 2026 is aligned with the United Nations Sustainable Development Goals (UN SDGs). These themes will guide the keynote addresses, technical sessions, panel discussions, idea pitching competition, and the inventors’ exhibit, ensuring that every innovation presented contributes toward a sustainable, inclusive, and technology-driven future. Through this platform, innovators will gain direct exposure to investors, incubators, and industry mentors. Participants with validated PoCs will receive strategic guidance to convert innovations into scalable start-ups. The event also enables high-impact networking and expert interactions, fostering meaningful collaborations. The Confluence 2026 is not just an event—it is a launchpad for impactful ideas, sustainable technologies, and next-generation start-ups."
 
 const navigationLinks = [
   {href: '#page', label: 'Home'},
@@ -465,7 +465,7 @@ const navigationLinks = [
   },
   { href: '#speakers', label: 'Speakers' },
   { href: '#sponsorship', label: 'Sponsorship' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#contacts', label: 'Contact' },
 ]
 
 const Countdown = ({ targetDate }) => {
@@ -507,7 +507,7 @@ const Countdown = ({ targetDate }) => {
 
 const SectionHeading = ({ kicker, title, subtitle }) => (
   <div className="section-heading">
-    {kicker && <span className="section-heading__kicker">{kicker}</span>}
+    {kicker && <span className="section-heading__kicker"><b>{kicker}</b></span>}
     <h2>{title}</h2>
     {subtitle && <p>{subtitle}</p>}
   </div>
@@ -683,6 +683,7 @@ function App() {
         <SectionHeading kicker="The Confluence" title="Research, Innovation & Start-up Summit" />
         <p>{aboutEvent1}</p>
         <p>{aboutEvent2}</p>
+        <p>{aboutEvent3}</p>
         
         </div>
       </section>
@@ -726,12 +727,12 @@ function App() {
           kicker="Technical Sessions"
           title="Come and explore the incredible technical sessions"
           subtitle="Deep dives into breakthrough technologies."
-        />
+        />{/*
         <ul className="list list--arrow">
           {technicalSessionTopics.map((topic) => (
             <li key={topic}>{topic}</li>
           ))}
-        </ul>
+        </ul>*/}
       </div>
 
       <div className="panel panel--accent" id='panel-discussion'>
@@ -739,12 +740,12 @@ function App() {
           kicker="Panel Discussion"
           title="Participate in the talks of the Industrial Great Minds"
           subtitle="Unfiltered conversations with industry leaders."
-        />
+        />{/*
         <ul className="list list--arrow">
           {panelDiscussionTopics.map((topic) => (
             <li key={topic}>{topic}</li>
           ))}
-        </ul>
+        </ul>*/}
       </div>
 
     </section>
@@ -811,17 +812,6 @@ function App() {
               })}
             </div>
           </div>
-
-          {/* Column 2: Checklist (Standard List) */}
-          <div>
-            <h3>Attendee Checklist</h3>
-            <ul className="list list--dot">
-              {eventChecklist.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
-
         </div>
         
         <p className="note">
@@ -1025,6 +1015,7 @@ function App() {
 
       
       </div>
+      <div id="contacts">
       <footer className="footer">
         <div className="footer-content-compact">
           
@@ -1101,6 +1092,7 @@ function App() {
           © {new Date().getFullYear()} PSG College of Technology
         </div>
       </footer>
+      </div>
       </>
   )
 }
