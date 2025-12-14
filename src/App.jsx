@@ -114,10 +114,10 @@ const exhibitGuidelines = [
 ]
 
 const importantDates = [
-  'Dec 15, 2025: Registration Opens',
-  'Jan 10, 2026: Abstract Submission Deadline',
-  'Jan 25, 2026: Shortlisted Candidates Announced',
-  'Feb 10, 2026: Final Pitch Deck Submission',
+  'Dec 17, 2025: Submission Opens',
+  "Jan 20, 2026:Idea Submission and Inventors' Exhibit Submission ",
+  'Jan 31, 2026: Shortlisted idea and Product Announced',
+  'Feb 10, 2026: Registration closes',
   'Feb 27, 2026: The Grand Event',
 ]
 
@@ -456,6 +456,7 @@ const navigationLinks = [
   { label: 'About',
     dropdown: [ 
       { label: 'The College', href: '#about' },
+      { label: 'The IIC', href: '#the-iic' },
       { label: 'The Confluence', href: '#the-confluence' },
       {label: 'Schedule', href: '#important-dates'},
       { label: 'Advisory Committee', href: '#advisory'},
