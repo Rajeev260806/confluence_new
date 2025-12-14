@@ -78,23 +78,16 @@ export default function SignUp() {
 
   return (
     <div className="page">
+      
+      {/* 1. BACKGROUND BUBBLES */}
       <div className="bubble-container">
         <div className="bubble"></div><div className="bubble"></div><div className="bubble"></div><div className="bubble"></div><div className="bubble"></div>
       </div>
 
-      <nav className="site-nav">
-        <div className="site-nav__brand">
-          <img src={psgTechLogo} alt="Logo" style={{ height: '50px', width: 'auto', objectFit: 'contain', marginRight: '1rem', borderRadius: '5px' }}/>
-          <span>PSG College of Technology</span>
-        </div>
-        <div className="nav-center-block">
-          <div className="nav-date">Feb 27 • 2026</div>
-          <div className="nav-timer">{timeLeft.d}d : {timeLeft.h}h : {timeLeft.m}m : {timeLeft.s}s</div>
-        </div>
-        <Link to="/" className="btn btn--primary">Home</Link>
-      </nav>
-
+      {/* 2. MAIN CONTENT AREA */}
       <div className="auth-wrapper">
+        
+        {/* Left Side: Hero Text */}
         <div className="auth-left">
           <div className="hero-container">
             <span className="auth-page-label">Sign Up To</span>
@@ -107,6 +100,7 @@ export default function SignUp() {
           </div>
         </div>
 
+        {/* Right Side: Sign Up Form */}
         <div className="auth-right">
           <div className="form-container">
             <div className="panel panel--outline">
@@ -144,6 +138,20 @@ export default function SignUp() {
           </div>
         </div>
       </div>
+
+      {/* 3. NAVBAR (MOVED TO BOTTOM FOR LAYERING FIX) */}
+      <nav className="site-nav" style={{ position: 'fixed', top: 0, width: '100%', zIndex: 9999999 }}>
+        <div className="site-nav__brand">
+          <img src={psgTechLogo} alt="Logo" style={{ height: '50px', width: 'auto', objectFit: 'contain', marginRight: '1rem', borderRadius: '5px' }}/>
+          <span>PSG College of Technology</span>
+        </div>
+        <div className="nav-center-block" style={{ color: '#fff' }}> {/* Added color fix just in case */}
+          <div className="nav-date">Feb 27 • 2026</div>
+          <div className="nav-timer">{timeLeft.d}d : {timeLeft.h}h : {timeLeft.m}m : {timeLeft.s}s</div>
+        </div>
+        <Link to="/" className="btn btn--primary">Home</Link>
+      </nav>
+
     </div>
   )
 }

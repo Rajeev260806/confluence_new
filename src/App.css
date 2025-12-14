@@ -5,6 +5,8 @@
   position: relative;
   /* Push content down so it doesn't hide behind the Fixed Navbar */
   padding-top: 80px; 
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .site-nav {
@@ -350,15 +352,6 @@
   text-align: justify;
   text-align-last: justify; 
   width: 100%;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  .hero-container { width: 100%; padding: 0 1rem; }
-  .hero-main-text { font-size: 2.8rem; white-space: normal; text-align: center; }
-  .hero-lines-group { margin-left: 0; } /* Reset indent on mobile */
-  .hero-year-text { font-size: 2.5rem; }
-  .hero-sub-text { text-align: center; text-align-last: center; font-size: 0.9rem; }
 }
 
 .hero__lede {
@@ -1798,25 +1791,6 @@
   white-space: nowrap;
 }
 
-/* --- MOBILE FIX --- */
-@media (max-width: 900px) {
-  .auth-left .hero-container {
-    margin: 0 auto; /* Center it back on mobile */
-  }
-  .auth-left .hero-main-text {
-    font-size: 2.5rem !important;
-    text-align: center !important;
-  }
-  .auth-left .hero-lines-group {
-    margin-left: 0;
-  }
-  .auth-left .hero-sub-text {
-    text-align: center !important;
-    text-align-last: center !important;
-  }
-
-}
-
 /* ========================================= */
 /* HOVER EFFECTS FOR HERO BLOCK (Auth Page) */
 /* ========================================= */
@@ -2325,4 +2299,152 @@
     position: relative !important;
     z-index: 1 !important;
   }
+}
+/* --- MOBILE HERO FIXES --- */
+@media screen and (max-width: 768px) {
+  .hero-container {
+    width: 100%;
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .hero-main-text {
+    font-size: 2.5rem; /* Reduced from 5rem */
+    line-height: 1.1;
+  }
+
+  .hero-year-text {
+    font-size: 2.5rem; /* Reduced from 3.8rem */
+  }
+
+  .hero-middle-row {
+    flex-direction: column; /* Stack line and year */
+    justify-content: center;
+  }
+
+  .hero-lines-group {
+    display: none; /* Hide decorative lines on mobile */
+  }
+
+  .hero-sub-text {
+    font-size: 1rem;
+    text-align: center;
+    text-align-last: center;
+  }
+}
+/* =================================================================
+   FINAL "SUPER SPECIFIC" FIX
+   Paste at the VERY bottom of src/App.css
+   ================================================================= */
+
+@media screen and (max-width: 900px) {
+
+  /* 1. LAYOUT RESET */
+  html, body, .page {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+
+  .auth-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 0 1rem !important;
+    margin-top: 60px !important;
+    width: 100% !important;
+  }
+
+  /* 2. TEXT CONTAINER */
+  .auth-left {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.4) !important;
+    padding-bottom: 1rem !important;
+    margin-bottom: 1.5rem !important;
+    border-right: none !important;
+    border-left: none !important;
+  }
+
+  .auth-left .hero-container {
+    width: 90vw !important;
+    max-width: 350px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* 3. TITLE TEXT - SUPER SPECIFIC SELECTOR */
+  /* This long chain forces the browser to use THIS font-size */
+  html body .page .auth-wrapper .auth-left .hero-container .hero-main-text {
+    font-size: 2.5rem !important; /* Approx 22px */
+    width: 100% !important;
+    white-space: nowrap !important; /* Force Single Line */
+    text-align: center !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+    letter-spacing: -0.5px !important;
+    transform: none !important; /* Remove any desktop scaling */
+  }
+
+  .auth-left .hero-year-text{
+    font-size: 2.5rem !important;
+    line-height: 1 !important;
+  }
+
+  html body .page .auth-wrapper .auth-left .hero-container .hero-sub-container .hero-sub-text {
+    font-size: 0.8rem !important;
+    text-align: center !important;
+    line-height: 1 !important;
+  }
+
+  /* Label */
+  .auth-page-label {
+    width: 100% !important;
+    text-align: left !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 4px !important;
+    color: #fcd361;
+    padding-left: 2px;
+  }
+
+  /* 4. DECOR LINES ROW */
+  .hero-middle-row {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-top: 4px !important;
+  }
+
+  /* 4. LINES: Restore 'Start under E' Logic */
+.auth-left .hero-lines-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 15px !important;
+  flex-grow: 2 !important;
+  margin-left: 4rem !important; 
+}
+
+  .decor-line {
+    display: block !important;
+    width: 100% !important;
+    height: 2px !important;
+    background-color: #fcd361 !important;
+  }
+
+  .hero-year-text {
+    font-size: 1rem !important;
+    color: #fcd361 !important;
+    margin: 0 !important;
+  }
+
+  /* 5. FORM & NAV */
+  .auth-right, .panel--outline { width: 100% !important; }
+  .panel--outline { padding: 1.5rem !important; background: #0a103499; }
+  .site-nav { height: 60px !important; padding: 0 1rem !important; }
+  .nav-center-block { display: none !important; }
 }

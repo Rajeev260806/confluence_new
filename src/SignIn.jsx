@@ -97,32 +97,6 @@ export default function SignIn() {
         <div className="bubble"></div>
       </div>
 
-      {/* --- UPDATED NAVBAR --- */}
-      <nav className="site-nav">
-        <div className="site-nav__brand">
-          <img 
-            src={psgTechLogo} 
-            alt="PSG Tech Logo" 
-            style={{ height: '50px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.2)' }} 
-          />
-          <span>PSG College of Technology</span>
-        </div>
-
-        {/* CENTER: Updated Date */}
-        <div className="nav-center-block">
-          <div className="nav-date">Feb 27 • 2026</div>
-          <div className="nav-timer">
-            {timeLeft.d}d : {timeLeft.h}h : {timeLeft.m}m : {timeLeft.s}s
-          </div>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <Link to="/" className="btn btn--primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.95rem' }}>
-            Home
-          </Link>
-        </div>
-      </nav>
-
       {/* --- SPLIT SCREEN LAYOUT --- */}
       <div className="auth-wrapper">
         <div className="auth-left">
@@ -211,6 +185,31 @@ export default function SignIn() {
           </div>
         </div>
       </div>
+      {/* --- UPDATED NAVBAR --- */}
+      <nav className="site-nav">
+        <div className="site-nav__brand">
+          <img 
+            src={psgTechLogo} 
+            alt="PSG Tech Logo" 
+            style={{ height: '50px', borderRadius: '6px', border: '1px solid rgba(255,255,255,0.2)' }} 
+          />
+          <span>PSG College of Technology</span>
+        </div>
+
+        {/* CENTER: Updated Date */}
+        <div className="nav-center-block">
+          <div className="nav-date">Feb 27 • 2026</div>
+          <div className="nav-timer">
+            {timeLeft.d}d : {timeLeft.h}h : {timeLeft.m}m : {timeLeft.s}s
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <Link to="/" className="btn btn--primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.95rem' }}>
+            Home
+          </Link>
+        </div>
+      </nav>
     </div>
   )
 }
