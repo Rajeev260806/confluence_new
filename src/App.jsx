@@ -94,12 +94,12 @@ const panelDiscussionTopics = [
 
 const ideaPitchRules = [
   'Open to students, innovators, researchers, and early-stage entrepreneurs.',
-  'Individual or team participation (up to 3 members).',
-  'Submission of an abstract (Max. 200 words) is mandatory during the registration.',
+  'Individual or team participation (up to 4 members).',
+  'Submit a 150–200 word abstract during registration.',
   'Only shortlisted submissions will be invited for the final pitch.',
   'Ideas must be original and not submitted elsewhere.',
-  'Judging criteria: problem clarity, innovation, feasibility, impact and presentation.',
-  'A 3-minute pitch followed by a 2-minute Q&A.',
+  'Judging Criteria : Problem Solution fit, Innovation, Societal Impact, Product Market fit.',
+  'Only ideas at TRL 3 and above are eligible.',
 ]
 
 const exhibitGuidelines = [
@@ -110,6 +110,7 @@ const exhibitGuidelines = [
   'Space and basic display arrangements will be provided.',
   'Participants must be present during exhibit hours to explain their innovation.',
   "Jury's decision will be final",
+  'Only ideas at TRL 6  and above are eligible.',
 ]
 
 const importantDates = [
