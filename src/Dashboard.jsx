@@ -5,8 +5,9 @@ import './App.css'
 
 export default function Dashboard() {
   const navigate = useNavigate()
+  const userId = localStorage.getItem('userId')
 
-  // --- DOMAIN & SUB-DOMAIN DATA ---
+  // --- DATA LISTS ---
   const domainData = {
     "SDG 3: Good Health & Well-being": ["Health Tech", "Telemedicine", "Mental Wellness", "Medical Devices"],
     "SDG 6: Clean Water & Sanitation": ["Water Purification", "Waste Water Treatment", "Smart Irrigation"],
@@ -17,50 +18,59 @@ export default function Dashboard() {
     "SDG 13: Climate Action": ["Carbon Capture", "Renewable Tech", "Climate Analytics"]
   }
 
-  // --- STATE ---
-  const [registrationStatus, setRegistrationStatus] = useState({
-    ideaPitching: false,      
-    inventorsExhibit: false   
-  })
+  const memberCategories = ["Student", "Academician", "Industry"]
+  const trlLevelsIdea = ["TRL 3", "TRL 4", "TRL 5", "TRL 6", "TRL 7", "TRL 8", "TRL 9"]
+  const trlLevelsInventor = ["TRL 6", "TRL 7", "TRL 8", "TRL 9"]
+
+  // --- STATE: UI & AUTH ---
+  const [registrationStatus, setRegistrationStatus] = useState({ ideaPitching: false, inventorsExhibit: false })
   const [expandedCard, setExpandedCard] = useState(null)
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 })
   const [loading, setLoading] = useState(true)
 
-  const userId = localStorage.getItem('userId')
+  //Helper for initial member structure
+  const initialMember = {
+    name: '', category: '', designation: '', department: '', institution: '', city: '', state: '', mobile: '', email: ''
+  }
 
-  // ==========================================
-  // FORM 1: IDEA PITCHING STATE
-  // ==========================================
+  // --- STATE: IDEA PITCHING FORM ---
   const [ideaForm, setIdeaForm] = useState({
-    leadName: '', leadGender: '', leadEmail: '', leadMobile: '',
-    institutionName: '', exhibitorType: '', department: '', degree: '', yearOfStudy: '', city: '', state: '',
-    participationMode: 'Individual',
-    teamName: '', teamSize: '', teamMembers: [],
-    // New Fields
-    domain: '', subDomain: '',
-    title: '', category: '', otherCategory: '', abstractFile: null,
+    teamName: '',
+    teamSize: 1,
+    members: [{ ...initialMember }], // Initialized with 1 member
+    domain: '',
+    subDomain: '',
+    title: '',
+    problemStatement: '',
+    solution: '',
+    trlLevel: '',
+    productFile: null,
+    mediaFile: null,
     declarationOriginal: false, declarationRules: false, declarationPhoto: false
   })
 
-  // ==========================================
-  // FORM 2: INVENTORS EXHIBIT STATE
-  // ==========================================
+  // --- STATE: INVENTOR FORM ---
   const [inventorForm, setInventorForm] = useState({
-    fullName: '', gender: '', email: '', mobile: '', altMobile: '',
-    institutionName: '', exhibitorType: '', department: '', degree: '', yearOfStudy: '', city: '', state: '',
-    participationMode: 'Individual',
-    teamName: '', teamSize: '', teamMembers: [],
-    // New Fields
-    domain: '', subDomain: '',
-    title: '', category: '', otherCategory: '', abstractFile: null,
+    teamName: '',
+    teamSize: 1,
+    members: [{ ...initialMember }], // Initialized with 1 member
+    domain: '',
+    subDomain: '',
+    title: '',
+    problemStatement: '',
+    solution: '',
+    trlLevel: '',
+    spaceRequirements: '', // Specific to Inventor
+    productFile: null,
+    mediaFile: null,
     declarationOriginal: false, declarationRules: false, declarationPhoto: false
   })
 
-  // --- CHECKBOX VALIDATION ---
+  // --- VALIDATION ---
   const ideaAllChecked = ideaForm.declarationOriginal && ideaForm.declarationRules && ideaForm.declarationPhoto
   const inventorAllChecked = inventorForm.declarationOriginal && inventorForm.declarationRules && inventorForm.declarationPhoto
 
-  // --- FETCH STATUS ---
+  // --- EFFECTS ---
   useEffect(() => {
     if (!userId) {
       navigate('/signin')
@@ -68,8 +78,7 @@ export default function Dashboard() {
     }
     const fetchStatus = async () => {
       try {
-        // NOTE: Ensure this URL matches your backend (add /api if needed)
-        const response = await fetch(`api/status/${userId}`)
+        const response = await fetch(`api/status/${userId}`) // Adjust URL as needed
         if (response.ok) {
           const data = await response.json()
           setRegistrationStatus({
@@ -86,7 +95,6 @@ export default function Dashboard() {
     fetchStatus()
   }, [userId, navigate])
 
-  // --- TIMER ---
   useEffect(() => {
     const eventDate = new Date('2026-02-27T09:00:00+05:30')
     const interval = setInterval(() => {
@@ -109,128 +117,95 @@ export default function Dashboard() {
     localStorage.removeItem('userEmail')
     navigate('/signin')
   }
+
   const toggleCard = (cardName) => setExpandedCard(expandedCard === cardName ? null : cardName)
 
   // ==========================================
-  // HANDLERS: IDEA PITCHING
+  // HANDLERS: GENERIC TEAM & MEMBER LOGIC
   // ==========================================
-  const handleIdeaChange = (e) => {
+
+  // Handle changes for top-level text inputs (Title, Domain, etc.)
+  const handleBasicChange = (e, formType) => {
     const { name, value, type, checked } = e.target
     const val = type === 'checkbox' ? checked : value
+    const setForm = formType === 'idea' ? setIdeaForm : setInventorForm
+    const currentForm = formType === 'idea' ? ideaForm : inventorForm
+
+    if (name === 'domain') {
+      setForm({ ...currentForm, domain: val, subDomain: '' })
+    } else {
+      setForm({ ...currentForm, [name]: val })
+    }
+  }
+
+  // Handle Team Size Change (Resize members array)
+  const handleTeamSizeChange = (e, formType) => {
+    const newSize = parseInt(e.target.value)
+    const setForm = formType === 'idea' ? setIdeaForm : setInventorForm
+    const currentForm = formType === 'idea' ? ideaForm : inventorForm
     
-    // Logic: If Domain changes, clear the Sub-Domain
-    if (name === 'domain') {
-      setIdeaForm({ ...ideaForm, domain: val, subDomain: '' })
-    } else {
-      setIdeaForm({ ...ideaForm, [name]: val })
-    }
-  }
-  
-  const handleIdeaFile = (e) => setIdeaForm({ ...ideaForm, abstractFile: e.target.files[0] })
-  
-  const handleIdeaTeamSize = (e) => {
-    const size = parseInt(e.target.value) || 0
-    const membersNeeded = size >= 2 ? size : 0
-    const newMembers = Array(membersNeeded).fill().map(() => ({ name: '', email: '', mobile: '', designation: '', institution: '' }))
-    setIdeaForm({ ...ideaForm, teamSize: e.target.value, teamMembers: newMembers })
-  }
-  
-  const handleIdeaMemberUpdate = (index, field, value) => {
-    const updated = [...ideaForm.teamMembers]
-    updated[index][field] = value
-    setIdeaForm({ ...ideaForm, teamMembers: updated })
+    // Create new array preserving existing data, filling new slots with blanks
+    const currentMembers = currentForm.members
+    const newMembers = Array(newSize).fill(null).map((_, i) => currentMembers[i] || { ...initialMember })
+
+    setForm({ ...currentForm, teamSize: newSize, members: newMembers })
   }
 
-  const handleIdeaSubmit = async (e) => {
-    e.preventDefault()
-    if (!ideaAllChecked) return
+  // Handle Individual Member Field Updates
+  const handleMemberUpdate = (index, e, formType) => {
+    const { name, value } = e.target
+    const setForm = formType === 'idea' ? setIdeaForm : setInventorForm
+    const currentForm = formType === 'idea' ? ideaForm : inventorForm
+    
+    const updatedMembers = [...currentForm.members]
+    updatedMembers[index] = { ...updatedMembers[index], [name]: value }
+    setForm({ ...currentForm, members: updatedMembers })
+  }
 
-    const formData = new FormData()
-    Object.keys(ideaForm).forEach(key => {
-      if (key === 'teamMembers') {
-        formData.append(key, JSON.stringify(ideaForm[key]))
-      } else if (key !== 'abstractFile') {
-        formData.append(key, ideaForm[key])
-      }
-    })
-    if (ideaForm.abstractFile) formData.append('abstractFile', ideaForm.abstractFile)
-    formData.append('userId', userId)
-
-    try {
-      // Ensure URL is correct
-      const res = await fetch('api/register/idea', {
-        method: 'POST',
-        body: formData
-      })
-      if (res.ok) {
-        alert("Idea Pitching Registered Successfully!")
-        setRegistrationStatus(prev => ({ ...prev, ideaPitching: true }))
-        setExpandedCard(null)
-      } else {
-        alert("Registration Failed. Check backend logs.")
-      }
-    } catch (err) {
-      console.error(err)
-      alert("Server Error")
-    }
+  // Handle File Uploads
+  const handleFileChange = (e, fieldName, formType) => {
+    const setForm = formType === 'idea' ? setIdeaForm : setInventorForm
+    const currentForm = formType === 'idea' ? ideaForm : inventorForm
+    setForm({ ...currentForm, [fieldName]: e.target.files[0] })
   }
 
   // ==========================================
-  // HANDLERS: INVENTORS EXHIBIT
+  // HANDLERS: SUBMISSION
   // ==========================================
-  const handleInventorChange = (e) => {
-    const { name, value, type, checked } = e.target
-    const val = type === 'checkbox' ? checked : value
-
-    // Logic: If Domain changes, clear the Sub-Domain
-    if (name === 'domain') {
-      setInventorForm({ ...inventorForm, domain: val, subDomain: '' })
-    } else {
-      setInventorForm({ ...inventorForm, [name]: val })
-    }
-  }
-
-  const handleInventorFile = (e) => setInventorForm({ ...inventorForm, abstractFile: e.target.files[0] })
-  
-  const handleInventorTeamSize = (e) => {
-    const size = parseInt(e.target.value) || 0
-    const membersNeeded = size >= 2 ? size : 0
-    const newMembers = Array(membersNeeded).fill().map(() => ({ name: '', email: '', mobile: '', designation: '', institution: '' }))
-    setInventorForm({ ...inventorForm, teamSize: e.target.value, teamMembers: newMembers })
-  }
-
-  const handleInventorMemberUpdate = (index, field, value) => {
-    const updated = [...inventorForm.teamMembers]
-    updated[index][field] = value
-    setInventorForm({ ...inventorForm, teamMembers: updated })
-  }
-
-  const handleInventorSubmit = async (e) => {
+  const submitForm = async (e, formType) => {
     e.preventDefault()
-    if (!inventorAllChecked) return 
+    const isIdea = formType === 'idea'
+    const formState = isIdea ? ideaForm : inventorForm
+    const endpoint = isIdea ? 'api/register/idea' : 'api/register/inventor'
+
+    // Basic Validation Check
+    if (isIdea && !ideaAllChecked) return
+    if (!isIdea && !inventorAllChecked) return
 
     const formData = new FormData()
-    Object.keys(inventorForm).forEach(key => {
-      if (key === 'teamMembers') {
-        formData.append(key, JSON.stringify(inventorForm[key]))
-      } else if (key !== 'abstractFile') {
-        formData.append(key, inventorForm[key])
+    formData.append('userId', userId)
+    
+    // Append standard fields
+    Object.keys(formState).forEach(key => {
+      if (key === 'members') {
+        formData.append('members', JSON.stringify(formState.members))
+      } else if (key !== 'productFile' && key !== 'mediaFile') {
+        formData.append(key, formState[key])
       }
     })
-    if (inventorForm.abstractFile) formData.append('abstractFile', inventorForm.abstractFile)
-    formData.append('userId', userId)
+
+    // Append Files
+    if (formState.productFile) formData.append('productFile', formState.productFile)
+    if (formState.mediaFile) formData.append('mediaFile', formState.mediaFile)
 
     try {
-      const res = await fetch('api/register/inventor', {
-        method: 'POST',
-        body: formData
-      })
+      const res = await fetch(endpoint, { method: 'POST', body: formData })
       if (res.ok) {
-        alert("Inventors Exhibit Registered Successfully!")
-        setRegistrationStatus(prev => ({ ...prev, inventorsExhibit: true }))
+        alert(`${isIdea ? 'Idea Pitching' : 'Inventors Exhibit'} Registered Successfully!`)
+        setRegistrationStatus(prev => ({ ...prev, [isIdea ? 'ideaPitching' : 'inventorsExhibit']: true }))
         setExpandedCard(null)
       } else {
-        alert("Registration Failed.")
+        alert("Registration Failed. Please check inputs or try again.")
       }
     } catch (err) {
       console.error(err)
@@ -243,6 +218,7 @@ export default function Dashboard() {
   return (
     <div className="page" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
+      {/* BACKGROUND & NAV (UNCHANGED) */}
       <div className="bubble-container">
         <div className="bubble"></div><div className="bubble"></div><div className="bubble"></div><div className="bubble"></div><div className="bubble"></div>
       </div>
@@ -293,143 +269,112 @@ export default function Dashboard() {
             <button className={`expand-btn ${expandedCard === 'idea' ? 'active' : ''}`} onClick={() => toggleCard('idea')} style={{ position: 'absolute', top: expandedCard === 'idea' ? '1.5rem' : '50%', right: '1.5rem', transform: expandedCard === 'idea' ? 'rotate(45deg)' : 'translateY(-50%)', width: '35px', height: '35px', fontSize: '1.2rem' }}>+</button>
             <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: '600', marginBottom: '0', marginTop: '0', paddingRight: '3rem', paddingTop: '1rem' }}>Idea Pitching</h2>
             <p style={{ color: '#aaa', marginBottom: '1.5rem', marginTop: '1rem'}}>Pitch your innovative ideas to industry experts.</p>
+            
             <div className="card-expanded-content">
-              
               {registrationStatus.ideaPitching ? (
                 <div style={{ padding: '1.5rem', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', borderRadius: '8px', color: '#38bdf8', fontWeight: '600', textAlign: 'center' }}>✓ You have successfully registered for Idea Pitching.</div>
               ) : (
-                <form onSubmit={handleIdeaSubmit} className="reg-form">
+                <form onSubmit={(e) => submitForm(e, 'idea')} className="reg-form">
                   
-                  {/* 1. Basic Details */}
+                  {/* 1. Team Details */}
                   <div className="form-section">
-                    <h3 className="section-title">1. Basic Details</h3>
-                    <div className="form-group"><label className="form-label">Full Name</label><input type="text" name="leadName" className="form-input" required value={ideaForm.leadName} onChange={handleIdeaChange} /></div>
-                    <div className="form-group">
-                      <label className="form-label">Gender</label>
-                      <select name="leadGender" className="form-select" required value={ideaForm.leadGender} onChange={handleIdeaChange}>
-                        <option value="">Select Gender</option><option>Male</option><option>Female</option><option>Others</option>
-                      </select>
-                    </div>
-                    <div className="form-group"><label className="form-label">Email ID</label><input type="email" name="leadEmail" className="form-input" required value={ideaForm.leadEmail} onChange={handleIdeaChange} /></div>
+                    <h3 className="section-title">1. Team Details</h3>
                     <div className="form-grid-2">
-                      <div className="form-group"><label className="form-label">Mobile</label><input type="tel" name="leadMobile" className="form-input" required value={ideaForm.leadMobile} onChange={handleIdeaChange} /></div>
-                      <div className="form-group"><label className="form-label">Alt Contact</label><input type="tel" name="altMobile" className="form-input" value={ideaForm.altMobile} onChange={handleIdeaChange} /></div>
-                    </div>
-                  </div>
-
-                  {/* 2. Organisation Details */}
-                  <div className="form-section">
-                    <h3 className="section-title">2. Organisation Details</h3>
-                    <div className="form-group"><label className="form-label">Institution / Startup Name</label><input type="text" name="institutionName" className="form-input" required value={ideaForm.institutionName} onChange={handleIdeaChange} /></div>
-                    <div className="form-group">
-                      <label className="form-label">Type of Exhibitor</label>
-                      <select name="exhibitorType" className="form-select" required value={ideaForm.exhibitorType} onChange={handleIdeaChange}>
-                        <option value="">Select Type</option><option value="Student">Student</option><option value="Faculty">Faculty</option><option value="Startup">Startup</option><option value="Industry">Industry</option><option value="Independent Innovator">Independent Innovator</option>
-                      </select>
-                    </div>
-                    <div className="form-group"><label className="form-label">Department / Sector</label><input type="text" name="department" className="form-input" required value={ideaForm.department} onChange={handleIdeaChange} /></div>
-                    <div className="form-group">
-                      <label className="form-label">Degree / Program</label>
-                      <select name="degree" className="form-select" required value={ideaForm.degree} onChange={handleIdeaChange}>
-                        <option value="">Select Degree / Program</option><option value="UG">UG</option><option value="PG">PG</option><option value="PhD">PhD</option><option value="Diploma">Diploma</option><option value="Faculty">Faculty</option><option value="Startup Founder">Startup Founder</option><option value="Others">Others</option>
-                      </select>
-                    </div>
-                    {ideaForm.exhibitorType === 'Student' && (
-                      <div className="form-group"><label className="form-label">Year of Study</label><input type="text" name="yearOfStudy" className="form-input" placeholder="e.g. 2nd Year / Final Year" required value={ideaForm.yearOfStudy} onChange={handleIdeaChange} /></div>
-                    )}
-                    <div className="form-grid-2">
-                      <div className="form-group"><label className="form-label">City</label><input type="text" name="city" className="form-input" required value={ideaForm.city} onChange={handleIdeaChange} /></div>
-                      <div className="form-group"><label className="form-label">State</label><input type="text" name="state" className="form-input" required value={ideaForm.state} onChange={handleIdeaChange} /></div>
-                    </div>
-                  </div>
-
-                  {/* 3. Mode */}
-                  <div className="form-section">
-                    <h3 className="section-title">3. Participation Mode</h3>
-                    <div className="form-group" style={{display:'flex', gap:'2rem'}}>
-                      <label style={{color:'#fff'}}><input type="radio" name="participationMode" value="Individual" checked={ideaForm.participationMode==='Individual'} onChange={handleIdeaChange} style={{marginRight:'0.5rem'}}/>Individual</label>
-                      <label style={{color:'#fff'}}><input type="radio" name="participationMode" value="Team" checked={ideaForm.participationMode==='Team'} onChange={handleIdeaChange} style={{marginRight:'0.5rem'}}/>Team</label>
-                    </div>
-                  </div>
-
-                  {/* 4. Team Details */}
-                  {ideaForm.participationMode === 'Team' && (
-                    <div className="form-section">
-                      <h3 className="section-title">Team Details</h3>
-                      <div className="form-group"><label className="form-label">Team Name</label><input type="text" name="teamName" className="form-input" required value={ideaForm.teamName} onChange={handleIdeaChange} /></div>
-                      <div className="form-group"><label className="form-label">Total Members (Including You)</label><input type="number" name="teamSize" className="form-input" min="2" required value={ideaForm.teamSize} onChange={handleIdeaTeamSize} /></div>
-                      
-                      {ideaForm.teamMembers.map((m, i) => (
-                        <div key={i} style={{marginTop:'1rem', padding:'1rem', background:'rgba(255,255,255,0.05)'}}>
-                          <h4 style={{color:'#aaa', marginBottom:'0.5rem'}}>Member {i+1}</h4>
-                          <div className="form-grid-2"><input className="form-input" placeholder="Name" value={m.name} onChange={(e)=>handleIdeaMemberUpdate(i,'name',e.target.value)} /><input className="form-input" placeholder="Email" value={m.email} onChange={(e)=>handleIdeaMemberUpdate(i,'email',e.target.value)} /></div>
-                          <div className="form-grid-2" style={{marginTop:'0.5rem'}}><input className="form-input" placeholder="Mobile" value={m.mobile} onChange={(e)=>handleIdeaMemberUpdate(i,'mobile',e.target.value)} /><input className="form-input" placeholder="Designation" value={m.designation} onChange={(e)=>handleIdeaMemberUpdate(i,'designation',e.target.value)} /></div>
-                          <input className="form-input" placeholder="Institution" style={{marginTop:'0.5rem'}} value={m.institution} onChange={(e)=>handleIdeaMemberUpdate(i,'institution',e.target.value)} />
+                        <div className="form-group">
+                            <label className="form-label">Team Name</label>
+                            <input type="text" name="teamName" className="form-input" required value={ideaForm.teamName} onChange={(e) => handleBasicChange(e, 'idea')} />
                         </div>
-                      ))}
+                        <div className="form-group">
+                            <label className="form-label">Total Members</label>
+                            <select name="teamSize" className="form-select" value={ideaForm.teamSize} onChange={(e) => handleTeamSizeChange(e, 'idea')}>
+                                {[1, 2, 3, 4].map(n => <option key={n} value={n}>{n}</option>)}
+                            </select>
+                        </div>
                     </div>
-                  )}
 
-                  {/* ================================================= */}
-                  {/* NEW SECTION: DOMAIN SELECTION                     */}
-                  {/* ================================================= */}
+                    {ideaForm.members.map((member, index) => (
+                        <div key={index} style={{marginTop:'1.5rem', padding:'1rem', background:'rgba(255,255,255,0.05)', borderRadius:'8px', border:'1px solid rgba(255,255,255,0.1)'}}>
+                            <h4 style={{color:'#fcd361', marginBottom:'1rem'}}>Member {index + 1}</h4>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">Name</label><input className="form-input" name="name" required value={member.name} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                                <div className="form-group">
+                                    <label className="form-label">Category</label>
+                                    <select className="form-select" name="category" required value={member.category} onChange={(e) => handleMemberUpdate(index, e, 'idea')}>
+                                        <option value="">Select Category</option>
+                                        {memberCategories.map(c => <option key={c} value={c}>{c}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">Designation / Course</label><input className="form-input" name="designation" required value={member.designation} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                                <div className="form-group"><label className="form-label">Department / Section</label><input className="form-input" name="department" required value={member.department} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                            </div>
+                            <div className="form-group"><label className="form-label">Institute / Industry</label><input className="form-input" name="institution" required value={member.institution} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">City</label><input className="form-input" name="city" required value={member.city} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                                <div className="form-group"><label className="form-label">State</label><input className="form-input" name="state" required value={member.state} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                            </div>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">Mobile (Whatsapp)</label><input type="tel" className="form-input" name="mobile" required value={member.mobile} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                                <div className="form-group"><label className="form-label">Mail ID</label><input type="email" className="form-input" name="email" required value={member.email} onChange={(e) => handleMemberUpdate(index, e, 'idea')} /></div>
+                            </div>
+                        </div>
+                    ))}
+                  </div>
+
+                  {/* 2. Domain & Theme */}
                   <div className="form-section">
-                    <h3 className="section-title">4. Domain & Theme</h3>
-                    
+                    <h3 className="section-title">2. Domain & Theme Details</h3>
                     <div className="form-group">
                       <label className="form-label">Domain (SDG)</label>
-                      <select name="domain" className="form-select" required value={ideaForm.domain} onChange={handleIdeaChange}>
+                      <select name="domain" className="form-select" required value={ideaForm.domain} onChange={(e) => handleBasicChange(e, 'idea')}>
                         <option value="">-- Select SDG Domain --</option>
-                        {Object.keys(domainData).map((sdg) => (
-                          <option key={sdg} value={sdg}>{sdg}</option>
-                        ))}
+                        {Object.keys(domainData).map((sdg) => <option key={sdg} value={sdg}>{sdg}</option>)}
                       </select>
                     </div>
-
                     <div className="form-group">
                       <label className="form-label">Sub-Domain</label>
-                      <select name="subDomain" className="form-select" required value={ideaForm.subDomain} onChange={handleIdeaChange} disabled={!ideaForm.domain}>
+                      <select name="subDomain" className="form-select" required value={ideaForm.subDomain} onChange={(e) => handleBasicChange(e, 'idea')} disabled={!ideaForm.domain}>
                         <option value="">-- Select Sub-Domain --</option>
-                        {ideaForm.domain && domainData[ideaForm.domain].map((sub, index) => (
-                          <option key={index} value={sub}>{sub}</option>
-                        ))}
+                        {ideaForm.domain && domainData[ideaForm.domain].map((sub, index) => <option key={index} value={sub}>{sub}</option>)}
                       </select>
                     </div>
                   </div>
-                  {/* ================================================= */}
 
-                  {/* 5. Innovation Details */}
+                  {/* 3. Innovation Details */}
                   <div className="form-section">
-                    <h3 className="section-title">5. Innovation Details</h3>
-                    <div className="form-group"><label className="form-label">Title of Idea/Innovation</label><input type="text" name="title" className="form-input" required value={ideaForm.title} onChange={handleIdeaChange} /></div>
+                    <h3 className="section-title">3. Innovation Details</h3>
+                    <div className="form-group"><label className="form-label">Title</label><input type="text" name="title" className="form-input" required value={ideaForm.title} onChange={(e) => handleBasicChange(e, 'idea')} /></div>
+                    
                     <div className="form-group">
-                      <label className="form-label">Category</label>
-                      <select name="category" className="form-select" required value={ideaForm.category} onChange={handleIdeaChange}>
-                        <option value="">Select Category</option><option>AI & ML</option><option>Healthcare</option><option>Agriculture</option><option>Smart Cities</option><option>Clean Energy</option><option>Robotics & IoT</option><option>Cyber Security</option><option>Manufacturing</option><option>EdTech</option><option>FinTech</option><option>Biotechnology</option><option>Others</option>
+                        <label className="form-label">Problem Statement (Max. 250 words)</label>
+                        <textarea name="problemStatement" className="form-input" rows="4" required maxLength={1500} value={ideaForm.problemStatement} onChange={(e) => handleBasicChange(e, 'idea')} />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label className="form-label">Solution (Max. 250 words)</label>
+                        <textarea name="solution" className="form-input" rows="4" required maxLength={1500} value={ideaForm.solution} onChange={(e) => handleBasicChange(e, 'idea')} />
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">TRL Level</label>
+                      <select name="trlLevel" className="form-select" required value={ideaForm.trlLevel} onChange={(e) => handleBasicChange(e, 'idea')}>
+                        <option value="">Select TRL (3 to 9)</option>
+                        {trlLevelsIdea.map(t => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </div>
-                    {ideaForm.category === 'Others' && (
-                      <div className="form-group"><label className="form-label">Specify Category</label><input type="text" name="otherCategory" className="form-input" required value={ideaForm.otherCategory} onChange={handleIdeaChange} /></div>
-                    )}
-                    <div className="form-group"><label className="form-label">Abstract (Upload File)</label><input type="file" className="form-file-input" required onChange={handleIdeaFile} /></div>
+
+                    <div className="form-group"><label className="form-label">Upload Product Details (As per Template)</label><input type="file" className="form-file-input" required onChange={(e) => handleFileChange(e, 'productFile', 'idea')} /></div>
+                    <div className="form-group"><label className="form-label">Upload an Image or Video</label><input type="file" className="form-file-input" required onChange={(e) => handleFileChange(e, 'mediaFile', 'idea')} /></div>
                   </div>
 
-                  {/* 6. Declarations */}
+                  {/* 4. Declarations */}
                   <div className="form-section" style={{borderBottom:'none'}}>
-                    <h3 className="section-title">6. Declaration & Permission</h3>
+                    <h3 className="section-title">4. Declaration & Permission</h3>
                     <div style={{display:'flex', flexDirection:'column', gap:'0.8rem'}}>
-                      <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
-                        <input type="checkbox" name="declarationOriginal" checked={ideaForm.declarationOriginal} onChange={handleIdeaChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I confirm that the innovation being exhibited is original</span>
-                      </label>
-                      <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
-                        <input type="checkbox" name="declarationRules" checked={ideaForm.declarationRules} onChange={handleIdeaChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I agree to follow event rules and safety guidelines</span>
-                      </label>
-                      <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
-                        <input type="checkbox" name="declarationPhoto" checked={ideaForm.declarationPhoto} onChange={handleIdeaChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I grant permission for photography & promotional use</span>
-                      </label>
+                      <label className="checkbox-label"><input type="checkbox" name="declarationOriginal" checked={ideaForm.declarationOriginal} onChange={(e) => handleBasicChange(e, 'idea')} /> I confirm that the innovation being submitted is original</label>
+                      <label className="checkbox-label"><input type="checkbox" name="declarationRules" checked={ideaForm.declarationRules} onChange={(e) => handleBasicChange(e, 'idea')} /> I agree to follow event rules and safety guidelines</label>
+                      <label className="checkbox-label"><input type="checkbox" name="declarationPhoto" checked={ideaForm.declarationPhoto} onChange={(e) => handleBasicChange(e, 'idea')} /> I grant permission for photography & promotional use</label>
                     </div>
                   </div>
 
@@ -442,7 +387,7 @@ export default function Dashboard() {
           </div>
 
           {/* ========================================================== */}
-          {/* CARD 2: INVENTORS EXHIBIT                                */}
+          {/* CARD 2: INVENTORS EXHIBIT                                  */}
           {/* ========================================================== */}
           <div className={`panel panel--outline ${expandedCard === 'inventor' ? 'expanded' : ''}`} style={{ 
             position: 'relative', transition: 'all 0.3s ease', padding: expandedCard === 'inventor' ? '2rem' : '0.8rem 2rem', 
@@ -451,153 +396,128 @@ export default function Dashboard() {
           }}>
             <button className={`expand-btn ${expandedCard === 'inventor' ? 'active' : ''}`} onClick={() => toggleCard('inventor')} style={{ position: 'absolute', top: expandedCard === 'inventor' ? '1.5rem' : '50%', right: '1.5rem', transform: expandedCard === 'inventor' ? 'rotate(45deg)' : 'translateY(-50%)', width: '35px', height: '35px', fontSize: '1.2rem' }}>+</button>
             <h2 style={{ color: '#fff', fontSize: '1.5rem', fontWeight: '600', marginBottom: '0', marginTop: '0', paddingRight: '3rem', paddingTop: '1rem' }}>Inventors' Exhibit</h2>
-             <p style={{ color: '#aaa', marginBottom: '1.5rem', marginTop: '1rem'}}>Showcase your working prototypes to a global audience.</p>
+            <p style={{ color: '#aaa', marginBottom: '1.5rem', marginTop: '1rem'}}>Showcase your working prototypes to a global audience.</p>
+            
             <div className="card-expanded-content">
-             
-
               {registrationStatus.inventorsExhibit ? (
-                <div style={{ padding: '1.5rem', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', borderRadius: '8px', color: '#38bdf8', fontWeight: '600', textAlign: 'center' }}>✓ Successfully Registered</div>
+                <div style={{ padding: '1.5rem', background: 'rgba(56, 189, 248, 0.15)', border: '1px solid #38bdf8', borderRadius: '8px', color: '#38bdf8', fontWeight: '600', textAlign: 'center' }}>✓ You have successfully registered for Inventors Exhibit.</div>
               ) : (
-                <form onSubmit={handleInventorSubmit} className="reg-form">
+                <form onSubmit={(e) => submitForm(e, 'inventor')} className="reg-form">
                   
-                  {/* 1. Basic Details */}
+                  {/* 1. Team Details */}
                   <div className="form-section">
-                    <h3 className="section-title">1. Basic Details</h3>
-                    <div className="form-group"><label className="form-label">Full Name</label><input type="text" name="fullName" className="form-input" required value={inventorForm.fullName} onChange={handleInventorChange} /></div>
-                    <div className="form-group">
-                      <label className="form-label">Gender</label>
-                      <select name="gender" className="form-select" required value={inventorForm.gender} onChange={handleInventorChange}>
-                        <option value="">Select Gender</option><option value="Male">Male</option><option value="Female">Female</option><option value="Others">Others</option>
-                      </select>
-                    </div>
-                    <div className="form-group"><label className="form-label">Email ID</label><input type="email" name="email" className="form-input" required value={inventorForm.email} onChange={handleInventorChange} /></div>
+                    <h3 className="section-title">1. Team Details</h3>
                     <div className="form-grid-2">
-                      <div className="form-group"><label className="form-label">Mobile</label><input type="tel" name="mobile" className="form-input" required value={inventorForm.mobile} onChange={handleInventorChange} /></div>
-                      <div className="form-group"><label className="form-label">Alt Contact</label><input type="tel" name="altMobile" className="form-input" value={inventorForm.altMobile} onChange={handleInventorChange} /></div>
-                    </div>
-                  </div>
-
-                  {/* 2. Organisation Details */}
-                  <div className="form-section">
-                    <h3 className="section-title">2. Organisation Details</h3>
-                    <div className="form-group"><label className="form-label">Institution / Startup Name</label><input type="text" name="institutionName" className="form-input" required value={inventorForm.institutionName} onChange={handleInventorChange} /></div>
-                    <div className="form-group">
-                      <label className="form-label">Type of Exhibitor</label>
-                      <select name="exhibitorType" className="form-select" required value={inventorForm.exhibitorType} onChange={handleInventorChange}>
-                        <option value="">Select Type</option><option value="Student">Student</option><option value="Faculty">Faculty</option><option value="Startup">Startup</option><option value="Industry">Industry</option><option value="Independent Innovator">Independent Innovator</option>
-                      </select>
-                    </div>
-                    <div className="form-group"><label className="form-label">Department / Sector</label><input type="text" name="department" className="form-input" required value={inventorForm.department} onChange={handleInventorChange} /></div>
-                    <div className="form-group">
-                      <label className="form-label">Degree / Program</label>
-                      <select name="degree" className="form-select" required value={inventorForm.degree} onChange={handleInventorChange}>
-                        <option value="">Select Degree / Program</option><option value="UG">UG</option><option value="PG">PG</option><option value="PhD">PhD</option><option value="Diploma">Diploma</option><option value="Faculty">Faculty</option><option value="Startup Founder">Startup Founder</option><option value="Others">Others</option>
-                      </select>
-                    </div>
-                    {inventorForm.exhibitorType === 'Student' && (
-                      <div className="form-group"><label className="form-label">Year of Study</label><input type="text" name="yearOfStudy" className="form-input" placeholder="e.g. 2nd Year / Final Year" required value={inventorForm.yearOfStudy} onChange={handleInventorChange} /></div>
-                    )}
-                    <div className="form-grid-2">
-                      <div className="form-group"><label className="form-label">City</label><input type="text" name="city" className="form-input" required value={inventorForm.city} onChange={handleInventorChange} /></div>
-                      <div className="form-group"><label className="form-label">State</label><input type="text" name="state" className="form-input" required value={inventorForm.state} onChange={handleInventorChange} /></div>
-                    </div>
-                  </div>
-
-                  {/* 3. Mode */}
-                  <div className="form-section">
-                    <h3 className="section-title">3. Participation Mode</h3>
-                    <div className="form-group" style={{display:'flex', gap:'2rem'}}>
-                      <label style={{color:'#fff'}}><input type="radio" name="participationMode" value="Individual" checked={inventorForm.participationMode==='Individual'} onChange={handleInventorChange} style={{marginRight:'0.5rem'}}/>Individual</label>
-                      <label style={{color:'#fff'}}><input type="radio" name="participationMode" value="Team" checked={inventorForm.participationMode==='Team'} onChange={handleInventorChange} style={{marginRight:'0.5rem'}}/>Team</label>
-                    </div>
-                  </div>
-
-                  {/* 4. Team Details */}
-                  {inventorForm.participationMode === 'Team' && (
-                    <div className="form-section">
-                      <h3 className="section-title">Team Details</h3>
-                      <div className="form-group"><label className="form-label">Team Name</label><input type="text" name="teamName" className="form-input" required value={inventorForm.teamName} onChange={handleInventorChange} /></div>
-                      <div className="form-group"><label className="form-label">Total Members (Including You)</label><input type="number" name="teamSize" className="form-input" min="2" required value={inventorForm.teamSize} onChange={handleInventorTeamSize} /></div>
-                      
-                      {/* Only renders members if size >= 2 */}
-                      {inventorForm.teamMembers.map((m, i) => (
-                        <div key={i} style={{marginTop:'1rem', padding:'1rem', background:'rgba(255,255,255,0.05)'}}>
-                          <h4 style={{color:'#aaa', marginBottom:'0.5rem'}}>Member {i+1}</h4>
-                          <div className="form-grid-2"><input className="form-input" placeholder="Name" value={m.name} onChange={(e)=>handleInventorMemberUpdate(i,'name',e.target.value)} /><input className="form-input" placeholder="Email" value={m.email} onChange={(e)=>handleInventorMemberUpdate(i,'email',e.target.value)} /></div>
-                          <div className="form-grid-2" style={{marginTop:'0.5rem'}}><input className="form-input" placeholder="Mobile" value={m.mobile} onChange={(e)=>handleInventorMemberUpdate(i,'mobile',e.target.value)} /><input className="form-input" placeholder="Designation" value={m.designation} onChange={(e)=>handleInventorMemberUpdate(i,'designation',e.target.value)} /></div>
-                          <input className="form-input" placeholder="Institution" style={{marginTop:'0.5rem'}} value={m.institution} onChange={(e)=>handleInventorMemberUpdate(i,'institution',e.target.value)} />
+                        <div className="form-group">
+                            <label className="form-label">Team Name</label>
+                            <input type="text" name="teamName" className="form-input" required value={inventorForm.teamName} onChange={(e) => handleBasicChange(e, 'inventor')} />
                         </div>
-                      ))}
+                        <div className="form-group">
+                            <label className="form-label">Total Members</label>
+                            <select name="teamSize" className="form-select" value={inventorForm.teamSize} onChange={(e) => handleTeamSizeChange(e, 'inventor')}>
+                                {[1, 2, 3, 4].map(n => <option key={n} value={n}>{n}</option>)}
+                            </select>
+                        </div>
                     </div>
-                  )}
-                  
-                  {/* ================================================= */}
-                  {/* NEW SECTION: DOMAIN SELECTION                     */}
-                  {/* ================================================= */}
+
+                    {inventorForm.members.map((member, index) => (
+                        <div key={index} style={{marginTop:'1.5rem', padding:'1rem', background:'rgba(255,255,255,0.05)', borderRadius:'8px', border:'1px solid rgba(255,255,255,0.1)'}}>
+                            <h4 style={{color:'#fcd361', marginBottom:'1rem'}}>Member {index + 1}</h4>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">Name</label><input className="form-input" name="name" required value={member.name} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                                <div className="form-group">
+                                    <label className="form-label">Category</label>
+                                    <select className="form-select" name="category" required value={member.category} onChange={(e) => handleMemberUpdate(index, e, 'inventor')}>
+                                        <option value="">Select Category</option>
+                                        {memberCategories.map(c => <option key={c} value={c}>{c}</option>)}
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">Designation / Course</label><input className="form-input" name="designation" required value={member.designation} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                                <div className="form-group"><label className="form-label">Department / Section</label><input className="form-input" name="department" required value={member.department} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                            </div>
+                            <div className="form-group"><label className="form-label">Institute / Industry</label><input className="form-input" name="institution" required value={member.institution} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">City</label><input className="form-input" name="city" required value={member.city} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                                <div className="form-group"><label className="form-label">State</label><input className="form-input" name="state" required value={member.state} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                            </div>
+                            <div className="form-grid-2">
+                                <div className="form-group"><label className="form-label">Mobile (Whatsapp)</label><input type="tel" className="form-input" name="mobile" required value={member.mobile} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                                <div className="form-group"><label className="form-label">Mail ID</label><input type="email" className="form-input" name="email" required value={member.email} onChange={(e) => handleMemberUpdate(index, e, 'inventor')} /></div>
+                            </div>
+                        </div>
+                    ))}
+                  </div>
+
+                  {/* 2. Domain & Theme */}
                   <div className="form-section">
-                    <h3 className="section-title">4. Domain & Theme</h3>
-                    
+                    <h3 className="section-title">2. Domain & Theme Details</h3>
                     <div className="form-group">
                       <label className="form-label">Domain (SDG)</label>
-                      <select name="domain" className="form-select" required value={inventorForm.domain} onChange={handleInventorChange}>
+                      <select name="domain" className="form-select" required value={inventorForm.domain} onChange={(e) => handleBasicChange(e, 'inventor')}>
                         <option value="">-- Select SDG Domain --</option>
-                        {Object.keys(domainData).map((sdg) => (
-                          <option key={sdg} value={sdg}>{sdg}</option>
-                        ))}
+                        {Object.keys(domainData).map((sdg) => <option key={sdg} value={sdg}>{sdg}</option>)}
                       </select>
                     </div>
-
                     <div className="form-group">
                       <label className="form-label">Sub-Domain</label>
-                      <select name="subDomain" className="form-select" required value={inventorForm.subDomain} onChange={handleInventorChange} disabled={!inventorForm.domain}>
+                      <select name="subDomain" className="form-select" required value={inventorForm.subDomain} onChange={(e) => handleBasicChange(e, 'inventor')} disabled={!inventorForm.domain}>
                         <option value="">-- Select Sub-Domain --</option>
-                        {inventorForm.domain && domainData[inventorForm.domain].map((sub, index) => (
-                          <option key={index} value={sub}>{sub}</option>
-                        ))}
+                        {inventorForm.domain && domainData[inventorForm.domain].map((sub, index) => <option key={index} value={sub}>{sub}</option>)}
                       </select>
                     </div>
                   </div>
-                  {/* ================================================= */}
 
-                  {/* 5. Innovation Details */}
+                  {/* 3. Innovation Details */}
                   <div className="form-section">
-                    <h3 className="section-title">5. Innovation Details</h3>
-                    <div className="form-group"><label className="form-label">Title of Idea/Innovation</label><input type="text" name="title" className="form-input" required value={inventorForm.title} onChange={handleInventorChange} /></div>
+                    <h3 className="section-title">3. Innovation Details</h3>
+                    <div className="form-group"><label className="form-label">Title</label><input type="text" name="title" className="form-input" required value={inventorForm.title} onChange={(e) => handleBasicChange(e, 'inventor')} /></div>
+                    
                     <div className="form-group">
-                      <label className="form-label">Category / Domain</label>
-                      <select name="category" className="form-select" required value={inventorForm.category} onChange={handleInventorChange}>
-                        <option value="">Select Category</option><option>AI & ML</option><option>Healthcare</option><option>Agriculture</option><option>Smart Cities</option><option>Clean Energy</option><option>Robotics & IoT</option><option>Cyber Security</option><option>Manufacturing</option><option>EdTech</option><option>FinTech</option><option>Biotechnology</option><option>Others</option>
+                        <label className="form-label">Problem Statement (Max. 250 words)</label>
+                        <textarea name="problemStatement" className="form-input" rows="4" required maxLength={1500} value={inventorForm.problemStatement} onChange={(e) => handleBasicChange(e, 'inventor')} />
+                    </div>
+                    
+                    <div className="form-group">
+                        <label className="form-label">Solution (Max. 250 words)</label>
+                        <textarea name="solution" className="form-input" rows="4" required maxLength={1500} value={inventorForm.solution} onChange={(e) => handleBasicChange(e, 'inventor')} />
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label">TRL Level</label>
+                      <select name="trlLevel" className="form-select" required value={inventorForm.trlLevel} onChange={(e) => handleBasicChange(e, 'inventor')}>
+                        <option value="">Select TRL (6 to 9)</option>
+                        {trlLevelsInventor.map(t => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </div>
-                    {inventorForm.category === 'Others' && (
-                      <div className="form-group"><label className="form-label">Specify Category</label><input type="text" name="otherCategory" className="form-input" required value={inventorForm.otherCategory} onChange={handleInventorChange} /></div>
-                    )}
-                    <div className="form-group"><label className="form-label">Abstract (Upload File)</label><input type="file" className="form-file-input" required onChange={handleInventorFile} /></div>
+
+                    <div className="form-group"><label className="form-label">Upload Product Details (As per Template)</label><input type="file" className="form-file-input" required onChange={(e) => handleFileChange(e, 'productFile', 'inventor')} /></div>
+                    <div className="form-group"><label className="form-label">Upload an Image or Video</label><input type="file" className="form-file-input" required onChange={(e) => handleFileChange(e, 'mediaFile', 'inventor')} /></div>
                   </div>
 
-                  {/* 6. Declarations */}
+                  {/* 4. Space Requirements */}
+                  <div className="form-section">
+                    <h3 className="section-title">4. Space & Other Requirements</h3>
+                    <div className="form-group">
+                        <label className="form-label">Requirements (Max. 200 words)</label>
+                        <textarea name="spaceRequirements" className="form-input" rows="3" required maxLength={1200} value={inventorForm.spaceRequirements} onChange={(e) => handleBasicChange(e, 'inventor')} />
+                    </div>
+                  </div>
+
+                  {/* 5. Declarations */}
                   <div className="form-section" style={{borderBottom:'none'}}>
-                    <h3 className="section-title">6. Declaration & Permission</h3>
+                    <h3 className="section-title">5. Declaration & Permission</h3>
                     <div style={{display:'flex', flexDirection:'column', gap:'0.8rem'}}>
-                      <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
-                        <input type="checkbox" name="declarationOriginal" checked={inventorForm.declarationOriginal} onChange={handleInventorChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I confirm that the innovation being exhibited is original</span>
-                      </label>
-                      <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
-                        <input type="checkbox" name="declarationRules" checked={inventorForm.declarationRules} onChange={handleInventorChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I agree to follow event rules and safety guidelines</span>
-                      </label>
-                      <label style={{display:'flex', alignItems:'center', gap:'0.8rem', cursor:'pointer', color:'#ccc'}}>
-                        <input type="checkbox" name="declarationPhoto" checked={inventorForm.declarationPhoto} onChange={handleInventorChange} style={{width:'18px', height:'18px', accentColor:'#fcd361'}} />
-                        <span>I grant permission for photography & promotional use</span>
-                      </label>
+                      <label className="checkbox-label"><input type="checkbox" name="declarationOriginal" checked={inventorForm.declarationOriginal} onChange={(e) => handleBasicChange(e, 'inventor')} /> I confirm that the innovation being exhibited is original</label>
+                      <label className="checkbox-label"><input type="checkbox" name="declarationRules" checked={inventorForm.declarationRules} onChange={(e) => handleBasicChange(e, 'inventor')} /> I agree to follow event rules and safety guidelines</label>
+                      <label className="checkbox-label"><input type="checkbox" name="declarationPhoto" checked={inventorForm.declarationPhoto} onChange={(e) => handleBasicChange(e, 'inventor')} /> I grant permission for photography & promotional use</label>
                     </div>
                   </div>
 
                   <button type="submit" className="btn btn--primary" disabled={!inventorAllChecked} style={{ width: '100%', marginTop: '1.5rem', opacity: inventorAllChecked ? 1 : 0.5, cursor: inventorAllChecked ? 'pointer' : 'not-allowed' }}>
                     {inventorAllChecked ? 'Submit Registration' : 'Accept Declaration to Submit'}
                   </button>
-                  
                 </form>
               )}
             </div>
