@@ -97,15 +97,15 @@ const ideaPitchRules = [
   'Individual or team participation (up to 4 members).',
   ' The problem statement and the solution should be submitted online using only the provided template',
   'Only shortlisted submissions will be invited for the final pitch.',
-  'Ideas must be original and not submitted elsewhere.',
+  'Ideas must be original and should not have been pitched or submitted in any other competition.',
   'Judging Criteria : Problem Solution fit, Innovation, Societal Impact, Product Market fit.',
   'Only ideas at TRL 3 and above are eligible.',
 ]
 
 const exhibitGuidelines = [
-  'Individual inventors, student innovators, R&D teams, and early-stage product developers are invited.',
+  'Individual inventors, student innovators, and early-stage product developers are invited to exhibit their working model of original inventions',
   'Exhibits must represent an original invention or prototype.',
-  'A brief description of the invention to be provided during the registration.',
+  'Participants should provide a brief description of their invention during registration.',
   'Working models, demos, or proof-of-concepts are mandatory.',
   'Space and basic display arrangements will be provided.',
   'Participants must be present during exhibit hours to explain their innovation.',
@@ -439,7 +439,7 @@ const sponsorsData = [
   },
 ]
 */}
-const aboutCollege = `PSG College of Technology (PSG Tech), established in 1951 by PSG & Sons' Charities, is an ISO 9001:2015 certified autonomous institution affiliated with Anna University, Chennai. Celebrating its Platinum Jubilee, PSG Tech offers 21 undergraduate and 24 postgraduate programs spanning Engineering and Technology, Computer Applications, Management Sciences, and Basic and Advanced Sciences. The campus hosts state-of-the-art Centers of Excellence including TIFAC-CORE in Product Design, Machine Tool Research Centre, Engineering Design Centre, Virtual Reality Centre, Tool and Die Centre, Centre for Nanotechnology, Centre for Robotics, Centre of Excellence in Artificial Intelligence and Software, Centre for Non-Linear Dynamics, Danfoss Centre of Excellence in Climate and Energy, and the Centre of Excellence in Welding Engineering and Technology. PSG Tech partners closely with industry, operates on-campus manufacturing units, and consistently ranks among India’s top institutions for innovation and industry linkage.`
+const aboutCollege = `PSG College of Technology (PSG Tech), established in 1951 by PSG & Sons’ Charities, is an ISO 9001:2015 certified autonomous institution affiliated with Anna University, Chennai. This year marks a significant milestone as PSG College of Technology celebrates its Platinum Jubilee, coinciding with the Centenary Year of PSG & Sons’ Charities, the founding trust renowned for its contributions to education and industry. PSG Tech offers 21 undergraduate and 24 postgraduate programmes across Engineering and Technology, Computer Applications, Management Sciences, and Basic and Advanced Sciences. The institution is home to several state-of-the-art Centers of Excellence including the TIFAC CORE in Product Design, Machine Tool Research Centre, Engineering Design Centre, Virtual Reality Centre, Tool and Die Centre, Centre for Nanotechnology, Centre forRobotics, Centre of Excellence in Artificial Intelligence and Software, Centre for Non-Linear Dynamics, Danfoss Centre of Excellence in Climate and Energy, and the Centre of Excellence in Welding Engineering and Technology. Under the PSG Industrial Institute, the college also operates in-campus manufacturing units producing machine tools, pumps, and motors, along with off-campus foundry units, enabling practical industry exposure for students. PSG Tech has built a strong network with industries, research organizations, alumni, and entrepreneurs, fostering innovation and collaboration. The institution has received national recognition, ranking second in the ATAL Ranking of Institutions on Innovation Achievements (ARIIA) under the Government and Government Aided Technical Institutions category by the Ministry of Education, Government of India in 2021, and being awarded the Best Industry-Linked Institution by AICTE-CII in 2012. Further, during India’s G20 Presidency in 2022, PSG Tech was chosen as one of 75 leading educational institutions in the country to conduct special lectures, student exchange programmes, and academic and cultural activities to promote awareness of the G20 agenda among students and the academic community.`
 const aboutIIC = 'Institution’s Innovation Council (IIC) at PSG College of Technology is a dedicated innovation and entrepreneurship support body established under the directive of the Ministry of Education’s Innovation Cell (MIC), Government of India. Its purpose is to cultivate and strengthen an innovation-driven mindset among students and faculty by organizing activities throughout the year that promote creative thinking, problem-solving, and entrepreneurial skills. The IIC at PSG Tech works to:'
 const aboutIICPoints = [
   'Conduct innovation and entrepreneurship programs, workshops, and contests to nurture skills and idea generation',
@@ -533,7 +533,7 @@ function App() {
   const eventMeta = useMemo(
     () => ({
       date: 'Friday, Feb 27, 2026',
-      venue: 'GRD Centenary Auditorium',
+      venue: 'GRD Centenary Auditorium-PSG Tech',
     }),
     []
   )
@@ -725,8 +725,8 @@ function App() {
         <div id="idea-pitch" className="panel panel--accent">
           <SectionHeading
             kicker="Idea Pitching Competition"
-            title="Showcase your most impactful solutions"
-            subtitle="Pitch to industry and academic experts, gain feedback, visibility, and a chance to win exciting prizes."
+            title="Showcase the most creative and impactful ideas"
+            subtitle=" Pitch the solution to leading industry and academic experts. Gain valuable visibility, receive constructive feedback, and elevate the work to the next level. Plus, stand a chance to win exciting prizes while making a real impact with the innovation."
           />
           <ul className="list list--arrow">
             {ideaPitchRules.map((rule) => (
@@ -740,7 +740,7 @@ function App() {
           <SectionHeading
             kicker="Inventors’ Exhibit"
             title="Spotlight for breakthrough prototypes"
-            subtitle="Creators, innovators, and researchers exhibit working models and disruptive solutions."
+            subtitle= "The Inventors’ Exhibit provides a platform for creators, innovators, and researchers to showcase their prototypes, working models, and breakthrough ideas.This exhibit highlights novel solutions across domains and offers an opportunity to interact with industry experts, academicians, investors, and fellow innovators"
           />
           <ul className="list list--arrow">
             {exhibitGuidelines.map((rule) => (
@@ -790,6 +790,90 @@ function App() {
 
       </div>
     </section>
+    {/* --- INSERT PRIZE MONEY SECTION HERE (Below Important Dates) --- */}
+<section className="section" id="important-dates">
+      
+      <div className="panel panel--outline">
+        <SectionHeading
+          kicker="Rewards"
+          title="Prizes and Benefits for the Winners for Idea Pitching and Inventor’ Exhibit"
+          subtitle="Mark your calendars and get ready for the big day."
+        />
+  <div className="container" style={{ 
+    display: 'flex', 
+    gap: '30px', 
+    alignItems: 'center', 
+    justifyContent: 'space-between',
+    maxWidth: '1200px',
+    flexWrap: 'wrap', /* Allows wrapping on smaller screens */
+  }}>
+
+    {/* LEFT SIDE: CASH PRIZES TABLE */}
+    <div className="prize-cash-panel" style={{ 
+      flex: '1 1 450px', 
+      minWidth: '300px',
+      paddingBottom: '90px', 
+      borderRadius: '12px',
+      color: '#fff'
+    }}>
+      <h3 style={{ 
+        color: '#fcd361', 
+        fontSize: '1.8rem', 
+        marginBottom: '1.5rem', 
+        textAlign: 'center',
+        borderBottom: '2px solid rgba(252, 211, 97, 0.3)',
+        paddingBottom: '10px'
+      }}>Cash Prizes</h3>
+      <div className="prize-list" style={{ fontSize: '1.2rem' }}>
+        <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+          <span style={{ fontWeight: 'bold' }}>🥇 1st Prize:</span> 
+          <span style={{ color: '#fcd361', fontWeight: 'bold' }}>Rs 50,000</span>
+        </p>
+        <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+          <span style={{ fontWeight: 'bold' }}>🥈 2nd Prize:</span> 
+          <span style={{ color: '#aaa' }}>Rs 30,000</span>
+        </p>
+        <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: 'bold' }}>🥉 3rd Prize:</span> 
+          <span style={{ color: '#aaa' }}>Rs 20,000</span>
+        </p>
+      </div>
+    </div>
+
+    {/* RIGHT SIDE: MENTORSHIP & ACCESS PANEL */}
+    <div className="prize-mentorship-panel" style={{ 
+      flex: '1 1 450px', 
+      minWidth: '300px',
+      padding: '30px', 
+      borderRadius: '12px',
+      color: '#fff',
+      textAlign: 'center'
+    }}>
+      <h3 style={{ 
+        color: '#38bdf8', 
+        fontSize: '1.8rem', 
+        marginBottom: '1.5rem', 
+        textAlign: 'center',
+        borderBottom: '2px solid rgba(56, 189, 248, 0.3)',
+        paddingBottom: '10px'
+      }}>Beyond Cash</h3>
+      <p style={{ 
+        fontSize: '1.4rem', 
+        lineHeight: '1.8', 
+        color: '#ccc',
+        whiteSpace: 'pre-line' /* Respects line breaks for easy formatting */
+      }}>
+        Apart from Cash Prizes,
+        Winners Will Also Receive
+        <strong style={{ color: '#fcd361', display: 'block', margin: '5px 0' }}>100 hours of lab access</strong>
+        and 
+        <strong style={{ color: '#38bdf8', display: 'block', margin: '5px 0' }}>one to one mentorship</strong>
+      </p>
+    </div>
+  </div>
+  </div>
+</section>
+{/* --- END PRIZE MONEY SECTION --- */}
 
     {/* NEW SECTION: Advisory Committee */}
     <section className="section" id="advisory">
