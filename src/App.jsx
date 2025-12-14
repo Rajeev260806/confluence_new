@@ -529,7 +529,7 @@ const GradientCard = ({ title, copy }) => (
 )
 
 function App() {
-  const [navOpen, setNavOpen] = useState(false)
+  const [navOpen, setNavOpen] = useState(false);
   const eventMeta = useMemo(
     () => ({
       date: 'Friday, Feb 27, 2026',
@@ -544,10 +544,9 @@ function App() {
         setNavOpen(false)
       }
     }
-
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [navOpen])
 
   return (
     <>
@@ -577,7 +576,8 @@ function App() {
           <span />
           <span />
         </button>
-        <div id="site-nav-links" className={`site-nav__links${navOpen ? ' is-open' : ''}`}>
+        {/* In src/App.jsx, find the div that holds the links and CHANGE it to this: */}
+<div className={`site-nav__links ${navOpen ? 'is-open' : ''}`}>
           
           {navigationLinks.map((link) => {
             if (link.dropdown) {
