@@ -216,9 +216,9 @@ const advisoryBoard = [
     image: adv8,
   },
   {
-    name: 'Prof. Dr. Gandhi',
-    designation: 'Head ERP',
-    company: ' Textile Design Dept. of NIFT Chennai',
+    name: 'Gandhi',
+    designation: 'Head-ERP, Textile Design',
+    company: 'National Institute of Fashion Technology Chennai',
     image: adv9,
   },
 ]
