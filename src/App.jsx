@@ -571,7 +571,7 @@ function App() {
           aria-label="Toggle navigation menu"
           aria-controls="site-nav-links"
           aria-expanded={navOpen}
-          onClick={() => setNavOpen((open) => !open)}
+          onClick={() => setNavOpen(!navOpen)}
         >
           <span />
           <span />
