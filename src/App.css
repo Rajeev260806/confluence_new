@@ -2424,6 +2424,7 @@
     justify-content: space-between !important;
     align-items: center !important;
     margin-top: 4px !important;
+    padding-right: 5px !important;
   }
 
   /* 4. LINES: Restore 'Start under E' Logic */
