@@ -216,7 +216,7 @@ const advisoryBoard = [
     image: adv8,
   },
   {
-    name: 'Gandhi',
+    name: 'Prof Dr. Gandhi',
     designation: 'Head-ERP, Textile Design',
     company: 'National Institute of Fashion Technology Chennai',
     image: adv9,
@@ -795,17 +795,18 @@ function App() {
       
       <div className="panel panel--outline">
         <SectionHeading
-          kicker="Rewards"
+          kicker="Prize Pool"
           title="Prizes and Benefits for the Winners for Idea Pitching and Inventor’ Exhibit"
-          subtitle="Mark your calendars and get ready for the big day."
+          subtitle="Get ready to grab the amazing prizes and benefits!"
         />
   <div className="container" style={{ 
     display: 'flex', 
     gap: '30px', 
-    alignItems: 'center', 
-    justifyContent: 'space-between',
-    maxWidth: '1200px',
-    flexWrap: 'wrap', /* Allows wrapping on smaller screens */
+    alignItems: 'stretch', 
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    width: '100%',
+    padding: '50px',
   }}>
 
     {/* LEFT SIDE: CASH PRIZES TABLE */}
@@ -844,7 +845,8 @@ function App() {
     <div className="prize-mentorship-panel" style={{ 
       flex: '1 1 450px', 
       minWidth: '300px',
-      padding: '30px', 
+      paddingTop: '0px',
+      marginBotton: '30px', 
       borderRadius: '12px',
       color: '#fff',
       textAlign: 'center'
