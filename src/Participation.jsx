@@ -39,7 +39,7 @@ const Participation = () => {
   const handleLogout = () => {
     // We are simulating the logout function, you can change this to navigate('/signin')
     // if you want it to behave like a true logout.
-    navigate('/dashboard'); 
+    navigate('/'); 
   };
 
   const handleInputChange = (e) => {
@@ -237,7 +237,7 @@ const Participation = () => {
           <div className="nav-timer">{timeLeft.d}d : {timeLeft.h}h : {timeLeft.m}m : {timeLeft.s}s</div>
         </div>
         {/* Use handleLogout for consistency. It now navigates to /dashboard */}
-        <button onClick={handleLogout} className="btn btn--primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.95rem' }}>Back to Dashboard</button>
+        <button onClick={handleLogout} className="btn btn--primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.95rem' }}>Home</button>
       </nav>
 
       {/* MAIN CONTENT WRAPPER */}
