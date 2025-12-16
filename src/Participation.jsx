@@ -267,7 +267,7 @@ const Participation = () => {
           <form onSubmit={handleSubmit}>
             
             {/* TAB NAVIGATION */}
-            <div className="tab-navigation" style={{ marginBottom: '30px', borderBottom: '2px solid #333' }}>
+            <div className="tab-navigation">
               <button 
                 type="button"
                 className={`tab-btn ${activeTab === 'ideaPitching' ? 'active' : ''}`}

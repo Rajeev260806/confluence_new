@@ -2526,6 +2526,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
+    border-bottom:2px solid #fcd361;
 }
 
 .tab-btn {
