@@ -5,6 +5,7 @@ import App from './App'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Dashboard from './Dashboard'
+import Participation from './Participation.jsx';
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/participate" element={<Participation />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

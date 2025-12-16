@@ -1195,7 +1195,7 @@ function App() {
             )
           })}
 
-        <Link to="/signin" className="nav-cta">Register Now</Link>
+        <Link to="/participate" className="nav-cta">Register Now</Link>
         </div>
       </nav>
       </>
