@@ -806,7 +806,7 @@ function App() {
     justifyContent: 'space-around',
     flexWrap: 'wrap',
     width: '100%',
-    padding: '50px',
+    padding: '50px 200px',
   }}>
 
     {/* LEFT SIDE: CASH PRIZES TABLE */}
@@ -839,38 +839,6 @@ function App() {
           <span style={{ color: '#aaa' }}>Rs 20,000</span>
         </p>
       </div>
-    </div>
-
-    {/* RIGHT SIDE: MENTORSHIP & ACCESS PANEL */}
-    <div className="prize-mentorship-panel" style={{ 
-      flex: '1 1 450px', 
-      minWidth: '300px',
-      paddingTop: '0px',
-      marginBotton: '30px', 
-      borderRadius: '12px',
-      color: '#fff',
-      textAlign: 'center'
-    }}>
-      <h3 style={{ 
-        color: '#38bdf8', 
-        fontSize: '1.8rem', 
-        marginBottom: '1.5rem', 
-        textAlign: 'center',
-        borderBottom: '2px solid rgba(56, 189, 248, 0.3)',
-        paddingBottom: '10px'
-      }}>Beyond Cash</h3>
-      <p style={{ 
-        fontSize: '1.4rem', 
-        lineHeight: '1.8', 
-        color: '#ccc',
-        whiteSpace: 'pre-line' /* Respects line breaks for easy formatting */
-      }}>
-        Apart from Cash Prizes,
-        Winners Will Also Receive
-        <strong style={{ color: '#fcd361', display: 'block', margin: '5px 0' }}>100 hours of lab access</strong>
-        and 
-        <strong style={{ color: '#38bdf8', display: 'block', margin: '5px 0' }}>one to one mentorship</strong>
-      </p>
     </div>
   </div>
   </div>
