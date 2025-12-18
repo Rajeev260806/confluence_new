@@ -24,6 +24,7 @@ import sdg4 from './assets/sdg9.png'
 import sdg5 from './assets/sdg11.png'
 import sdg6 from './assets/sdg12.png'
 import sdg7 from './assets/sdg13.png'
+import sdg8 from './assets/sdg14.png'
 import './App.css'
 import { Link } from 'react-router-dom'
 
@@ -31,22 +32,22 @@ const eventDate = new Date('2026-02-27T09:00:00+05:30')
 
 const highlights = [
   {
-    title: 'Keynote/Technical Sessions',
-    copy:
-      'Deep-dive talks with industry leaders, researchers, and innovators covering breakthrough technologies and entrepreneurship trends.',
-  },
-  {
     title: 'Panel Discussions',
     copy:
       'Interactive conversations that unpack the future of innovation, incubation, and collaborative problem-solving within academia and industry.',
   },
   {
-    title: 'Idea Pitching Competition',
+    title: 'Poster Presentation',
     copy:
-      'Students, innovators, researchers, and early-stage founders present original ideas in a high-energy pitch arena with expert feedback.',
+      'The poster presentation enables research scholars to showcase fundamental, sustainability-oriented research while fostering interdisciplinary interaction and knowledge exchange.',
   },
   {
-    title: 'Inventors’ Exhibit',
+    title: 'Idea Pitching Competition',
+    copy:
+      'Student innovators present original ideas in a high-energy pitch arena with expert feedback.',
+  },
+  {
+    title: 'Innovator’ Exhibit',
     copy:
       'A curated showcase of prototypes, working models, and transformative projects that highlight the creative power of PSG Tech.',
   },
@@ -75,15 +76,18 @@ const participationProfiles = [
   'Industry Experts & Professionals',
   'Investors & Incubation/Innovation Cell Members',
 ]
-/*
-const technicalSessionTopics = [
-  'Generative AI: Beyond the Hype – Real world applications.',
-  'Sustainable Energy: The future of Green Tech and EV infrastructure.',
-  'Blockchain & FinTech: Decentralizing the future of finance.',
-  'Robotics & Automation: The next industrial revolution.',
-  'Cybersecurity: Protecting digital assets in a hyper-connected world.',
-]
 
+const posterPresentation = [
+  'Open to students, researchers, and early-career professionals.',
+  'Only individual participation is allowed.',
+  'Posters must be submitted online using the prescribed poster template only.',
+  'Shortlisted participants will be invited to present their posters during the event.',
+  'Posters should present original work and must not have been presented at any other conference or competition.',
+  'Judging Criteria: Clarity of concept, Technical depth, Visual presentation, Innovation, and Relevance to the theme.',
+  'All poster presentations will be evaluated by a jury; the jury’s decision will be final.',
+  'The work presented should be at a conceptual, experimental, or early validation stage.'
+]
+/*
 const panelDiscussionTopics = [
   'Startups vs MNCs: Choosing the right career path.',
   'Funding Winter: How to bootstrap your way to success.',
@@ -93,13 +97,14 @@ const panelDiscussionTopics = [
 ]*/
 
 const ideaPitchRules = [
-  'Open to students, innovators, researchers, and early-stage entrepreneurs.',
+  'Open to student innovators.',
   'Individual or team participation (up to 4 members).',
   ' The problem statement and the solution should be submitted online using only the provided template',
   'Only shortlisted submissions will be invited for the final pitch.',
   'Ideas must be original and should not have been pitched or submitted in any other competition.',
   'Judging Criteria : Problem Solution fit, Innovation, Societal Impact, Product Market fit.',
-  'Only ideas at TRL 3 and above are eligible.',
+  "Jury's decision will be final",
+  'Only ideas at TRL 3 to TRL 5 are eligible.',
 ]
 
 const exhibitGuidelines = [
@@ -110,15 +115,27 @@ const exhibitGuidelines = [
   'Space and basic display arrangements will be provided.',
   'Participants must be present during exhibit hours to explain their innovation.',
   "Jury's decision will be final",
-  'Only ideas at TRL 6  and above are eligible.',
+  'Only ideas at TRL 6  and TRL 7 are eligible.',
 ]
 
 const importantDates = [
   'Dec 17, 2025: Submission Opens',
-  "Jan 20, 2026:Idea Submission and Inventors' Exhibit Submission ",
+  "Jan 20, 2026:Idea Submission and Innovators' Exhibit Submission ",
   'Jan 31, 2026: Shortlisted idea and Product Announced',
   'Feb 10, 2026: Registration closes',
   'Feb 27, 2026: The Grand Event',
+]
+
+const generalRules = [
+  'Students from institutions across India, including UG/PG students and research scholars in Science, Technology, Engineering, and Mathematics (STEM), are eligible to participate.',
+  'Participants can register online through the event portal.',
+  'Participation may be individual or in teams from the same institution (maximum team size: 4 members), routed through the Institution’s Innovation Council (IIC).',
+  'Participants must submit a bonafide certificate and a valid institutional ID during the submission process.',
+  'A participant or team may register in multiple categories with separate registrations and submissions.',
+  'All submissions must be original, unpublished, and plagiarism-free. Any form of plagiarism or misrepresentation will lead to immediate disqualification.',
+  'The decision of the jury/panel of experts shall be final and binding.',
+  'Participants are advised to adhere strictly to deadlines. Late submissions will not be considered under any circumstances.',
+  'For detailed instructions and norms, please refer to the official event website.',
 ]
 
 const sdgData = [
@@ -163,6 +180,12 @@ const sdgData = [
     title: "SDG 13: Climate Action",
     img: sdg7,
     topics: ["Carbon Capture & Storage", "Climate Modeling & AI", "Renewable Ag-Tech"]
+  },
+  {
+    id: 14,
+    title: "SDG 14: Life Below Water",
+    img: sdg8,
+    topics: ["Marine Conservation & Biodiversity", "Sustainable Fisheries & Aquaculture", "Ocean Monitoring & AI"]
   }
 ]
 
@@ -270,7 +293,7 @@ const committeeTeams = [
     ]
   },
   {
-    title: "Inventors' Exhibit Committee",
+    title: "Innovators' Exhibit Committee",
     members: [
       { name: 'Dr Prabukarthi A', desig: 'Assistant Professor', dept: 'Department of Mechanical' },
       { name: 'Dr Vairam T', desig: 'Assistant Professor (Sl. Gr.)', dept: 'Department of IT' },
@@ -447,9 +470,9 @@ const aboutIICPoints = [
   'Encourage students to participate in hackathons, demo days, and design challenges to build real-world experience.',
   'Offer pre-incubation and hand-holding support for early-stage entrepreneurial ventures.',
 ]
-const aboutEvent1 = "The Institution’s Innovation Council (IIC) of PSG College of Technology proudly presents “The Confluence 2026 – Research, Innovation & Start-up Summit” as part of the Platinum Jubilee celebrations of PSG College of Technology. This one-day national-level flagship event that brings together researchers, innovators, entrepreneurs, investors, industry leaders, and academicians on a single vibrant platform."
+const aboutEvent1 = "The Institution’s Innovation Council (IIC) of PSG College of Technology proudly presents “The Confluence 2026 – Research, Innovation & Technology Summit” as part of the Platinum Jubilee celebrations of PSG College of Technology. This one-day national-level flagship event that brings together researchers, innovators, entrepreneurs, investors, industry leaders, and academicians on a single vibrant platform."
 const aboutEvent2 = "The summit aims to foster a strong culture of innovation, nurture entrepreneurial thinking among students and faculty, and showcase PSG Tech’s research and start-up ecosystem in alignment with the national innovation and entrepreneurship agenda. The Confluence 2026 serves as a powerful interface between research, technology, industry, and societal needs."
-const aboutEvent3 = "In line with global sustainability priorities, The Confluence 2026 is aligned with the United Nations Sustainable Development Goals (UN SDGs). These themes will guide the keynote addresses, technical sessions, panel discussions, idea pitching competition, and the inventors’ exhibit, ensuring that every innovation presented contributes toward a sustainable, inclusive, and technology-driven future. Through this platform, innovators will gain direct exposure to investors, incubators, and industry mentors. Participants with validated PoCs will receive strategic guidance to convert innovations into scalable start-ups. The event also enables high-impact networking and expert interactions, fostering meaningful collaborations. The Confluence 2026 is not just an event—it is a launchpad for impactful ideas, sustainable technologies, and next-generation start-ups."
+const aboutEvent3 = "In line with global sustainability priorities, The Confluence 2026 is aligned with the United Nations Sustainable Development Goals (UN SDGs). These themes will guide the keynote addresses, technical sessions, panel discussions, idea pitching competition, and the innovator’ exhibit, ensuring that every innovation presented contributes toward a sustainable, inclusive, and technology-driven future. Through this platform, innovators will gain direct exposure to investors, incubators, and industry mentors. Participants with validated PoCs will receive strategic guidance to convert innovations into scalable start-ups. The event also enables high-impact networking and expert interactions, fostering meaningful collaborations. The Confluence 2026 is not just an event—it is a launchpad for impactful ideas, sustainable technologies, and next-generation start-ups.The Confluence 2026 is aligned with the United Nations Sustainable Development Goals (UN SDGs)."
 
 const navigationLinks = [
   {href: '#page', label: 'Home'},
@@ -465,10 +488,10 @@ const navigationLinks = [
   { 
     label: 'Events', 
     dropdown: [
-      { label: 'Technical Sessions', href: '#technical-sessions' },
       { label: "Panel Discussion", href: '#panel-discussion' },
+      { label: 'Poster Presentation', href: '#poster-sessions' },
       { label: 'Idea Pitching', href: '#idea-pitch' },
-      { label: "Inventors' Exhibit", href: '#inventors-exhibit' }
+      { label: "Innovators' Exhibit", href: '#innovators-exhibit' }
     ]
   },
   { href: '#speakers', label: 'Speakers' },
@@ -585,7 +608,7 @@ function App() {
 
                   {/* ROW 3: SUBTITLE (Aligned Right) */}
                   <div className="hero-sub-container">
-                    <p className="hero-sub-text">Research, Innovation & Start-up Summit</p>
+                    <p className="hero-sub-text">Research, Innovation & Technology Summit</p>
                   </div>
 
                 </div>
@@ -690,20 +713,6 @@ function App() {
   </div>
 </section>
       <section id="sessions" className="section split-section">
-      
-      
-      <div className="panel panel--outline" id='technical-sessions'>
-        <SectionHeading
-          kicker="Technical Sessions"
-          title="Come and explore the incredible technical sessions"
-          subtitle="Deep dives into breakthrough technologies."
-        />{/*
-        <ul className="list list--arrow">
-          {technicalSessionTopics.map((topic) => (
-            <li key={topic}>{topic}</li>
-          ))}
-        </ul>*/}
-      </div>
 
       <div className="panel panel--accent" id='panel-discussion'>
         <SectionHeading
@@ -718,6 +727,20 @@ function App() {
         </ul>*/}
       </div>
 
+      
+      <div className="panel panel--outline" id='poster-sessions'>
+        <SectionHeading
+          kicker="Poster Presentation"
+          title="Showcase the ideas with beautiful posters"
+          subtitle="The Poster Presentation offers a scholarly forum for PG students and research scholars to present fundamental research through posters, highlighting research objectives, methodologies, key findings, and broader implications. The session promotes academic exchange and interdisciplinary interaction with experts, peers, and researchers.Contributions are invited in broad sustainability-oriented fundamental research areas, including sustainable and advanced materials; semiconductors, energy conversion, storage, and transport phenomena; environmental and earth system sciences; climate, atmospheric, and ocean sciences; water–energy–food nexus;  biological and bio-inspired systems; mathematical modeling, simulation, and computational science; quantum materials, quantum devices, and quantum computing; and fundamental studies in sensors, measurement, and metrology."
+        />{
+        <ul className="list list--arrow">
+          {posterPresentation.map((topic) => (
+            <li key={topic}>{topic}</li>
+          ))}
+        </ul>}
+      </div>
+
     </section>
       <section id="competitions" className="section split-section">
         
@@ -726,7 +749,7 @@ function App() {
           <SectionHeading
             kicker="Idea Pitching Competition"
             title="Showcase the most creative and impactful ideas"
-            subtitle=" Pitch the solution to leading industry and academic experts. Gain valuable visibility, receive constructive feedback, and elevate the work to the next level. Plus, stand a chance to win exciting prizes while making a real impact with the innovation."
+            subtitle=" The Idea Pitching Competition offers a vibrant platform to showcase creative, innovative, and impactful ideas by presenting solutions to a panel of leading industry professionals and academic experts.Participants gain valuable visibility, receive constructive feedback, and get opportunities to elevate their ideas to the next level. They also gain exposure to investors while competing for exciting prizes and recognition."
           />
           <ul className="list list--arrow">
             {ideaPitchRules.map((rule) => (
@@ -735,13 +758,12 @@ function App() {
           </ul>
         </div>
 
-        {/* 2. Inventors' Exhibit Card -> Added id="inventors-exhibit" */}
-        <div id="inventors-exhibit" className="panel panel--outline">
+        {/* 2. Innovators' Exhibit Card -> Added id="inventors-exhibit" */}
+        <div id="innovators-exhibit" className="panel panel--outline">
           <SectionHeading
-            kicker="Inventors’ Exhibit"
+            kicker="Innovators’ Exhibit"
             title="Spotlight for breakthrough prototypes"
-            subtitle= "The Inventors’ Exhibit provides a platform for creators, innovators, and researchers to showcase their prototypes, working models, and breakthrough ideas.This exhibit highlights novel solutions across domains and offers an opportunity to interact with industry experts, academicians, investors, and fellow innovators"
-          />
+            subtitle= "The Innovators’ Exhibit offers a dynamic platform for creators, innovators, and researchers to showcase original prototypes, working models, and breakthrough innovations.The exhibit highlights novel, application-ready solutions across diverse domains and provides participants with opportunities to engage with industry experts, academicians, investors, and fellow innovators."          />
           <ul className="list list--arrow">
             {exhibitGuidelines.map((rule) => (
               <li key={rule}>{rule}</li>
@@ -791,12 +813,40 @@ function App() {
       </div>
     </section>
     {/* --- INSERT PRIZE MONEY SECTION HERE (Below Important Dates) --- */}
+    
+<section className="section" id="general-rules">
+      
+      <div className="panel panel--outline">
+        <SectionHeading
+          kicker="General Rules and Regulations"
+          title="General Rules & Info"
+          subtitle="Please read carefully to ensure smooth participation."
+        />
+  <div className="container" style={{ 
+    display: 'flex', 
+    gap: '30px', 
+    alignItems: 'stretch', 
+    justifyContent: 'space-around',
+    flexWrap: 'wrap',
+    width: '100%',
+    paddingBottom: '50px',
+    paddingTop: '20px',
+  }}>
+    <ul className="list list--arrow">
+      {generalRules.map((reasons) => (
+        <li key={reasons}>{reasons}</li>
+      ))}
+    </ul>
+</div>
+  </div>
+</section>
+
 <section className="section" id="important-dates">
       
       <div className="panel panel--outline">
         <SectionHeading
           kicker="Prize Pool"
-          title="Prizes and Benefits for the Winners for Idea Pitching and Inventor’ Exhibit"
+          title="Award for Winners"
           subtitle="Get ready to grab the amazing prizes and benefits!"
         />
   <div className="container" style={{ 
@@ -806,7 +856,6 @@ function App() {
     justifyContent: 'space-around',
     flexWrap: 'wrap',
     width: '100%',
-    padding: '50px 200px',
   }}>
 
     {/* LEFT SIDE: CASH PRIZES TABLE */}
@@ -824,21 +873,84 @@ function App() {
         textAlign: 'center',
         borderBottom: '2px solid rgba(252, 211, 97, 0.3)',
         paddingBottom: '10px'
-      }}>Cash Prizes</h3>
+      }}>Idea Pitching</h3>
       <div className="prize-list" style={{ fontSize: '1.2rem' }}>
         <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <span style={{ fontWeight: 'bold' }}>🥇 1st Prize:</span> 
-          <span style={{ color: '#fcd361', fontWeight: 'bold' }}>Rs 50,000</span>
+          <span style={{ color: '#fcd361', fontWeight: 'bold' }}>Rs 30,000</span>
         </p>
         <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <span style={{ fontWeight: 'bold' }}>🥈 2nd Prize:</span> 
-          <span style={{ color: '#aaa' }}>Rs 30,000</span>
+          <span style={{ color: '#aaa' }}>Rs 20,000</span>
         </p>
         <p style={{ display: 'flex', justifyContent: 'space-between' }}>
           <span style={{ fontWeight: 'bold' }}>🥉 3rd Prize:</span> 
-          <span style={{ color: '#aaa' }}>Rs 20,000</span>
+          <span style={{ color: '#aaa' }}>Rs 10,000</span>
         </p>
       </div>
+      
+    </div>
+    <div className="prize-cash-panel" style={{ 
+      flex: '1 1 450px', 
+      minWidth: '300px',
+      paddingBottom: '90px', 
+      borderRadius: '12px',
+      color: '#fff'
+    }}>
+      <h3 style={{ 
+        color: '#fcd361', 
+        fontSize: '1.8rem', 
+        marginBottom: '1.5rem', 
+        textAlign: 'center',
+        borderBottom: '2px solid rgba(252, 211, 97, 0.3)',
+        paddingBottom: '10px'
+      }}>Innovators’ Exhibit</h3>
+      <div className="prize-list" style={{ fontSize: '1.2rem' }}>
+        <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+          <span style={{ fontWeight: 'bold' }}>🥇 1st Prize:</span> 
+          <span style={{ color: '#fcd361', fontWeight: 'bold' }}>Rs 30,000</span>
+        </p>
+        <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+          <span style={{ fontWeight: 'bold' }}>🥈 2nd Prize:</span> 
+          <span style={{ color: '#aaa' }}>Rs 20,000</span>
+        </p>
+        <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: 'bold' }}>🥉 3rd Prize:</span> 
+          <span style={{ color: '#aaa' }}>Rs 10,000</span>
+        </p>
+      </div>
+      
+    </div>
+    <div className="prize-cash-panel" style={{ 
+      flex: '1 1 450px', 
+      minWidth: '300px',
+      paddingBottom: '90px', 
+      borderRadius: '12px',
+      color: '#fff'
+    }}>
+      <h3 style={{ 
+        color: '#fcd361', 
+        fontSize: '1.8rem', 
+        marginBottom: '1.5rem', 
+        textAlign: 'center',
+        borderBottom: '2px solid rgba(252, 211, 97, 0.3)',
+        paddingBottom: '10px'
+      }}>Poster Presentation</h3>
+      <div className="prize-list" style={{ fontSize: '1.2rem' }}>
+        <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+          <span style={{ fontWeight: 'bold' }}>🥇 1st Prize:</span> 
+          <span style={{ color: '#fcd361', fontWeight: 'bold' }}>Rs 30,000</span>
+        </p>
+        <p style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+          <span style={{ fontWeight: 'bold' }}>🥈 2nd Prize:</span> 
+          <span style={{ color: '#aaa' }}>Rs 20,000</span>
+        </p>
+        <p style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ fontWeight: 'bold' }}>🥉 3rd Prize:</span> 
+          <span style={{ color: '#aaa' }}>Rs 10,000</span>
+        </p>
+      </div>
+      
     </div>
   </div>
   </div>
