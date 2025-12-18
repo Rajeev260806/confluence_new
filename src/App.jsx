@@ -52,7 +52,7 @@ const highlights = [
       'A curated showcase of prototypes, working models, and transformative projects that highlight the creative power of PSG Tech.',
   },
 ]
-
+/*
 const sponsorshipReasons = [
   'Connect with emerging startups and innovators.',
   'Engage with top academicians and R&D experts.',
@@ -66,6 +66,31 @@ const sponsorshipCategories = [
   'Silver Sponsor',
   'Event Sponsor', 
   'Session Sponsor',
+]*/
+
+// --- CONTACT DATA ---
+const contactDetails = [
+  {
+    role: "Poster Presentation",
+    name: "Dr. M. Santhanalakshmi",
+    designation: "Associate Professor",
+    dept: "Dept of Electronics & Communication",
+    phone: "9789456689"
+  },
+  {
+    role: "Idea Pitching",
+    name: "Dr. N. Muthuram",
+    designation: "Assistant Professor (Sr. Gr.)",
+    dept: "Dept of Production Engineering",
+    phone: "9003497663"
+  },
+  {
+    role: "Innovators' Exhibit",
+    name: "Dr. A. Prabukarthi",
+    designation: "Assistant Professor",
+    dept: "Dept of Mechanical Engineering",
+    phone: "9940531820"
+  }
 ]
 
 const participationProfiles = [
@@ -125,6 +150,29 @@ const importantDates = [
   'Feb 10, 2026: Registration closes',
   'Feb 27, 2026: The Grand Event',
 ]
+
+const eventRegistrationFees = [
+  "Innovators' Exhibit: Rs.1000",
+  "Idea Pitching Competition: Rs.750",
+  "Poster Presentation: Rs.750",
+]
+
+const entryFees = [
+  "Industry Professionals: Rs.2000",
+  "Academicians/Researchers: Rs.700",
+  "UG/PG Students: Rs.500",
+]
+
+// --- PAYMENT DATA ---
+const paymentDetails = {
+  accountName: "PSG Centre for Non formal and Continuing Education (PSG CNCE)",
+  transferMode: 'Online Payment',
+  accountNumber: "1481267367",
+  bankName: "Central Bank of India",
+  branch: "Peelamedu",
+  ifsc: "CBIN0280913",
+  type: "Online Payment"
+}
 
 const generalRules = [
   'Students from institutions across India, including UG/PG students and research scholars in Science, Technology, Engineering, and Mathematics (STEM), are eligible to participate.',
@@ -190,8 +238,27 @@ const sdgData = [
 ]
 
 const advisoryBoard = [
+  
   {
-    name: 'Shri. Ramshankar C S',
+    name: 'Prof. Dr. M. K.Gandhi',
+    designation: 'Professor and HEAD ERP',
+    company: 'NIFT, Chennai',
+    image: adv9,
+  },
+  {
+    name: 'Mr. Midhu Unnithan',
+    designation: 'COO, TECHIN',
+    company: 'IIT Palakkad',
+    image: adv3,
+  },
+  {
+    name: ' Dr. Nakul Parameswar',
+    designation: 'Assistant Professor',
+    company: 'Department of Entrepreneurship and Management, Indian Institute of Technology Hyderabad (IITH)',
+    image: adv6,
+  },
+  {
+    name: 'Shri.C.S. Ramshankar',
     designation: 'Co-founder and CEO',
     company: 'Maxbyte Technologies',
     image: adv1,
@@ -203,10 +270,10 @@ const advisoryBoard = [
     image: adv2,
   },
   {
-    name: 'Mr. Midhu Unnithan',
-    designation: 'COO, TECHIN',
-    company: 'IIT Palakkad',
-    image: adv3,
+    name: 'Mr. Sriram Sankaran',
+    designation: ' Chairman and Managing Director',
+    company: 'Synchron Group',
+    image: adv7,
   },
   {
     name: 'Mr. Sugantharaja Radhakrishnan',
@@ -215,34 +282,16 @@ const advisoryBoard = [
     image: adv4,
   },
   {
-    name: 'Dr. Suresh D S',
+    name: 'Dr. D.S. Suresh',
     designation: 'Director',
     company: 'Channabasaveshwara Institute of Technology, Tumkur',
     image: adv5,
-  },
-  {
-    name: ' Dr. Nakul Parameswar',
-    designation: 'Assistant Professor',
-    company: 'Department of Entrepreneurship and Management, Indian Institute of Technology Hyderabad (IITH)',
-    image: adv6,
-  },
-  {
-    name: 'Mr. Sriram Sankaran',
-    designation: ' Chairman and Managing Director',
-    company: 'Synchron Group',
-    image: adv7,
   },
   {
     name: 'Mr. Suresh Muthuswami',
     designation: 'Former Chairman of North America',
     company: 'Tata Consultancy Services (TCS)',
     image: adv8,
-  },
-  {
-    name: 'Prof. Dr. M. K.Gandhi',
-    designation: 'Professor and HEAD ERP',
-    company: 'NIFT, Chennai',
-    image: adv9,
   },
 ]
 const committeeLeaders = [
@@ -864,14 +913,15 @@ function App() {
       minWidth: '300px',
       paddingBottom: '90px', 
       borderRadius: '12px',
-      color: '#fff'
+      color: '#fff',
+      border: '1px solid #38bdf8'
     }}>
       <h3 style={{ 
         color: '#fcd361', 
         fontSize: '1.8rem', 
         marginBottom: '1.5rem', 
         textAlign: 'center',
-        borderBottom: '2px solid rgba(252, 211, 97, 0.3)',
+        borderBottom: '1px solid #38bdf8',
         paddingBottom: '10px'
       }}>Idea Pitching</h3>
       <div className="prize-list" style={{ fontSize: '1.2rem' }}>
@@ -895,14 +945,15 @@ function App() {
       minWidth: '300px',
       paddingBottom: '90px', 
       borderRadius: '12px',
-      color: '#fff'
+      color: '#fff',
+      border: '1px solid #38bdf8'
     }}>
       <h3 style={{ 
         color: '#fcd361', 
         fontSize: '1.8rem', 
         marginBottom: '1.5rem', 
         textAlign: 'center',
-        borderBottom: '2px solid rgba(252, 211, 97, 0.3)',
+        borderBottom: '1px solid #38bdf8',
         paddingBottom: '10px'
       }}>Innovators’ Exhibit</h3>
       <div className="prize-list" style={{ fontSize: '1.2rem' }}>
@@ -926,14 +977,15 @@ function App() {
       minWidth: '300px',
       paddingBottom: '90px', 
       borderRadius: '12px',
-      color: '#fff'
+      color: '#fff',
+      border: '1px solid #38bdf8'
     }}>
       <h3 style={{ 
         color: '#fcd361', 
         fontSize: '1.8rem', 
         marginBottom: '1.5rem', 
         textAlign: 'center',
-        borderBottom: '2px solid rgba(252, 211, 97, 0.3)',
+        borderBottom: '1px solid #38bdf8',
         paddingBottom: '10px'
       }}>Poster Presentation</h3>
       <div className="prize-list" style={{ fontSize: '1.2rem' }}>
@@ -1064,7 +1116,7 @@ function App() {
         <div className="panel panel--outline">
           <SectionHeading
             kicker="Community"
-            title="Who Can Participate?"
+            title="Who Can Attend?"
             subtitle="The Confluence welcomes a diverse community of forward-thinking changemakers."
           />
           <div className="grid grid--chips">
@@ -1085,6 +1137,125 @@ function App() {
             title="Secure your spot online"
             subtitle="Participants can register through the event portal. Early submissions are encouraged for curated slots."
           />
+          <div className="sponsorship">
+          
+          {/* Column 1: The Golden Timeline */}
+          <div className="Event_cont">
+            <h3>Event Registration Fees</h3>
+            
+            {/* The Timeline Container */}
+            <div className="timeline">
+              {eventRegistrationFees.map((item, index) => {
+                const [eventName, eventFees] = item.split(':');
+                
+                return (
+                  <div className="timeline-item" key={index}>
+                    <span className="timeline-date">{eventName}</span>
+                    <span className="timeline-event">{eventFees}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="Event_cont">
+            <h3>Event Entry Fees</h3>
+            
+            {/* The Timeline Container */}
+            <div className="timeline">
+              {entryFees.map((item, index) => {
+                const [Participant, eventFees] = item.split(':');
+                
+                return (
+                  <div className="timeline-item" key={index}>
+                    <span className="timeline-date">{Participant}</span>
+                    <span className="timeline-event">{eventFees}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <p className="note">*Inclusive of GST</p>
+                  {/* ========================================================== */}
+        {/* NEW SECTION: PAYMENT DETAILS CARD                          */}
+        {/* ========================================================== */}
+        <div style={{ width: '100%', maxWidth: '800px', marginBottom: '3rem' }}>
+          <div style={{padding: '2rem'}}>
+            <h3 style={{ 
+              color: '#fcd361', 
+              marginBottom: '1.5rem', 
+              fontSize: '2rem', 
+              textTransform: 'uppercase', 
+              letterSpacing: '1px' 
+            }}>
+              Payment Details
+            </h3>
+
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+              gap: '1.5rem',
+              color: '#e2e8f0' 
+            }}>
+              
+              {/* Account Holder - Full Width on Mobile */}
+              <div style={{ gridColumn: '1 / -1', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
+                <span style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.3rem' }}>Account Holder</span>
+                <span style={{ fontSize: '1.1rem', fontWeight: '600', color: '#fff' }}>{paymentDetails.accountName}</span>
+              </div>
+              <div style={{ gridColumn: '1 / -1', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
+                <span style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.3rem' }}>Payment Type</span>
+                <span style={{ fontSize: '1.1rem', fontWeight: '600', color: '#fff' }}>{paymentDetails.transferMode}</span>
+              </div>
+
+              {/* Account Number */}
+              <div>
+                <span style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.3rem' }}>Account Number</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ fontSize: '1.2rem', fontFamily: 'monospace', fontWeight: 'bold', color: '#fff' }}>{paymentDetails.accountNumber}</span>
+                  <button 
+                    onClick={() => navigator.clipboard.writeText(paymentDetails.accountNumber)}
+                    style={{ background: 'transparent', border: '1px solid #555', color: '#aaa', borderRadius: '4px', cursor: 'pointer', padding: '2px 6px', fontSize: '0.7rem' }}
+                    title="Copy"
+                  >
+                    COPY
+                  </button>
+                </div>
+              </div>
+
+              {/* IFSC Code */}
+              <div>
+                <span style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.3rem' }}>IFSC Code</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ fontSize: '1.2rem', fontFamily: 'monospace', fontWeight: 'bold', color: '#fff' }}>{paymentDetails.ifsc}</span>
+                  <button 
+                    onClick={() => navigator.clipboard.writeText(paymentDetails.ifsc)}
+                    style={{ background: 'transparent', border: '1px solid #555', color: '#aaa', borderRadius: '4px', cursor: 'pointer', padding: '2px 6px', fontSize: '0.7rem' }}
+                    title="Copy"
+                  >
+                    COPY
+                  </button>
+                </div>
+              </div>
+
+              {/* Bank Details */}
+              <div>
+                <span style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.3rem' }}>Bank Name</span>
+                <span style={{ fontSize: '1rem' }}>{paymentDetails.bankName}</span>
+              </div>
+
+              <div>
+                <span style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.3rem' }}>Branch</span>
+                <span style={{ fontSize: '1rem' }}>{paymentDetails.branch}</span>
+              </div>
+
+            </div>
+
+            <div style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)', textAlign: 'center', fontSize: '0.9rem', color: '#94a3b8' }}>
+              ⚠️ Please keep the transaction receipt handy for verification.
+            </div>
+          </div>
+        </div>
           <div style={{ marginTop: '1.5rem', textAlign: 'left' }}>
              {/* Added a placeholder button to make this section look complete */}
              <button className="nav-cta" style={{ background: 'transparent' }}>
@@ -1102,6 +1273,7 @@ function App() {
             title="Sponsorship Opportunities"
             subtitle="Gain exceptional visibility among entrepreneurs, innovators, academicians, industry leaders, and students."
           />
+          {/*
           <div className="sponsorship">
             <div>
               <h3>Why Sponsor?</h3>
@@ -1120,7 +1292,7 @@ function App() {
               </ul>
             </div>
           </div>
-          <p className="note">For more details please contact the organizers.</p>
+          <p className="note">For more details please contact the organizers.</p>*/}
         </div>
       </section>
 
@@ -1142,7 +1314,127 @@ function App() {
         ))}
       </div>*/}
     </section>
+        {/* ========================================================== */}
+    {/* NEW SECTION: CONTACT DETAILS                               */}
+    {/* ========================================================== */}
+     {/* 3. SPONSORSHIP TEXT SECTION (Wrapped) */}
+      <section className="section" id="sponsorship">
+        <div className="panel panel--outline">
+          <SectionHeading
+            kicker="Contact Us"
+            title="Contact Coordinators"
+            subtitle="Reach out to us anytime—we’re happy to help."
+          />
+    {/* ========================================================== */}
+{/* NEW SECTION: CONTACT DETAILS (FLEX VERSION)                */}
+{/* ========================================================== */}
+<div style={{ width: '100%', maxWidth: '100%', marginTop: '3rem', marginBottom: '4rem' }}>
+  <div style={{ 
+    background: 'rgba(255, 255, 255, 0.05)', 
+    backdropFilter: 'blur(10px)', 
+    border: '1px solid rgba(255, 255, 255, 0.1)', 
+    borderRadius: '16px', 
+    padding: '2rem',
+    boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.37)' 
+  }}>
 
+    <div style={{ 
+      display: 'flex',              // Flexbox instead of Grid
+      flexDirection: 'row',         // Aligns items in a row
+      flexWrap: 'wrap',             // Wraps to next line on mobile
+      justifyContent: 'space-around', // Distributes space evenly
+      gap: '2rem',                  // Space between items
+      textAlign: 'center'
+    }}>
+      
+      {contactDetails.map((contact, index) => (
+        <div key={index} style={{ 
+          display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          padding: '1rem',
+          flex: '1 1 280px',        // Grow: 1, Shrink: 1, Basis: 280px (Trigger wrap on small screens)
+          maxWidth: '350px'         // Prevents them from getting uncomfortably wide
+        }}>
+          
+          {/* Role Badge */}
+          <span style={{ 
+            background: 'rgba(56, 189, 248, 0.1)', 
+            color: '#38bdf8', 
+            padding: '4px 12px', 
+            borderRadius: '20px', 
+            fontSize: '0.8rem', 
+            fontWeight: '600',
+            marginBottom: '1rem',
+            border: '1px solid rgba(56, 189, 248, 0.3)'
+          }}>
+            {contact.role}
+          </span>
+
+          {/* Name */}
+          <h4 style={{ 
+            color: '#fff', 
+            fontSize: '1.1rem', 
+            margin: '0 0 0.5rem 0', 
+            fontWeight: '600',
+            whiteSpace: 'nowrap' // Keeps name on one line if possible
+          }}>
+            {contact.name}
+          </h4>
+
+          {/* Designation & Dept */}
+          <p style={{ 
+            color: '#94a3b8', 
+            fontSize: '0.9rem', 
+            margin: '0 0 0.2rem 0',
+            lineHeight: '1.4'
+          }}>
+            {contact.designation}
+          </p>
+          <p style={{ 
+            color: '#64748b', 
+            fontSize: '0.85rem', 
+            margin: '0 0 1.2rem 0',
+            fontStyle: 'italic',
+            minHeight: '40px' // Ensures alignment even if dept names vary in length
+          }}>
+            {contact.dept}
+          </p>
+
+          {/* Phone Button */}
+          <a href={`tel:${contact.phone}`} style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: '8px', 
+            color: '#fff', 
+            textDecoration: 'none', 
+            background: 'rgba(255,255,255,0.1)', 
+            padding: '8px 20px', 
+            borderRadius: '8px',
+            marginTop: 'auto', // Pushes button to bottom of flex container
+            transition: 'all 0.2s ease',
+            border: '1px solid rgba(255,255,255,0.05)'
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.2)'
+            e.currentTarget.style.transform = 'translateY(-2px)'
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
+            e.currentTarget.style.transform = 'translateY(0)'
+          }}
+          >
+            <span style={{ fontSize: '1.1rem' }}>📞</span>
+            <span style={{ fontSize: '1rem', fontFamily: 'monospace', letterSpacing: '1px' }}>{contact.phone}</span>
+          </a>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+    </div>
+    </section>
       <div className="back-to-top">
         <a href="#top" aria-label="Back to top">
           <span>↑</span>
