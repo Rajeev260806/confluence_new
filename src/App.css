@@ -3,7 +3,6 @@
   width: 100%;
   margin: 0 auto;
   position: relative;
-  /* Push content down so it doesn't hide behind the Fixed Navbar */
   padding-top: 80px; 
   padding-left: 20px;
   padding-right: 20px;
